@@ -1,0 +1,24 @@
+{
+	"name": "imcger/currenttime",
+	"type": "phpbb-extension",
+	"description": "Refreshes the display of the current time on the index page.",
+	"homepage": "",
+	"version": "0.1.0",
+	"time": "2024-12-18",
+	"license": "GPL-2.0-only",
+	"authors": [{
+			"name": "Thorsten Ahlers",
+			"homepage": "https://github.com/IMC-GER",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=7.1.3"
+	},
+	"extra": {
+		"display-name": "Current Time",
+		"soft-require": {
+			"phpbb/phpbb": ">=3.3.0,<4.0.0@dev"
+		}
+	}
+}

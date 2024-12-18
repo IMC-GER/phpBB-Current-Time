@@ -1,0 +1,12 @@
+services:
+    imcger.style.listener:
+        class: imcger\style\event\main_listener
+        arguments:
+            - '@user'
+            - '@template'
+            - '@language'
+        tags:
+            - { name: event.listener }
+
+    _defaults:
+        public: true
