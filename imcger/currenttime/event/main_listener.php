@@ -51,12 +51,12 @@ class main_listener implements EventSubscriberInterface
 		$dateformat = $this->user->data['user_dateformat'];
 
 		$pattern = [
-			'/g/', // Stunde im 12-Stunden-Format; ohne vorangestellte Null	1 bis 12
-			'/G/', // Stunde im 24-Stunden-Format; ohne vorangestellte Null	0 bis 23
-			'/h/', // Stunde im 12-Stunden-Format; mit vorangestellter Null	01 bis 12
-			'/H/', // Stunde im 24-Stunden-Format; mit vorangestellter Null	00 bis 23
-			'/i/', // Minuten; mit vorangestellter Null						00 bis 59
-			'/s/', // Sekunden; mit vorangestellter Null					00 bis 59
+			'/g/', // hour in 12-hour format; without leading zero	 1 to 12
+			'/G/', // hour in 24-hour format; without leading zero	 0 to 23
+			'/h/', // hour in 12-hour format; with leading zero		01 to 12
+			'/H/', // hour in 24-hour format; with leading zero		00 to 23
+			'/i/', // minutes; with leading zero					00 to 59
+			'/s/', // seconds; with leading zero					00 to 59
 		];
 
 		$replacement = [
