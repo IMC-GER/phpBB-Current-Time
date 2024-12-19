@@ -7,63 +7,75 @@
  *
  */
 
-	class imcgerClockAnimate {
+/**
+ * @var	imcger	object for pphpBB.
+ */
+if (typeof imcger != 'object') {
+	var imcger = {};
+}
 
-		// Initialize the form
-		constructor(timeStringObject) {
-			const d = new Date();
-			var thisObj = this;
+imcger.currentTime = {};
 
-			this.timeStringObject	= timeStringObject;
-			this.timeString			= timeStringObject.innerHTML;
-			this.currenttDay 		= d.getDate();
+class imcgerClockAnimate {
 
-			if (this.timeString.search(/\{\{[ghis]\}\}/i) < 0) {
-				return;
-			}
+	// Initialize the form
+	constructor(timeStringObject) {
+		const d = new Date();
+		var thisObj = this;
 
-			this.setTimeString();
+		this.timeStringObject	= timeStringObject;
+		this.timeString			= timeStringObject.innerHTML;
+		this.currentDay 		= d.getDate();
 
-			if (this.timeString.search(/\{\{[s]\}\}/i) >= 0) {
-				setInterval(() => thisObj.setTimeString(), 1000);
-			} else {
-				setTimeout(() => {
-					this.setTimeString();
-					setInterval(() => thisObj.setTimeString(), 60000);
-				}, (60 - d.getSeconds()) * 1000);
-
-			}
+		if (this.timeString.search(/\{\{[gGhHis]\}\}/) < 0) {
+			return;
 		}
 
-		setTimeString() {
-			const d = new Date();
+		this.setTimeString();
 
-			if (this.currenttDay != d.getDate()) {
-				window.location.reload();
-			}
-
-			this.timeStringObject.innerHTML = this.getTimeString(this.timeString);
-		}
-
-		getTimeString(newTimeString) {
-			const d = new Date();
-			let hours12 = (d.getHours() + 24) % 12 || 12;
-
-			newTimeString = newTimeString.replaceAll('\{\{g\}\}', hours12).replaceAll('\{\{G\}\}', this.formatNumber(hours12)).replaceAll('\{\{h\}\}', d.getHours()).replaceAll('\{\{H\}\}', this.formatNumber(d.getHours())).replaceAll('\{\{i\}\}', this.formatNumber(d.getMinutes())).replaceAll('\{\{s\}\}', this.formatNumber(d.getSeconds()));
-
-			return newTimeString;
-		}
-
-		// Make 2-digit with leading zero
-		formatNumber(num) {
-			return num < 10 ? '0' + num : num.toString();
+		if (this.timeString.search(/\{\{[s]\}\}/) >= 0) {
+			setInterval(() => thisObj.setTimeString(), 1000);
+		} else {
+			setTimeout(() => {
+				this.setTimeString();
+				setInterval(() => thisObj.setTimeString(), 60000);
+			}, (60 - d.getSeconds()) * 1000);
 		}
 	}
 
-	// Initialize Clocks
-	var imcgerClocks = document.getElementsByClassName('time'),
-		imcgerClock  = [];
+	setTimeString() {
+		const d = new Date();
 
-	for (i = 0; i < imcgerClocks.length; i++) {
-		imcgerClock[i] = new imcgerClockAnimate(imcgerClocks[i]);
+		if (this.currentDay != d.getDate()) {
+			window.location.reload();
+		}
+
+		this.timeStringObject.innerHTML = this.getTimeString();
 	}
+
+	getTimeString() {
+		const d = new Date();
+		let hours12		  = d.getHours() % 12 || 12,
+			newTimeString = this.timeString.replaceAll('\{\{g\}\}', hours12)
+										   .replaceAll('\{\{G\}\}', this.formatNumber(hours12))
+										   .replaceAll('\{\{h\}\}', d.getHours())
+										   .replaceAll('\{\{H\}\}', this.formatNumber(d.getHours()))
+										   .replaceAll('\{\{i\}\}', this.formatNumber(d.getMinutes()))
+										   .replaceAll('\{\{s\}\}', this.formatNumber(d.getSeconds()));
+
+		return newTimeString;
+	}
+
+	// Make 2-digit with leading zero
+	formatNumber(num) {
+		return num < 10 ? '0' + num : num;
+	}
+}
+
+// Initialize Clocks
+imcger.currentTime.Clocks = document.getElementsByClassName('time');
+imcger.currentTime.Clock  = [];
+
+for (i = 0; i < imcger.currentTime.Clocks.length; i++) {
+	imcger.currentTime.Clock[i] = new imcgerClockAnimate(imcger.currentTime.Clocks[i]);
+}
