@@ -8,7 +8,7 @@
  *
  */
 
-namespace imcger\style\event;
+namespace imcger\currenttime\event;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -48,6 +48,9 @@ class main_listener implements EventSubscriberInterface
 
 	public function page_header_after()
 	{
+		$datetime	 = $this->user->create_datetime();
+		$time_offset = $datetime->getOffset();
+
 		$dateformat = $this->user->data['user_dateformat'];
 
 		$pattern = [
@@ -71,7 +74,7 @@ class main_listener implements EventSubscriberInterface
 		$dateformat = preg_replace($pattern, $replacement, $dateformat);
 
 		$this->template->assign_vars([
-			'CURRENT_TIME'	=> sprintf($this->user->lang['CURRENT_TIME'], $this->user->format_date(time(), $dateformat, false)),
+			'CURRENT_TIME'	=> sprintf($this->user->lang['CURRENT_TIME'], $this->user->format_date(time(), $dateformat, false)) . '{{' . $time_offset . '}}',
 		]);
 	}
 }

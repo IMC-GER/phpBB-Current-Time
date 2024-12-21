@@ -20,16 +20,19 @@ class imcgerClockAnimate {
 
 	// Initialize the form
 	constructor(timeStringObject) {
-		const d = new Date();
 		var thisObj = this;
 
 		this.timeStringObject	= timeStringObject;
 		this.timeString			= timeStringObject.innerHTML;
-		this.currentDay 		= d.getDate();
 
 		if (this.timeString.search(/\{\{[gGhHis]\}\}/) < 0) {
 			return;
 		}
+
+		let phpbbTimeOffset	 = this.timeString.match(/\{\{-?\d+\}\}/)[0];
+		this.timeString		 = this.timeString.replace(phpbbTimeOffset, '');
+		this.phpbbTimeOffset = parseInt(phpbbTimeOffset.substr(2, phpbbTimeOffset.length - 4));
+		this.currentDay 	 = this.setTimeZone(new Date(), this.phpbbTimeOffset).getDate()
 
 		this.setTimeString();
 
@@ -44,17 +47,20 @@ class imcgerClockAnimate {
 	}
 
 	setTimeString() {
-		const d = new Date();
+		let date = new Date();
 
-		if (this.currentDay != d.getDate()) {
+		if (this.phpbbTimeOffset != (date.getTimezoneOffset() * 60)) {
+			date = this.setTimeZone(date, this.phpbbTimeOffset);
+		}
+
+		if (this.currentDay != date.getDate()) {
 			window.location.reload();
 		}
 
-		this.timeStringObject.innerHTML = this.getTimeString();
+		this.timeStringObject.innerHTML = this.getTimeString(date);
 	}
 
-	getTimeString() {
-		const d = new Date();
+	getTimeString(d) {
 		let hours12		  = d.getHours() % 12 || 12,
 			newTimeString = this.timeString.replaceAll('\{\{g\}\}', hours12)
 										   .replaceAll('\{\{G\}\}', this.formatNumber(hours12))
@@ -70,6 +76,12 @@ class imcgerClockAnimate {
 	formatNumber(num) {
 		return num < 10 ? '0' + num : num;
 	}
+
+	setTimeZone(date, offset) {
+		const utc = date.getTime() + (date.getTimezoneOffset() * 60000);
+		return new Date(utc + (offset * 1000));
+	}
+
 }
 
 // Initialize Clocks

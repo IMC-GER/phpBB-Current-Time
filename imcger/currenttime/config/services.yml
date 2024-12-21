@@ -1,6 +1,6 @@
 services:
-    imcger.style.listener:
-        class: imcger\style\event\main_listener
+    imcger.currenttime.listener:
+        class: imcger\currenttime\event\main_listener
         arguments:
             - '@user'
             - '@template'
