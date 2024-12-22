@@ -29,10 +29,11 @@ class imcgerClockAnimate {
 			return;
 		}
 
+		let date = new Date();
 		let phpbbTimeOffset	 = this.timeString.match(/\{\{-?\d+\}\}/)[0];
 		this.timeString		 = this.timeString.replace(phpbbTimeOffset, '');
 		this.phpbbTimeOffset = parseInt(phpbbTimeOffset.substr(2, phpbbTimeOffset.length - 4));
-		this.currentDay 	 = this.setTimeZone(new Date(), this.phpbbTimeOffset).getDate()
+		this.currentDay 	 = this.setTimeZone(date, this.phpbbTimeOffset).getDate();
 
 		this.setTimeString();
 
@@ -42,14 +43,14 @@ class imcgerClockAnimate {
 			setTimeout(() => {
 				this.setTimeString();
 				setInterval(() => thisObj.setTimeString(), 60000);
-			}, (60 - d.getSeconds()) * 1000);
+			}, (60 - date.getSeconds()) * 1000);
 		}
 	}
 
 	setTimeString() {
 		let date = new Date();
 
-		if (this.phpbbTimeOffset != (date.getTimezoneOffset() * 60)) {
+		if (this.phpbbTimeOffset != (date.getTimezoneOffset() * -60)) {
 			date = this.setTimeZone(date, this.phpbbTimeOffset);
 		}
 
