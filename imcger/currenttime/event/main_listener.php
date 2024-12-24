@@ -39,7 +39,7 @@ class main_listener implements EventSubscriberInterface
 		$this->language = $language;
 	}
 
-	static public function getSubscribedEvents()
+	public static function getSubscribedEvents()
 	{
 		return [
 			'core.page_header_after'			=>	'page_header_after',
@@ -48,8 +48,8 @@ class main_listener implements EventSubscriberInterface
 
 	public function page_header_after()
 	{
-		$datetime	 = $this->user->create_datetime();
-		$time_offset = $datetime->getOffset();
+		$datetime  = $this->user->create_datetime();
+		$tz_offset = $datetime->getOffset();
 
 		$dateformat = $this->user->data['user_dateformat'];
 
@@ -63,18 +63,19 @@ class main_listener implements EventSubscriberInterface
 		];
 
 		$replacement = [
-			'{{\g}}',
-			'{{\G}}',
-			'{{\h}}',
-			'{{\H}}',
-			'{{\i}}',
-			'{{\s}}',
+			'{\g}',
+			'{\G}',
+			'{\h}',
+			'{\H}',
+			'{\i}',
+			'{\s}',
 		];
 
 		$dateformat = preg_replace($pattern, $replacement, $dateformat);
 
 		$this->template->assign_vars([
-			'CURRENT_TIME'	=> sprintf($this->user->lang['CURRENT_TIME'], $this->user->format_date(time(), $dateformat, false)) . '{{' . $time_offset . '}}',
+			'CURRENT_TIME'			=> sprintf($this->user->lang['CURRENT_TIME'], $this->user->format_date(time(), $dateformat, false)),
+			'IMCGER_CT_TZOFFSET'	=> $tz_offset,
 		]);
 	}
 }
