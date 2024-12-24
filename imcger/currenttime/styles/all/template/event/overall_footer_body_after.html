@@ -7,4 +7,23 @@
  *
  #}
 
-{% INCLUDEJS '@imcger_currenttime/current_time.js' %}
+{% INCLUDEJS '@imcger_currenttime/imcger_clock.js' %}
+
+<script>
+	/**
+	 * @var	imcger	object for pphpBB.
+	 */
+	if (typeof imcger != 'object') {
+		var imcger = {};
+	}
+
+	imcger.currentTime = {};
+
+	// Initialize Clocks
+	imcger.currentTime.Clocks = document.getElementsByClassName('time');
+	imcger.currentTime.Clock  = [];
+
+	for (i = 0; i < imcger.currentTime.Clocks.length; i++) {
+		imcger.currentTime.Clock[i] = new imcgerClock(imcger.currentTime.Clocks[i], {{ IMCGER_CT_TZOFFSET }});
+	}
+</script>
