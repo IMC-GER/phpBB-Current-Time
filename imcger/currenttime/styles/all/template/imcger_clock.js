@@ -13,17 +13,26 @@ class imcgerClock {
 	#jsTzOffset;
 	#currentDay;
 
-	constructor(timeStringObject = undefined, tzOffset = null) {
+	constructor(timeStringObject = null, tzOffset = null) {
 		var thisObj = this;
 
 		let date = new Date();
 		this.#jsTzOffset = date.getTimezoneOffset() * -60;
 		this.#tzOffset	 = tzOffset ?? this.#jsTzOffset;
 		this.#timeString = '';
+		this.#currentDay = 0;
 
-		if (typeof timeStringObject !== 'undefined') {
+		if (!Number.isInteger(this.#tzOffset)) {
+			throw new TypeError("tzOffset must be an integer");
+		} else if ( this.#tzOffset < -43200 || this.#tzOffset > 50400) {
+			throw new RangeError("The timezone offset must be between -43200 and 50400.");
+		}
+
+		if (timeStringObject != null && typeof timeStringObject === 'object') {
 			this.#timeStringObject	= timeStringObject;
 			this.#timeString		= timeStringObject.innerHTML;
+		} else if (timeStringObject != null) {
+			throw new TypeError("timeStringObject must be a object");
 		}
 
 		if (this.#timeString.search(/\{[gGhHisaA]\}/) >= 0) {
@@ -49,11 +58,13 @@ class imcgerClock {
 			date = this.#setTimeZone(date, this.#tzOffset);
 		}
 
-		if (this.#currentDay != date.getDate()) {
+		if (this.#currentDay && this.#currentDay != date.getDate()) {
 			window.location.reload();
 		}
 
-		this.#timeStringObject.innerHTML = this.#getTimeString(date);
+		if (this.#timeStringObject != null) {
+			this.#timeStringObject.innerHTML = this.#getTimeString(date);
+		}
 	}
 
 	#getTimeString(d) {
@@ -90,10 +101,11 @@ class imcgerClock {
 	}
 
 	set timeString(value) {
-		if (typeof value === "string") {
+		if (typeof value === 'string') {
 			this.#timeString = value;
+			this.#setTimeString();
 		} else {
-			console.error('timeString is no string', value );
+			throw new TypeError("timeString must be a string");
 		}
 	}
 
@@ -103,11 +115,16 @@ class imcgerClock {
 
 	set tzOffset(value) {
 		if (Number.isInteger(value)) {
-			this.#tzOffset = value;
-		} else {
-			console.error('tzOffset is no integer', value);
-		}
+			if ( value >= -43200 && value <= 50400) {
+				this.#tzOffset = value;
 
+				this.#setTimeString();
+			} else {
+				throw new RangeError("The timezone offset must be between -43200 and 50400.");
+			}
+		} else {
+			throw new TypeError("tzOffset must be an integer");
+		}
 	}
 
 	get tzOffset() {

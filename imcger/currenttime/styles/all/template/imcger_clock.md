@@ -1,29 +1,26 @@
-# JavaSkript Klasse imcgerClock
+# JavaScript class imcgerClock
 
-## Beschreibung
-Mit imcgerClock kann eine Uhrzeit als String ausgegeben werden. Als Parameter können der Zeitzonenoffset
-und ein Objekt angegeben werden. Das Objekt muss ein String mit den Platzhaltern für die Ausgabe der Zeit
-sein. An dieses Objekt erfolgt auch die Ausgabe der imcgerClock. Diese wird jede Sekunde bzw. Minute
-aktualisiert.
-Der Zeitzonenoffset wird in Sekunden angegeben. Der Offset für GMT+1 entspricht +3600. Wird der
-tzOffset nicht angegeben wird die Zeitzone des Browsers angenommen.
+## Description
+The imcgerClock can be used to output a time as a string. The timezone offset and an object can be passed as parameters. The object must be a string with the placeholders for the time output. The imcgerClock is also output to this object. The object is updated every second or minute.
 
-In einem an die Klasse übergebene String werden folgende Platzhaltern durch die angegebenen Werte ersetzt.
+The time zone offset is specified in seconds. The offset for GMT+1 corresponds to +3600. If the tzOffset is not specified, the browser's time zone is assumed.
 
-|Platzh.| Beschreibung											| Anzeige    |
-| ----- | ----------------------------------------------------- | ---------- |
-| \{a\}	| Ante meridiem und Post meridiem in Kleinbuchstaben	| am oder pm |
-| \{A\}	| Ante meridiem und Post meridiem in Großbuchstaben 	| AM oder PM |
-| \{g\}	| Stunde im 12-Stunden-Format; ohne vorangestellte Null | 1 bis 12	 |
-| \{G\}	| Stunde im 24-Stunden-Format; ohne vorangestellte Null | 0 bis 23	 |
-| \{h\}	| Stunde im 12-Stunden-Format; mit vorangestellter Null | 01 bis 12	 |
-| \{H\}	| Stunde im 24-Stunden-Format; mit vorangestellter Null | 00 bis 23	 |
-| \{i\}	| Minuten; mit vorangestellter Null 					| 00 bis 59	 |
-| \{s\}	| Sekunden; mit vorangestellter Null					| 00 bis 59	 |
+In a string passed to the class, the following placeholders are replaced by the specified values.
+
+|Placeh.| Description										| Displays   |
+| ----- | ------------------------------------------------- | ---------- |
+| \{a\}	| Lowercase Ante meridiem and Post meridiem			| am oder pm |
+| \{A\}	| Uppercase Ante meridiem and Post meridiem			| AM oder PM |
+| \{g\}	| 12-hour format of an hour without leading zeros	| 1 bis 12	 |
+| \{G\}	| 24-hour format of an hour without leading zeros	| 0 bis 23	 |
+| \{h\}	| 12-hour format of an hour with leading zeros		| 01 bis 12	 |
+| \{H\}	| 24-hour format of an hour with leading zeros		| 00 bis 23	 |
+| \{i\}	| Minutes with leading zeros						| 00 bis 59	 |
+| \{s\}	| Seconds with leading zeros						| 00 bis 59	 |
 
 
-## Anwendung
-### Aufruf mit angegeben Objekt
+## Description
+### Call with specified object
 #### HTML Code
 ```html
 <p id="time">GMT: {g}:{i}:{s} {a}</p>
@@ -32,9 +29,9 @@ In einem an die Klasse übergebene String werden folgende Platzhaltern durch die
 #### JavaScript Code
 ```javascript
 let timerObj = document.getElementById('time');
-let gmtTime  = new imcgerClock(timerObj, 0);
+let gmtTime  = new imcgerClock(timerObj, 0); // Output: GMT: 8:36:54 am
 ```
-### Aufruf ohne Parameter
+### Call without parameters
 #### HTML Code
 ```html
 <p id="time"></p>
@@ -48,5 +45,5 @@ let gmtTime  = new imcgerClock();
 gmtTime.timeString = "GMT-5:  {g}:{i}:{s} {a}";
 gmtTime.tzOffset   = -18000;
 
-timerObj.innerHTML = gmtTime.toString();
+timerObj.innerHTML = gmtTime.toString(); // Output: GMT-5: 3:31:29 am
 ```
