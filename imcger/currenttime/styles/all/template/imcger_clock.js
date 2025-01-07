@@ -11,7 +11,6 @@ class imcgerClock {
 	#timeString;
 	#tzOffset;
 	#jsTzOffset;
-	#currentDay;
 
 	constructor(timeStringObject = null, tzOffset = null) {
 		var thisObj = this;
@@ -20,7 +19,6 @@ class imcgerClock {
 		this.#jsTzOffset = date.getTimezoneOffset() * -60;
 		this.#tzOffset	 = tzOffset ?? this.#jsTzOffset;
 		this.#timeString = '';
-		this.#currentDay = 0;
 
 		if (!Number.isInteger(this.#tzOffset)) {
 			throw new TypeError("tzOffset must be an integer");
@@ -36,8 +34,6 @@ class imcgerClock {
 		}
 
 		if (this.#timeString.search(/\{[gGhHisaA]\}/) >= 0) {
-			this.#currentDay = this.#setTimeZone(date, this.#tzOffset).getDate();
-
 			this.#setTimeString();
 
 			if (this.#timeString.search("{s}") >= 0) {
@@ -58,10 +54,6 @@ class imcgerClock {
 			date = this.#setTimeZone(date, this.#tzOffset);
 		}
 
-		if (this.#currentDay && this.#currentDay != date.getDate()) {
-			window.location.reload();
-		}
-
 		if (this.#timeStringObject != null) {
 			this.#timeStringObject.innerHTML = this.#getTimeString(date);
 		}
@@ -76,7 +68,15 @@ class imcgerClock {
 											.replaceAll("{i}", this.#formatNumber(d.getMinutes()))
 											.replaceAll("{s}", this.#formatNumber(d.getSeconds()))
 											.replaceAll("{a}", d.getHours() < 12 ? 'am' : 'pm')
-											.replaceAll("{A}", d.getHours() < 12 ? 'AM' : 'PM');
+											.replaceAll("{A}", d.getHours() < 12 ? 'AM' : 'PM')
+											.replaceAll("{y}", d.getFullYear().toString().slice(-2))
+											.replaceAll("{Y}", d.getFullYear())
+											.replaceAll("{n}", d.getMonth() + 1)
+											.replaceAll("{m}", this.#formatNumber(d.getMonth() + 1))
+											.replaceAll("{M}", imcger.currentTime.monthShort[d.getMonth()])
+											.replaceAll("{j}", d.getDate())
+											.replaceAll("{d}", this.#formatNumber(d.getDate()))
+											.replaceAll("{D}", imcger.currentTime.weekdayShort[d.getDay() || 7]);
 
 		return newTimeString;
 	}

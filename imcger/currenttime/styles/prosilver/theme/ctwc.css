@@ -1,0 +1,36 @@
+/**
+ * Current Time
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2024, Thorsten Ahlers
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ */
+
+
+.ctwc-container {
+	margin: 5px 0;
+	padding: 5px;
+	text-align: center;
+	font-weight: bold;
+}
+
+#ctwc-clock div {
+	display: inline-block;
+	margin: 0 20px;
+}
+
+#ctwc-clock div span:last-child {
+	font-weight: normal;
+}
+
+#ctwc-clock span {
+	white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+	.ctwc-container {
+		border-radius: 0;
+		margin: 0 -5px;
+	}
+}

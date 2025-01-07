@@ -1,10 +1,46 @@
+parameters:
+    imcger.currenttime.table.ctwc_data: '%core.table_prefix%ctwc_data'
+
 services:
-    imcger.currenttime.listener:
-        class: imcger\currenttime\event\main_listener
+    imcger.currenttime.ctwc_helper:
+        class: imcger\currenttime\controller\ctwc_helper
         arguments:
             - '@user'
             - '@template'
             - '@language'
+
+    imcger.currenttime.acp_ucp.controller:
+        class: imcger\currenttime\controller\ctwc_controller
+        arguments:
+            - '@dbal.conn'
+            - '@request'
+            - '@user'
+            - '@template'
+            - '@language'
+            - '@imcger.currenttime.ctwc_helper'
+            - '@ext.manager'
+            - '%imcger.currenttime.table.ctwc_data%'
+            - '%core.root_path%'
+            - '%core.php_ext%'
+
+    imcger.currenttime.listener:
+        class: imcger\currenttime\event\main_listener
+        arguments:
+            - '@auth'
+            - '@user'
+            - '@template'
+            - '@language'
+            - '%imcger.currenttime.table.ctwc_data%'
+        tags:
+            - { name: event.listener }
+
+    imcger.currenttime.acp.listener:
+        class: imcger\currenttime\event\acp_listener
+        arguments:
+            - '@user'
+            - '@template'
+            - '@request'
+            - '@imcger.currenttime.ctwc_helper'
         tags:
             - { name: event.listener }
 

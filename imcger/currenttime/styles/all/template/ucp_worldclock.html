@@ -1,0 +1,28 @@
+{#
+ * Current Time
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2024, Thorsten Ahlers
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+{% include 'ucp_header.html' %}
+
+<form name="ucp_worldclock" id="ucp_worldclock" method="post" action="{{ U_ACTION }}">
+
+<h2>{{ lang( 'UCP_CT_MODULE_WORLDCLOCK' ) }}</h2>
+
+<div class="panel">
+	<div class="inner">
+		{% include '@imcger_currenttime/ctwc_settings.html' %}
+	</div>
+</div>
+
+<fieldset class="submit-buttons">
+	<input type="submit" name="submit" value="Absenden" class="button1" >
+	{{ S_FORM_TOKEN }}
+</fieldset>
+</form>
+
+{% include 'ucp_footer.html' %}

@@ -1,0 +1,72 @@
+{#
+ * Current Time
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2024, Thorsten Ahlers
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+{% INCLUDECSS '@imcger_currenttime/acp_toggle.css' %}
+{% INCLUDECSS '@imcger_currenttime/confirmbox.css' %}
+{% INCLUDEJS '@imcger_currenttime/confirmbox.js' %}
+{% set switch_type = TOGGLECTRL_CT ?? TOGGLECTRL_TYPE ?? 'toggle' %}
+
+{% INCLUDE 'overall_header.html' %}
+
+<h1>{{ lang('ACP_CTWC_TITLE') }}</h1>
+
+<p>{{ ACP_CTWC_DESC }}</p>
+
+<form id="acp_board" method="post" action="{{ U_ACTION }}">
+
+	{% include '@imcger_currenttime/ctwc_settings.html' %}
+
+	<fieldset>
+		<legend>{{ lang('ACP_SUBMIT_CHANGES') }}</legend>
+		<dl>
+			<dt>
+				<label>{{ lang('CTWC_RESET_DEFAULT') ~ lang('COLON') }}</label><br>
+				<span>{{ lang('CTWC_RESET_DEFAULT_EXP') }}</span>
+			</dt>
+			<dd>
+				{{ _self.switch('ctwc_reset_default', false, switch_type) }}
+				{{ _self.confirmbox('ctwc_reset_default', lang('CTWC_RESET_ASK_BEFORE_EXP')) }}
+			</dd>
+		</dl>
+		<p class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+			<input class="button2" type="reset"  id="reset" name="reset" value="{{ lang('RESET') }}">
+		</p>
+	</fieldset>
+
+	{{ S_FORM_TOKEN }}
+</form>
+
+<p class="imcger-copyright">
+	{{ CTWC_NAME }} v{{ CTWC_EXT_VER }} &copy; IMC-Ger<br>
+	{{ lang('CTWC_LANG_DESC') }} v{{ lang('CTWC_LANG_EXT_VER') }} &bull; {{ lang('CTWC_LANG_AUTHOR') }}
+</p>
+
+{% INCLUDE 'overall_footer.html' %}
+
+{% macro confirmbox(name, message, default = false) -%}
+	<div id="{{ name }}_confirmbox" data-default="{{ default }}" style="display: none;">
+		<h2>{{ lang('CONFIRM') }}</h2>
+		<p>{{ message }}</p>
+		<p>
+			<input type="button" class="button1" name="{{ name }}_confirm_yes" value="{{ lang('YES') }}">&nbsp;
+			<input type="button" class="button2" name="{{ name }}_confirm_no" value="{{ lang('NO') }}">
+		</p>
+	</div>
+{%- endmacro %}
+
+{% macro switch(name, checked = false, type = 'toggle') -%}
+	{% if type == 'toggle' || type == 'checkbox' -%}
+		<input type="checkbox"{{ type == 'toggle' ? ' class="toggle"' }} name="{{ name }}" value="1"{{ checked ? ' checked' }}>
+	{%- elseif type == 'radio' -%}
+		<label><input type="radio" class="radio" name="{{ name }}" value="1"{{ checked ? ' checked' }}> {{ lang('YES') }}</label>
+		<label><input type="radio" class="radio" name="{{ name }}" value="0"{{ !checked ? ' checked' }}> {{ lang('NO') }}</label>
+	{%- endif %}
+{%- endmacro %}
+

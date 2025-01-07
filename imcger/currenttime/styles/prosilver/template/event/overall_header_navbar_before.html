@@ -1,0 +1,19 @@
+{#
+ * Current Time
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2024, Thorsten Ahlers
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+{% INCLUDECSS '@imcger_currenttime/ctwc.css' %}
+{% INCLUDECSS '@imcger_currenttime/ctwc_all.css' %}
+
+{% if ctwc_clock|length %}
+<div class="navbar ctwc-container">
+	<div class="inner">
+		<div  id="ctwc-clock"></div>
+	</div>
+</div>
+{% endif %}
