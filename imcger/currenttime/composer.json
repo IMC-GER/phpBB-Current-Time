@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Refreshes the display of the current time on the index page.",
 	"homepage": "",
-	"version": "0.7.0",
-	"time": "2025-01-07",
+	"version": "0.7.1-b1",
+	"time": "2025-01-08",
 	"license": "GPL-2.0-only",
 	"authors": [{
 			"name": "Thorsten Ahlers",

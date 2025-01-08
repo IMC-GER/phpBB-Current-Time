@@ -156,7 +156,7 @@ class ctwc_controller
 				$this->db->sql_query($sql);
 
 				// Important hack to display the changes of the world clocks
-				redirect(append_sid($this->phpbb_root_path . 'ucp.' . $this->phpEx, 'i=-imcger-currenttime-ucp-ucp_module&amp;mode=worldclock'));
+				redirect(append_sid($this->u_action));
 			}
 		}
 
