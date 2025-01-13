@@ -10,7 +10,7 @@
 /**
  * @var	imcger	object for pphpBB.
  */
-if (typeof imcger != 'object') {
+if (typeof imcger !== 'object') {
 	var imcger = {};
 }
 
@@ -18,7 +18,7 @@ if (typeof imcger != 'object') {
 
 	'use strict';
 
-	imcger.currenttime = {};
+	imcger.currentTime = {};
 
 	/**
 	 * Hide the optgroups that are not the selected timezone
@@ -27,7 +27,7 @@ if (typeof imcger != 'object') {
 	 * @param {bool}	keepSelection Shall we keep the value selected,
 	 * 					or shall the user be forced to repick one.
 	 */
-	imcger.currenttime.timezoneSwitchDate = function($box, keepSelection) {
+	imcger.currentTime.timezoneSwitchDate = function($box, keepSelection) {
 		let $timezoneCopy = $('#ctwc_timezone_copy'),
 			$tzDate		  = $box,
 			$timezone	  = $tzDate.parent().next().children();
@@ -47,7 +47,6 @@ if (typeof imcger != 'object') {
 		}
 
 		let selectVal = $timezone.val();
-		console.log(selectVal);
 
 		if ($tzDate.val() !== '') {
 			$timezone.children('optgroup').remove(':not([data-tz-value="' + $tzDate.val() + '"])');
@@ -70,7 +69,7 @@ if (typeof imcger != 'object') {
 	};
 
 	$('.ctwc-tz-date').change(function() {
-		imcger.currenttime.timezoneSwitchDate($(this), false);
+		imcger.currentTime.timezoneSwitchDate($(this), false);
 	});
 
 	$('.ctwc-tz-date').each(function() {

@@ -21,16 +21,13 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// Language pack author
 	'CTWC_LANG_DESC'				=> 'Deutsch',
-	'CTWC_LANG_EXT_VER' 			=> '0.7.0',
+	'CTWC_LANG_EXT_VER' 			=> '0.8.0',
 	'CTWC_LANG_AUTHOR' 				=> 'IMC-GER',
 
 	'ACP_CT_MODULE_WORLDCLOCK'		 => 'Current Time / World Clock',
 	'ACP_CT_SETTINGS'				 => 'Einstellungen',
 	'ACP_CTWC_TITLE'				 => 'World Clock',
-	'ACP_CTWC_DESC'					 => 'Um die „World Clock“ angezeigt zu bekommen, muss dem Benutzer in der Rechteverwaltung das Benutzerrecht zugewiesen werden. Auf dieser Seite werden die Grundeinstellungen für neue Benutzer vorgenommen. Diese Einstellungen können für alle Benutzer übernommen werden. Die Einstellungen für Gäste müssen <a href="%1s">auf dieser Seite</a> vorgenommen werden.',
-
-	'UCP_CT_MODULE_WORLDCLOCK'		 => 'Weltzeituhr konfiguieren',
-	'UCP_CT_MODULE_WORLDCLOCK_TITLE' => 'Weltzeituhr',
+	'ACP_CTWC_DESC'					 => 'Um die „World Clock“ angezeigt zu bekommen, muss dem Benutzer in der Rechteverwaltung das Benutzerrecht zugewiesen werden. Auf dieser Seite werden die Grundeinstellungen für neue Benutzer vorgenommen. Diese Einstellungen können für alle Benutzer übernommen werden. Die Einstellungen für Gäste müssen <a href="%1s#ctwc_prefs">auf dieser Seite</a> vorgenommen werden.',
 
 	// Permission
 	'ACL_U_CTWC_ACCESS'		=> 'Kann die Weltzeituhr anzeigen',
@@ -46,9 +43,9 @@ $lang = array_merge($lang, [
 	'CTWC_WORLDCLOCK_EXP'	=> 'Du kannst die Weltzeituhr aktivieren und die Zeitzone und die Stadt innerhalb der Zeitzone einstellen. Der Name der Stadt wird vor der Zeitangabe angezeigt.',
 
 	'CTWC_TZ_CITY'			 => 'Alternative Bezeichnung der Zeitzone',
-	'CTWC_TZ_CITY_EXP'		 => 'Wenn Sie dieses Feld leer lassen, wird der Stadtname der Zeitzone angezeigt.',
+	'CTWC_TZ_CITY_EXP'		 => 'Wenn dieses Feld leer bleibt, wird der Stadtname der Zeitzone angezeigt.',
 	'CTWC_WCLOCK_FORMAT'	 => 'Format der Weltzeituhr',
-	'CTWC_WCLOCK_FORMAT_EXP' => 'Diese Platzhalter „g G h H i s a A y Y n m M j d D“ werden derzeit unterstützt.',
+	'CTWC_WCLOCK_FORMAT_EXP' => 'Diese Platzhalter „g G h H i s a A y Y n m M j d D z W“ werden derzeit unterstützt.',
 
 	'CTWC_WCLOCK_LINES'		=> 'Anzeige der Weltzeituhren in',
 	'CTWC_SINGLELINE'		=> 'einer Zeile',

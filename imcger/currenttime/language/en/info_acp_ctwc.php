@@ -21,16 +21,13 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// Language pack author
 	'CTWC_LANG_DESC'				=> 'English',
-	'CTWC_LANG_EXT_VER' 			=> '0.7.0',
+	'CTWC_LANG_EXT_VER' 			=> '0.8.0',
 	'CTWC_LANG_AUTHOR' 				=> 'IMC-GER',
 
 	'ACP_CT_MODULE_WORLDCLOCK'		 => 'Current Time / World Clock',
 	'ACP_CT_SETTINGS'				 => 'Settings',
 	'ACP_CTWC_TITLE'				 => 'World Clock',
-	'ACP_CTWC_DESC'					 => 'To display the “World Clock”, the user must be assigned user permissions in the permission management. The basic settings for new users are made <a href="%1s">on this page</a>. These settings can be applied to all users. The settings for anonymous user must be made on this page.',
-
-	'UCP_CT_MODULE_WORLDCLOCK'		 => 'Edit World Clock',
-	'UCP_CT_MODULE_WORLDCLOCK_TITLE' => 'World Clock',
+	'ACP_CTWC_DESC'					 => 'To display the “World Clock”, the user must be assigned user permissions in the permission management. The basic settings for new users are made on this page. These settings can be applied to all users. The settings for anonymous user must be made <a href="%1s#ctwc_prefs">on this page</a>.',
 
 	// Permission
 	'ACL_U_CTWC_ACCESS'		=> 'Can view world clock',
@@ -48,7 +45,7 @@ $lang = array_merge($lang, [
 	'CTWC_TZ_CITY'			 => 'Alternative designation of the time zone',
 	'CTWC_TZ_CITY_EXP'		 => 'If you leave this field blank, the city name of the time zone will be displayed.',
 	'CTWC_WCLOCK_FORMAT'	 => 'World clock time format',
-	'CTWC_WCLOCK_FORMAT_EXP' => 'These placeholders “g G h H i s a A y Y n m M j d D” are currently supported.',
+	'CTWC_WCLOCK_FORMAT_EXP' => 'These placeholders “g G h H i s a A y Y n m M j d D z W” are currently supported.',
 
 	'CTWC_WCLOCK_LINES'		=> 'Display world clocks in',
 	'CTWC_SINGLELINE'		=> 'single-line',

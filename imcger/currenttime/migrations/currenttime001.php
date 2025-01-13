@@ -76,13 +76,15 @@ class currenttime001 extends \phpbb\db\migration\migration
 				]
 			],
 
-			['module.add', ['ucp', 'UCP_PREFS',
+			['module.add', [
+					'ucp',
+					'UCP_PREFS',
 					[
 						'module_auth'		=> 'ext_imcger/currenttime && acl_u_ctwc_access',
 						'module_basename'	=> '\imcger\currenttime\ucp\ucp_module',
 						'module_langname'	=> 'UCP_CT_MODULE_WORLDCLOCK',
 						'module_mode'		=> 'worldclock',
-					]
+					],
 				]
 			],
 

@@ -1,12 +1,35 @@
 /**
- * JavaScript class imcgerClock
+ * JavaScript class IMCGerClock
  *
  * @copyright (c) 2024, Thorsten Ahlers
  * @license GNU General Public License, version 2 (GPL-2.0)
  *
  */
 
-class imcgerClock {
+class IMCGerDate extends Date {
+
+	getDayOfYear() {
+		const firstDay = new Date(this.getFullYear(), 0, 0);
+		const diff = this - firstDay + ((firstDay.getTimezoneOffset() - this.getTimezoneOffset()) * 60 * 1000);
+
+		return Math.floor(diff / (60 * 60 * 24 * 1000));
+	}
+
+	getWeekNo() {
+		const curDate = new Date(this.getTime());
+		curDate.setHours(0, 0, 0, 0);
+		// Thursday this week
+		curDate.setDate(curDate.getDate() + 3 - (curDate.getDay() + 6) % 7);
+
+		const firstThu = new Date(curDate.getFullYear(), 0, 4);
+		// First Thursday at the beginning of the year
+		firstThu.setDate(firstThu.getDate() + 3 - (firstThu.getDay() + 6) % 7);
+
+		return (1 + Math.round(((curDate.getTime() - firstThu.getTime()) / 86400000 - 3 + (firstThu.getDay() + 6) % 7) / 7));
+	}
+}
+
+class IMCGerClock {
 	#timeStringObject;
 	#timeString;
 	#tzOffset;
@@ -15,7 +38,7 @@ class imcgerClock {
 	constructor(timeStringObject = null, tzOffset = null) {
 		var thisObj = this;
 
-		let date = new Date();
+		let date = new IMCGerDate();
 		this.#jsTzOffset = date.getTimezoneOffset() * -60;
 		this.#tzOffset	 = tzOffset ?? this.#jsTzOffset;
 		this.#timeString = '';
@@ -33,7 +56,7 @@ class imcgerClock {
 			throw new TypeError("timeStringObject must be a object");
 		}
 
-		if (this.#timeString.search(/\{[gGhHisaA]\}/) >= 0) {
+		if (this.#timeString.search(/\{[gGhHisaAyYnmMjdD]\}/) >= 0) {
 			this.#setTimeString();
 
 			if (this.#timeString.search("{s}") >= 0) {
@@ -48,7 +71,7 @@ class imcgerClock {
 	}
 
 	#setTimeString() {
-		let date = new Date();
+		let date = new IMCGerDate();
 
 		if (this.#tzOffset != this.#jsTzOffset) {
 			date = this.#setTimeZone(date, this.#tzOffset);
@@ -76,7 +99,9 @@ class imcgerClock {
 											.replaceAll("{M}", imcger.currentTime.monthShort[d.getMonth()])
 											.replaceAll("{j}", d.getDate())
 											.replaceAll("{d}", this.#formatNumber(d.getDate()))
-											.replaceAll("{D}", imcger.currentTime.weekdayShort[d.getDay() || 7]);
+											.replaceAll("{D}", imcger.currentTime.weekdayShort[d.getDay() || 7])
+											.replaceAll("{z}", d.getDayOfYear())
+											.replaceAll("{W}", d.getWeekNo());
 
 		return newTimeString;
 	}
@@ -87,11 +112,11 @@ class imcgerClock {
 
 	#setTimeZone(date, offset) {
 		const utc = date.getTime() + (this.#jsTzOffset * -1000);
-		return new Date(utc + (offset * 1000));
+		return new IMCGerDate(utc + (offset * 1000));
 	}
 
 	toString() {
-		let date = new Date();
+		let date = new IMCGerDate();
 
 		if (this.#tzOffset != this.#jsTzOffset) {
 			date = this.#setTimeZone(date, this.#tzOffset);

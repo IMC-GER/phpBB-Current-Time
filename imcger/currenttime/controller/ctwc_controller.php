@@ -88,7 +88,7 @@ class ctwc_controller
 	{
 		$this->modul = $modul;
 
-		$this->language->add_lang(['common', 'ucp']);
+		$this->language->add_lang(['ucp', ]);
 
 		add_form_key('imcger\currenttime');
 
@@ -108,14 +108,15 @@ class ctwc_controller
 			{
 				$user_setting[$i][0] = $this->request->variable('ctwc_wclock_disp_' . $i, 0);
 				$user_setting[$i][1] = $this->request->variable('ctwc_tz_' . $i, '');
-				$user_setting[$i][2] = trim($this->request->variable('ctwc_tz_city_' . $i, '', true));
+				$user_setting[$i][2] = $this->request->variable('ctwc_tz_city_' . $i, '', true);
 
 				$user_setting[$i][0] = !$user_setting[$i][1] ? 0 : $user_setting[$i][0];
 			}
-			$user_setting[6] = trim($this->request->variable('ctwc_wclock_format', 'H:i:s'));
+			$user_setting[6] = $this->request->variable('ctwc_wclock_format', 'H:i:s');
 			$user_setting[7] = $this->request->variable('ctwc_wclock_lines', 0);
 
 			$user_data_str = json_encode($user_setting, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+			$user_data_str = $this->db->sql_escape($user_data_str);
 
 			if ($this->modul == 'acp')
 			{
@@ -218,7 +219,7 @@ class ctwc_controller
 	}
 
 	/**
-	 * @param  string $action The selected action (UCP section).
+	 * @param  string $action The selected action (ACP & UCP section).
 	 * @return mixed
 	 */
 	public function set_page_url($action)

@@ -7,12 +7,9 @@
  *
  #}
 
-{% INCLUDECSS '@imcger_currenttime/ctwc.css' %}
-
-{% if ctwc_clock|length %}
-<div class="navbar ctwc-container">
-	<div class="inner">
-		<div  id="ctwc-clock"></div>
-	</div>
-</div>
+{# Idea and code from Kirk (phpbb.de) #}
+{% if SCRIPT_NAME != 'index' %}
+	<p class="responsive-center ctwc-currenttime time rightside">
+		{{ CURRENT_TIME }}
+	</p>
 {% endif %}

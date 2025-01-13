@@ -77,31 +77,9 @@ class acp_listener implements EventSubscriberInterface
 
 		$user_row += ['ctwc_wclock_format' => trim($this->request->variable('ctwc_wclock_format', $user_setting[6] ?? ''))];
 		$user_row += ['ctwc_wclock_lines' => $this->request->variable('ctwc_wclock_lines', $user_setting[7] ?? 0)];
+		$user_row += ['user_ctwc_currtime_format' => $this->request->variable('user_ctwc_currtime_format',  $event['user_row']['user_ctwc_currtime_format'])];
 
 		$event['user_row'] = array_merge($event['user_row'], $user_row);
-
-		// $event['user_row'] = array_merge($event['user_row'], [
-			// 'ctwc_wclock_disp_0' => $this->request->variable('ctwc_wclock_disp_0', $user_setting[0][0] ?? 0),
-			// 'ctwc_tz_0'			 => $this->request->variable('ctwc_tz_0', $user_setting[0][1] ?? ''),
-			// 'ctwc_tz_city_0'	 => trim($this->request->variable('ctwc_tz_city_0', $user_setting[0][2] ?? '', true)),
-			// 'ctwc_wclock_disp_1' => $this->request->variable('ctwc_wclock_disp_1', $user_setting[1][0] ?? 0),
-			// 'ctwc_tz_1'			 => $this->request->variable('ctwc_tz_1', $user_setting[1][1] ?? ''),
-			// 'ctwc_tz_city_1'	 => trim($this->request->variable('ctwc_tz_city_1', $user_setting[1][2] ?? '', true)),
-			// 'ctwc_wclock_disp_2' => $this->request->variable('ctwc_wclock_disp_2', $user_setting[2][0] ?? 0),
-			// 'ctwc_tz_2'			 => $this->request->variable('ctwc_tz_2', $user_setting[2][1] ?? ''),
-			// 'ctwc_tz_city_2'	 => trim($this->request->variable('ctwc_tz_city_2', $user_setting[2][2] ?? '', true)),
-			// 'ctwc_wclock_disp_3' => $this->request->variable('ctwc_wclock_disp_3', $user_setting[3][0] ?? 0),
-			// 'ctwc_tz_3'			 => $this->request->variable('ctwc_tz_3', $user_setting[3][1] ?? ''),
-			// 'ctwc_tz_city_3'	 => trim($this->request->variable('ctwc_tz_city_3', $user_setting[3][2] ?? '', true)),
-			// 'ctwc_wclock_disp_4' => $this->request->variable('ctwc_wclock_disp_4', $user_setting[4][0] ?? 0),
-			// 'ctwc_tz_4'			 => $this->request->variable('ctwc_tz_4', $user_setting[4][1] ?? ''),
-			// 'ctwc_tz_city_4'	 => trim($this->request->variable('ctwc_tz_city_4', $user_setting[4][2] ?? '', true)),
-			// 'ctwc_wclock_disp_5' => $this->request->variable('ctwc_wclock_disp_5', $user_setting[5][0] ?? 0),
-			// 'ctwc_tz_5'			 => $this->request->variable('ctwc_tz_5', $user_setting[5][1] ?? ''),
-			// 'ctwc_tz_city_5'	 => trim($this->request->variable('ctwc_tz_city_5', $user_setting[5][2] ?? '', true)),
-			// 'ctwc_wclock_format' => trim($this->request->variable('ctwc_wclock_format', $user_setting[6] ?? '')),
-			// 'ctwc_wclock_lines'	 => $this->request->variable('ctwc_wclock_lines', $user_setting[7] ?? 0),
-		// ]);
 	}
 
 	/**
@@ -125,7 +103,8 @@ class acp_listener implements EventSubscriberInterface
 		$user_data_str = json_encode($user_setting, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
 		$event['sql_ary'] = array_merge($event['sql_ary'], [
-			'user_imcger_ct_data' => $user_data_str,
+			'user_imcger_ct_data'		=> $user_data_str,
+			'user_ctwc_currtime_format' => $event['user_row']['user_ctwc_currtime_format'],
 		]);
 	}
 
@@ -163,9 +142,10 @@ class acp_listener implements EventSubscriberInterface
 				'CTWC_SINGLELINE'	=> 0,
 				'CTWC_TWOLINES'		=> 1,
 			]),
-			'TOGGLECTRL_CT'			=> 'radio',
-			'S_CTWC_ACP_USER_PREFS'	=> true,
-			'S_CTWC_ACCESS'			=> $user_auth->acl_get('u_ctwc_access'),
+			'TOGGLECTRL_CT'				=> 'radio',
+			'S_CTWC_ACP_USER_PREFS'		=> true,
+			'S_CTWC_ACCESS'				=> $user_auth->acl_get('u_ctwc_access'),
+			'USER_CTWC_CURRTIME_FORMAT'	=> $event['user_row']['user_ctwc_currtime_format'],
 		]);
 	}
 }

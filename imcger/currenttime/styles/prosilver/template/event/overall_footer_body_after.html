@@ -13,21 +13,24 @@
 	/**
 	 * @var	imcger	object for pphpBB.
 	 */
-	if (typeof imcger != 'object') {
+	if (typeof imcger !== 'object') {
 		var imcger = {};
 	}
 
-	imcger.currentTime = {};
+	if (typeof imcger.currentTime !== 'object') {
+		imcger.currentTime = {};
+	}
 
 	imcger.currentTime.weekdayShort = [{{ CTWC_WEEKDAY_SHORT_ARY }}];
 	imcger.currentTime.monthShort	= [{{ CTWC_MONTHS_SHORT_ARY }}];
 
-	// Initialize Clocks
+	// Initialize current time clock
 	imcger.currentTime.Clocks = document.getElementsByClassName('time');
-	imcger.currentTime.Clock  = [];
 
 	for (i = 0; i < imcger.currentTime.Clocks.length; i++) {
-		imcger.currentTime.Clock[i] = new imcgerClock(imcger.currentTime.Clocks[i], {{ CTWC_TZOFFSET }});
+		new IMCGerClock(imcger.currentTime.Clocks[i], {{ CTWC_TZOFFSET }});
+
+		imcger.currentTime.Clocks[i].style.visibility = 'visible';
 	}
 
 {% if ctwc_clock|length %}
@@ -45,11 +48,12 @@
 		cont.appendChild(elem);
 		newClock = elem.lastChild;
 
-		new imcgerClock(newClock, timeZone);
+		new IMCGerClock(newClock, timeZone);
 	}
 
-	{% for data in ctwc_clock %}
+	{% for data in ctwc_clock -%}
 		createClock('{{ data.CITY|e('js') }}', '{{ CTWC_DATESTRING|e('js') }}', {{ data.TIMEOFFSET }}, {{ CTWC_LINES }});
 	{% endfor %}
 {% endif %}
+
 </script>

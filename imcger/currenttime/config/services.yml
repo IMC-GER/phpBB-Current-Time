@@ -43,6 +43,18 @@ services:
             - '@imcger.currenttime.ctwc_helper'
         tags:
             - { name: event.listener }
+            
+    imcger.currenttime.ucp.listener:
+        class: 'imcger\currenttime\event\ucp_listener'
+        arguments:
+            - '@config'
+            - '@template'
+            - '@user'
+            - '@language'
+            - '@request'
+            - '@dbal.conn'
+        tags:
+            - { name: event.listener }
 
     _defaults:
         public: true

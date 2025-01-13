@@ -7,7 +7,6 @@
  *
  */
 
-
 .ctwc-container {
 	margin: 5px 0;
 	padding: 5px;
@@ -26,6 +25,14 @@
 
 #ctwc-clock span {
 	white-space: nowrap;
+}
+
+p.ctwc-currenttime {
+	margin-top: 4px;
+}
+
+p.time {
+	visibility: hidden;
 }
 
 @media (max-width: 700px) {

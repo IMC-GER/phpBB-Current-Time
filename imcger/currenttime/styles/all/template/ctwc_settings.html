@@ -8,11 +8,11 @@
  #}
 
 {% INCLUDEJS '@imcger_currenttime/timezone.js' %}
-{% INCLUDECSS '@imcger_currenttime/ctwc.css' %}
 {% INCLUDECSS '@imcger_currenttime/ctwc_all.css' %}
 {% import '@imcger_currenttime/twig_macros.html' as common %}
 {% set switch_type = TOGGLECTRL_CT ?? TOGGLECTRL_TYPE ?? 'toggle' %}
 
+		{% if S_CTWC_ACP_USER_PREFS is defined %}<a id="ctwc_prefs" class="anchor"></a>{% endif %}
 		<fieldset>
 			{% if S_CTWC_ACP_USER_PREFS is defined %}<legend>{{ lang( 'UCP_CT_MODULE_WORLDCLOCK' ) }}</legend>{% endif %}
 			<dl>
