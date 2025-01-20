@@ -35,6 +35,9 @@ class ucp_listener implements EventSubscriberInterface
 	/** @var \phpbb\db\driver\driver_interface */
 	protected $db;
 
+	/** @var \imcger\currenttime\controller\ctwc_helper */
+	protected $ctwc_helper;
+
 	/**
 	 * Constructor
 	 *
@@ -54,15 +57,17 @@ class ucp_listener implements EventSubscriberInterface
 		\phpbb\user $user,
 		\phpbb\language\language $language,
 		\phpbb\request\request $request,
-		\phpbb\db\driver\driver_interface $db
+		\phpbb\db\driver\driver_interface $db,
+		\imcger\currenttime\controller\ctwc_helper $ctwc_helper
 	)
 	{
-		$this->config	= $config;
-		$this->template = $template;
-		$this->user 	= $user;
-		$this->language = $language;
-		$this->request	= $request;
-		$this->db		= $db;
+		$this->config		= $config;
+		$this->template 	= $template;
+		$this->user 		= $user;
+		$this->language 	= $language;
+		$this->request		= $request;
+		$this->db			= $db;
+		$this->ctwc_helper	= $ctwc_helper;
 	}
 
 	/**
@@ -91,8 +96,8 @@ class ucp_listener implements EventSubscriberInterface
 	 */
 	public function ucp_display_module_before()
 	{
-		// Add language file in UCP
-		$this->language->add_lang('info_ucp_ctwc', 'imcger/currenttime');
+		// Add language file in UCP);
+		$this->language->add_lang(['info_acp_ctwc', 'info_ucp_ctwc', ], 'imcger/currenttime');
 	}
 
 	/**
@@ -104,12 +109,16 @@ class ucp_listener implements EventSubscriberInterface
 	 */
 	public function ucp_prefs_personal_data($event)
 	{
+		$format = !!$this->user->data['user_ctwc_currtime_format'] ? $this->user->data['user_ctwc_currtime_format'] : $this->user->date_format;
+
 		$event['data'] = array_merge($event['data'], [
-			'user_ctwc_currtime_format' => $this->request->variable('user_ctwc_currtime_format', $this->user->data['user_ctwc_currtime_format']),
+			'user_ctwc_currtime_format' => $this->request->variable('user_ctwc_currtime_format', $format),
 		]);
 
 		if (!$event['submit'])
 		{
+			$this->ctwc_helper->set_select_template_vars($event['data']['user_ctwc_currtime_format'], 'CTWC_CURRTIME_DATEFORMATS');
+
 			$this->template->assign_vars([
 				'TOGGLECTRL_CT'				=> 'radio',
 				'USER_CTWC_CURRTIME_FORMAT'	=> $event['data']['user_ctwc_currtime_format'],

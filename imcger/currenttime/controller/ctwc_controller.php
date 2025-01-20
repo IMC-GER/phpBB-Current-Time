@@ -27,8 +27,8 @@ class ctwc_controller
 	/** @var \phpbb\language\language */
 	protected $language;
 
-	/** @var \imcger\currenttime\controller\cp_controller */
-	protected $cp_controller;
+	/** @var \imcger\currenttime\controller\ctwc_helper */
+	protected $ctwc_helper;
 
 	/** @var \phpbb\extension\manager */
 	protected $ext_manager;
@@ -182,6 +182,8 @@ class ctwc_controller
 			$user_setting = json_decode($this->user->data['user_imcger_ct_data'], true);
 		}
 
+		$this->ctwc_helper->set_select_template_vars($user_setting[6] ?? $this->user->date_format, 'CTWC_WCLOCK_DATEFORMATS');
+
 		$this->ctwc_helper->timezone_select('ctwc0', $user_setting[0][1] ?? '');
 		$this->ctwc_helper->timezone_select('ctwc1', $user_setting[1][1] ?? '');
 		$this->ctwc_helper->timezone_select('ctwc2', $user_setting[2][1] ?? '');
@@ -210,7 +212,7 @@ class ctwc_controller
 			'CTWC_TZ_CITY_3'	 => $user_setting[3][2] ?? '',
 			'CTWC_TZ_CITY_4'	 => $user_setting[4][2] ?? '',
 			'CTWC_TZ_CITY_5'	 => $user_setting[5][2] ?? '',
-			'CTWC_WCLOCK_FORMAT' => $user_setting[6] ?? 'H:i:s',
+			'CTWC_WCLOCK_FORMAT' => $user_setting[6] ?? $this->user->date_format,
 			'CTWC_WCLOCK_LINES'		=> $this->ctwc_helper->select_struct($user_setting[7] ?? 0, [
 				'CTWC_SINGLELINE'	=> 0,
 				'CTWC_TWOLINES'		=> 1,

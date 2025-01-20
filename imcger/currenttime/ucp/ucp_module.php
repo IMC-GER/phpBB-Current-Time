@@ -29,8 +29,6 @@ class ucp_module
 
 		$language = $phpbb_container->get('language');
 
-		$language->add_lang(['info_acp_ctwc', ], 'imcger/currenttime');
-
 		switch ($mode)
 		{
 			case 'worldclock':

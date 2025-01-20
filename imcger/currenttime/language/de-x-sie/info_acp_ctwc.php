@@ -45,7 +45,7 @@ $lang = array_merge($lang, [
 	'CTWC_TZ_CITY'			 => 'Alternative Bezeichnung der Zeitzone',
 	'CTWC_TZ_CITY_EXP'		 => 'Wenn dieses Feld leer bleibt, wird der Stadtname der Zeitzone angezeigt.',
 	'CTWC_WCLOCK_FORMAT'	 => 'Format der Weltzeituhr',
-	'CTWC_WCLOCK_FORMAT_EXP' => 'Diese Platzhalter „g G h H i s a A y Y n m M j d D z W“ werden derzeit unterstützt.',
+	'CTWC_WCLOCK_FORMAT_EXP' => 'Diese Platzhalter „g G h H i s a A y Y n m M j d D z W F l O P S“ werden derzeit unterstützt.',
 
 	'CTWC_WCLOCK_LINES'		=> 'Anzeige der Weltzeituhren in',
 	'CTWC_SINGLELINE'		=> 'einer Zeile',
@@ -54,4 +54,15 @@ $lang = array_merge($lang, [
 	'CTWC_RESET_DEFAULT'		=> 'Benutzereinstellungen überschreiben',
 	'CTWC_RESET_DEFAULT_EXP'	=> 'Wenn diese Option aktiviert ist, werden die Einstellungen aller Benutzer überschrieben. Ohne die Aktivierung werden nur die Standardwerte für neue Benutzer gesetzt.',
 	'CTWC_RESET_ASK_BEFORE_EXP'	=> 'Diese Einstellung überschreibt die Einstellungen alle Benutzer mit den Standardwerten.<br><strong>Dieser Prozess kann nicht rückgängig gemacht werden!</strong>',
+
+	'CUSTOM_DATEFORMAT'			=> 'Eigenes …',
+	'ctwc_dateformats'	=> [
+		'D j. M Y, H:i:s'		=> 'So 1. Jan 2025, 18:33:28',
+		'j. M Y, H:i'			=> '1. Jan 2025, 13:57',
+		'D j. M Y, H:i:s'		=> 'Mo 1. Jan 2025, 13:57:28',
+		'j. F Y, H:i'			=> '1. Januar 2025, 13:57',
+		'l j. F Y, H:i'			=> 'Montag 1. Januar 2025, 13:57',
+		'd.m.Y, H:i:s'			=> '01.01.2025, 13:57:28',
+		'D j. M, H:i:s \G\M\TP'	=> 'Mo 1. Jan, 01:08:35 GMT+11:00',
+	],
 ]);

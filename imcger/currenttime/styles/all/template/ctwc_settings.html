@@ -268,7 +268,10 @@
 					<span>{{ lang('CTWC_WCLOCK_FORMAT_EXP') }}</span>
 				</dt>
 				<dd>
-					{{ common.text('ctwc_wclock_format', CTWC_WCLOCK_FORMAT, 15) }}
+					{{ common.select('ctwc_wclock_dateformats', CTWC_WCLOCK_DATEFORMATS) }}
+				</dd>
+				<dd>
+					{{ common.text('ctwc_wclock_format', CTWC_WCLOCK_FORMAT, 20) }}
 				</dd>
 			</dl>
 			<dl>

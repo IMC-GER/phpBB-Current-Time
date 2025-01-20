@@ -80,4 +80,8 @@ if (typeof imcger !== 'object') {
 		$timezone.val(tzsSetting);
 	});
 
+	$('[name=ctwc_wclock_dateformats]').change(function() {
+		$('[name=ctwc_wclock_format]').val($(this).val());
+	});
+
 })(jQuery); // Avoid conflicts with other libraries

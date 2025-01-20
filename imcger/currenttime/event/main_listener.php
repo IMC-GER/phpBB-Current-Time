@@ -70,19 +70,24 @@ class main_listener implements EventSubscriberInterface
 
 	public function page_header_after()
 	{
-		$weekday_short = ['dummy', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', ];
-		$month_short   = ['Jan', 'Feb', 'Mar', 'Apr', 'May_short', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ];
+		$weekday_month = [
+				['dummy', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun', ],
+				['dummy', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', ],
+				['Jan', 'Feb', 'Mar', 'Apr', 'May_short', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec', ],
+				['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December', ],
+			];
 
-		$js_weekday_short = '';
-		foreach ($weekday_short as $weekday)
+		$i = 0;
+		$js_weekday_month = [];
+		foreach ($weekday_month as $weekday_month_ary)
 		{
-			$js_weekday_short .= '\'' . $this->language->lang(['datetime', $weekday]) . '\', ';
-		}
+			$js_weekday_month[$i] = '';
 
-		$js_months_short = '';
-		foreach ($month_short as $months)
-		{
-			$js_months_short .= '\'' . $this->language->lang(['datetime', $months]) . '\', ';
+			foreach ($weekday_month_ary as $name)
+			{
+				$js_weekday_month[$i] .= '\'' . $this->language->lang(['datetime', $name]) . '\', ';
+			}
+			$i++;
 		}
 
 		$pattern = [
@@ -99,21 +104,34 @@ class main_listener implements EventSubscriberInterface
 			'/(?<!\\\\)n/', // Numeric representation of a month, without leading zeros	1 through 12
 			'/(?<!\\\\)m/', // Numeric representation of a month, with leading zeros	01 through 12
 			'/(?<!\\\\)M/', // A short textual representation of a month, three letters	Jan through Dec
+			'/(?<!\\\\)jS/', // Day of the month with suffix and without leading zeros 	1st to 31st
 			'/(?<!\\\\)j/', // Day of the month without leading zeros 					1 to 31
 			'/(?<!\\\\)d/', // Day of the month, 2 digits with leading zeros 			01 to 31
 			'/(?<!\\\\)D/', // A textual representation of a day, three letters			Mon through Sun
-			'/(?<!\\\\)z/', // The day of the year (starting from 1) 					1 through 366
-			'/(?<!\\\\)W/', // ISO 8601 week number of year, weeks starting on Monday
+			'/(?<!\\\\)z1/', // The day of the year (starting from 1) 					1 through 366
+			'/(?<!\\\\)z/', // The day of the year (starting from 0) 					0 through 365
+			'/(?<!\\\\)W0S/', // Week number of year, weeks starting on Sunday			1 to 53
+			'/(?<!\\\\)W1S/', // ISO 8601 week number of year, weeks starting on Monday	1 to 53
+			'/(?<!\\\\)WS/', // ISO 8601 week number of year, weeks starting on Monday	1 to 53
+			'/(?<!\\\\)W0/', // Week number of year, weeks starting on Sunday			1 to 53
+			'/(?<!\\\\)W1/', // ISO 8601 week number of year, weeks starting on Monday	1 to 53
+			'/(?<!\\\\)W/', // ISO 8601 week number of year, weeks starting on Monday	1 to 53
+			'/(?<!\\\\)l/', // A full textual representation of the day of the week 	Sunday through Saturday
+			'/(?<!\\\\)F/', // A full textual representation of a month					January through December
+			'/(?<!\\\\)O/', // Difference to Greenwich time (GMT) without colon 		Example: +0200
+			'/(?<!\\\\)P/', // Difference to Greenwich time (GMT) with colon 			Example: +02:00
 		];
 
 		$ct_replacement = [
-			'{\g}', '{\G}', '{\h}', '{\H}', '{\i}', '{\s}', '{\a}', '{\A}',
-			'{\y}', '{\Y}', '{\n}', '{\m}', '{\M}', '{\j}', '{\d}', '{\D}', '{\z}', '{\W}',
+			'{\g}', '{\G}', '{\h}', '{\H}', '{\i}', '{\s}', '{\a}', '{\A}', '{\y}', '{\Y}', '{\n}',
+			'{\m}', '{\M}', '{\j\S}', '{\j}', '{\d}', '{\D}', '{\z1}', '{\z}', '{\W0\S}', '{\W1\S}', '{\W\S}',
+			'{\W0}', '{\W1}', '{\W}', '{\l}', '{\F}', '{\O}', '{\P}',
 		];
 
 		$wc_replacement = [
-			'{g}', '{G}', '{h}', '{H}', '{i}', '{s}', '{a}', '{A}',
-			'{y}', '{Y}', '{n}', '{m}', '{M}', '{j}', '{d}', '{D}', '{z}', '{W}',
+			'{g}', '{G}', '{h}', '{H}', '{i}', '{s}', '{a}', '{A}', '{y}', '{Y}', '{n}',
+			'{m}', '{M}', '{jS}', '{j}', '{d}', '{D}', '{z1}', '{z}', '{W0S}', '{W1S}', '{WS}',
+			'{W0}', '{W1}', '{W}', '{l}', '{F}', '{O}', '{P}',
 		];
 
 		$wc_date_ary = json_decode($this->user->data['user_imcger_ct_data'],  true);
@@ -138,7 +156,8 @@ class main_listener implements EventSubscriberInterface
 				}
 			}
 
-			$date_str = preg_replace($pattern, $wc_replacement, $wc_date_ary[6] ?? '{H}:{i}:{s}');
+			$format = isset($wc_date_ary[6]) ? $wc_date_ary[6] : $this->user->date_format;
+			$date_str = preg_replace($pattern, $wc_replacement, $format);
 			$date_str = str_replace('\\', '', $date_str);
 
 			$this->template->assign_vars([
@@ -156,8 +175,10 @@ class main_listener implements EventSubscriberInterface
 		$this->template->assign_vars([
 			'CURRENT_TIME'				=> $this->language->lang('CURRENT_TIME', $this->user->format_date(time(), $dateformat, false)),
 			'CTWC_TZOFFSET'				=> $tz_offset,
-			'CTWC_WEEKDAY_SHORT_ARY'	=> $js_weekday_short,
-			'CTWC_MONTHS_SHORT_ARY'		=> $js_months_short,
+			'CTWC_WEEKDAY_SHORT_ARY'	=> $js_weekday_month[0],
+			'CTWC_WEEKDAY_ARY'			=> $js_weekday_month[1],
+			'CTWC_MONTHS_SHORT_ARY'		=> $js_weekday_month[2],
+			'CTWC_MONTHS_ARY'			=> $js_weekday_month[3],
 		]);
 	}
 }

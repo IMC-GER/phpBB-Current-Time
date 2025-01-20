@@ -22,11 +22,20 @@ In a string passed to the class, the following placeholders are replaced by the 
 | \{n\}	| Numeric representation of a month, without leading zeros	| 1 through 12	  |
 | \{m\}	| Numeric representation of a month, with leading zeros		| 01 through 12	  |
 | \{M\}	| A short textual representation of a month, three letters	| Jan through Dec |
+| \{jS\}| Day of the month with suffix and without leading zeros	| 1st to 31st	  |
 | \{j\}	| Day of the month without leading zeros					| 1 to 31		  |
 | \{d\}	| Day of the month, 2 digits with leading zeros				| 01 to 31		  |
 | \{D\}	| A textual representation of a day, three letters			| Mon through Sun |
-| \{z\}	| The day of the year (starting from 1)						| 1 to 366		  |
+| \{z1\}| The day of the year (starting from 1)						| 1 to 366		  |
+| \{z\}	| The day of the year (starting from 0)						| 0 to 365		  |
+|\{W0S\}| Week number of year, weeks starting on Sunday with suffix	| 1 to 53		  |
+|\{W1S\}| Week number of year, weeks starting on Monday with suffix	| 1 to 53		  |
+| \{WS\}| Week number of year, weeks starting on Monday with suffix	| 1 to 53		  |
+| \{W0\}| Week number of year, weeks starting on Sunday				| 1 to 53		  |
+| \{W1\}| ISO 8601 week number of year, weeks starting on Monday	| 1 to 53		  |
 | \{W\}	| ISO 8601 week number of year, weeks starting on Monday	| 1 to 53		  |
+| \{O\}	| Difference to Greenwich time (GMT) without colon between hours and minutes| +0200	 |
+| \{P\}	| Difference to Greenwich time (GMT) with colon between hours and minutes 	| +02:00 |
 
 
 ## Description

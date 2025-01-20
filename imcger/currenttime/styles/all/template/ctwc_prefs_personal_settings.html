@@ -7,11 +7,16 @@
  *
  #}
 
+{% INCLUDEJS '@imcger_currenttime/ctwc_prefs_personal_settings.js' %}
+{% import '@imcger_currenttime/twig_macros.html' as common %}
 	<dl>
 		<dt>
 			<label for="ctwc_currtime_format">{{ lang('CTWC_CURRTIME_FORMAT') ~ lang('COLON') }}</label><br><span>{{ lang('BOARD_DATE_FORMAT_EXPLAIN') }} {{ lang('CTWC_CURRTIME_FORMAT_EXPLAIN') }}</span>
 		</dt>
-		<dd id="ctwc_currtime_format" >
-			<input type="text" name="user_ctwc_currtime_format" id="user_ctwc_currtime_format" value="{{ USER_CTWC_CURRTIME_FORMAT }}" maxlength="64" class="inputbox narrow">
+		<dd>
+			{{ common.select('ctwc_currtime_dateformats', CTWC_CURRTIME_DATEFORMATS) }}
+		</dd>
+		<dd>
+			{{ common.text('user_ctwc_currtime_format', USER_CTWC_CURRTIME_FORMAT, 20) }}
 		</dd>
 	</dl>

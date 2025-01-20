@@ -130,4 +130,24 @@ class ctwc_helper
 
 		return $options_tpl;
 	}
+
+	public function set_select_template_vars($date_format, $template_var)
+	{
+		$this->language->add_lang(['info_acp_ctwc', 'info_ucp_ctwc', ], 'imcger/currenttime');
+
+		$dateformat = preg_replace('/[0-9]/', '', $date_format);
+		$dateformat_options = [$this->user->format_date(time(), $dateformat, false) => $date_format];
+		foreach ($this->language->lang_raw('ctwc_dateformats') as $format => $null)
+		{
+			if ($date_format != $format)
+			{
+				$dateformat = preg_replace('/[0-9]/', '', $format);
+				$dateformat_options += [$this->user->format_date(time(), $dateformat, false) => $format];
+			}
+		}
+
+		$this->template->assign_vars([
+			$template_var => $this->select_struct($date_format, $dateformat_options),
+		]);
+	}
 }

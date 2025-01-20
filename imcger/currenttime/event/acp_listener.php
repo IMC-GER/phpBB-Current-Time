@@ -26,8 +26,8 @@ class acp_listener implements EventSubscriberInterface
 	/** @var \phpbb\request\request */
 	protected $request;
 
-	/** @var \imcger\currenttime\controller\cp_controller */
-	protected $cp_controller;
+	/** @var \imcger\currenttime\controller\ctwc_helper */
+	protected $ctwc_helper;
 
 
 	/**
@@ -65,6 +65,7 @@ class acp_listener implements EventSubscriberInterface
 	public function acp_users_prefs_modify_data($event)
 	{
 		$user_setting = json_decode($event['user_row']['user_imcger_ct_data'], true);
+		$currtime_format = !!$event['user_row']['user_ctwc_currtime_format'] ? $event['user_row']['user_ctwc_currtime_format'] : $this->user->date_format;
 
 		$user_row = [];
 
@@ -75,9 +76,9 @@ class acp_listener implements EventSubscriberInterface
 			$user_row += ['ctwc_tz_city_' . $i => trim($this->request->variable('ctwc_tz_city_' . $i, $user_setting[$i][2] ?? '', true))];
 		}
 
-		$user_row += ['ctwc_wclock_format' => trim($this->request->variable('ctwc_wclock_format', $user_setting[6] ?? ''))];
+		$user_row += ['ctwc_wclock_format' => trim($this->request->variable('ctwc_wclock_format', $user_setting[6] ?? $this->user->date_format))];
 		$user_row += ['ctwc_wclock_lines' => $this->request->variable('ctwc_wclock_lines', $user_setting[7] ?? 0)];
-		$user_row += ['user_ctwc_currtime_format' => $this->request->variable('user_ctwc_currtime_format',  $event['user_row']['user_ctwc_currtime_format'])];
+		$user_row += ['user_ctwc_currtime_format' => $this->request->variable('user_ctwc_currtime_format',  $currtime_format)];
 
 		$event['user_row'] = array_merge($event['user_row'], $user_row);
 	}
@@ -116,6 +117,9 @@ class acp_listener implements EventSubscriberInterface
 		$user_auth	= new \phpbb\auth\auth();
 		$userdata	= $user_auth->obtain_user_data($event['user_row']['user_id']);
 		$user_auth->acl($userdata);
+
+		$this->ctwc_helper->set_select_template_vars($event['user_row']['user_ctwc_currtime_format'], 'CTWC_CURRTIME_DATEFORMATS');
+		$this->ctwc_helper->set_select_template_vars($event['user_row']['ctwc_wclock_format'], 'CTWC_WCLOCK_DATEFORMATS');
 
 		$this->ctwc_helper->timezone_select('ctwc0', $event['user_row']['ctwc_tz_0']);
 		$this->ctwc_helper->timezone_select('ctwc1', $event['user_row']['ctwc_tz_1']);

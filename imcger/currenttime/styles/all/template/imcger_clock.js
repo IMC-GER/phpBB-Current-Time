@@ -1,4 +1,5 @@
 /**
+ * JavaScript class IMCGerDate
  * JavaScript class IMCGerClock
  *
  * @copyright (c) 2024, Thorsten Ahlers
@@ -9,23 +10,22 @@
 class IMCGerDate extends Date {
 
 	getDayOfYear() {
-		const firstDay = new Date(this.getFullYear(), 0, 0);
-		const diff = this - firstDay + ((firstDay.getTimezoneOffset() - this.getTimezoneOffset()) * 60 * 1000);
+		const firstDay = new Date(this.getFullYear(), 0, 1);
+		const diff = this - firstDay + ((firstDay.getTimezoneOffset() - this.getTimezoneOffset()) * 60000);
 
-		return Math.floor(diff / (60 * 60 * 24 * 1000));
+		return Math.floor(diff / 86400000);
 	}
 
-	getWeekNo() {
+	getWeekNo(startDay = 1) {
 		const curDate = new Date(this.getTime());
 		curDate.setHours(0, 0, 0, 0);
-		// Thursday this week
-		curDate.setDate(curDate.getDate() + 3 - (curDate.getDay() + 6) % 7);
+		// startDay of the week must be converted to zero
+		curDate.setDate(curDate.getDate() + 3 - (curDate.getDay() + 7 - startDay) % 7);
 
-		const firstThu = new Date(curDate.getFullYear(), 0, 4);
-		// First Thursday at the beginning of the year
-		firstThu.setDate(firstThu.getDate() + 3 - (firstThu.getDay() + 6) % 7);
+		const firstWeekDay = new Date(curDate.getFullYear(), 0, 4);
+		firstWeekDay.setDate(firstWeekDay.getDate() + 3 - (firstWeekDay.getDay() + 7 - startDay) % 7);
 
-		return (1 + Math.round(((curDate.getTime() - firstThu.getTime()) / 86400000 - 3 + (firstThu.getDay() + 6) % 7) / 7));
+		return (1 + Math.round((curDate.getTime() - firstWeekDay.getTime()) / 86400000  / 7));
 	}
 }
 
@@ -38,7 +38,7 @@ class IMCGerClock {
 	constructor(timeStringObject = null, tzOffset = null) {
 		var thisObj = this;
 
-		let date = new IMCGerDate();
+		const date = new IMCGerDate();
 		this.#jsTzOffset = date.getTimezoneOffset() * -60;
 		this.#tzOffset	 = tzOffset ?? this.#jsTzOffset;
 		this.#timeString = '';
@@ -56,7 +56,7 @@ class IMCGerClock {
 			throw new TypeError("timeStringObject must be a object");
 		}
 
-		if (this.#timeString.search(/\{[gGhHisaAyYnmMjdD]\}/) >= 0) {
+		if (this.#timeString.search(/\{[gGhHisaAyYnmMjdDzW]\}/) >= 0) {
 			this.#setTimeString();
 
 			if (this.#timeString.search("{s}") >= 0) {
@@ -74,7 +74,7 @@ class IMCGerClock {
 		let date = new IMCGerDate();
 
 		if (this.#tzOffset != this.#jsTzOffset) {
-			date = this.#setTimeZone(date, this.#tzOffset);
+			date = this.#setTimeZone(date);
 		}
 
 		if (this.#timeStringObject != null) {
@@ -97,29 +97,60 @@ class IMCGerClock {
 											.replaceAll("{n}", d.getMonth() + 1)
 											.replaceAll("{m}", this.#formatNumber(d.getMonth() + 1))
 											.replaceAll("{M}", imcger.currentTime.monthShort[d.getMonth()])
+											.replaceAll("{F}", imcger.currentTime.month[d.getMonth()])
+											.replaceAll("{jS}", this.#getOrdinalSuffix(d.getDate()))
 											.replaceAll("{j}", d.getDate())
 											.replaceAll("{d}", this.#formatNumber(d.getDate()))
 											.replaceAll("{D}", imcger.currentTime.weekdayShort[d.getDay() || 7])
+											.replaceAll("{l}", imcger.currentTime.weekday[d.getDay() || 7])
+											.replaceAll("{z1}", d.getDayOfYear() + 1)
 											.replaceAll("{z}", d.getDayOfYear())
-											.replaceAll("{W}", d.getWeekNo());
+											.replaceAll("{W0S}", this.#getOrdinalSuffix(d.getWeekNo(0)))
+											.replaceAll("{W1S}", this.#getOrdinalSuffix(d.getWeekNo(1)))
+											.replaceAll("{WS}",	this.#getOrdinalSuffix(d.getWeekNo()))
+											.replaceAll("{W0}", d.getWeekNo(0))
+											.replaceAll("{W1}", d.getWeekNo(1))
+											.replaceAll("{W}", d.getWeekNo())
+											.replaceAll("{O}", this.#tzOffsetHour(false))
+											.replaceAll("{P}", this.#tzOffsetHour())
+											.replaceAll("{S}", '');
 
 		return newTimeString;
+	}
+
+	#getOrdinalSuffix(num) {
+		const suffixes = ["th", "st", "nd", "rd"];
+		const value = num % 100;
+
+		return num + (suffixes[(value - 20) % 10] || suffixes[value] || suffixes[0]);
 	}
 
 	#formatNumber(num) {
 		return num < 10 ? '0' + num : num;
 	}
 
-	#setTimeZone(date, offset) {
+	#setTimeZone(date) {
 		const utc = date.getTime() + (this.#jsTzOffset * -1000);
-		return new IMCGerDate(utc + (offset * 1000));
+		return new IMCGerDate(utc + (this.#tzOffset * 1000));
+	}
+
+	#tzOffsetHour(colon = true) {
+		const sign = this.#tzOffset >= 0 ? '+' : '-';
+			 colon = colon ? ':' : '';
+
+		const totalMinutes = Math.abs(this.#tzOffset) / 60;
+
+		const hours = this.#formatNumber(Math.floor(totalMinutes / 60));
+		const minutes = this.#formatNumber(Math.floor(totalMinutes % 60));
+
+		return (sign + hours + colon + minutes);
 	}
 
 	toString() {
-		let date = new IMCGerDate();
+		const date = new IMCGerDate();
 
 		if (this.#tzOffset != this.#jsTzOffset) {
-			date = this.#setTimeZone(date, this.#tzOffset);
+			date = this.#setTimeZone(date);
 		}
 
 		return this.#getTimeString(date);

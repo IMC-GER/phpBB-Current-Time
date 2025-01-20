@@ -53,6 +53,7 @@ services:
             - '@language'
             - '@request'
             - '@dbal.conn'
+            - '@imcger.currenttime.ctwc_helper'
         tags:
             - { name: event.listener }
 
