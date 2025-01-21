@@ -1,0 +1,204 @@
+{#
+ * Current Time
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2024, Thorsten Ahlers
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+<div id="ctwc-dateformat-decr">
+	<h3>{{ lang('CTWC_DATEFORMAT_TITLE') }}</h3>
+	<p>{{ lang('CTWC_DATEFORMAT_DECR1') }}</p>
+	<p>{{ lang('CTWC_DATEFORMAT_DECR2') }}</p>
+
+	<table>
+	<thead>
+		<tr>
+			<th>{{ lang('CTWC_DATEFORMAT_OPTION') }}.</th>
+			<th>{{ lang('CTWC_DATEFORMAT_DECR') }}</th>
+			<th>{{ lang('CTWC_DATEFORMAT_DISPLAY') }}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<th></th>
+			<th>{{ lang('CTWC_DATEFORMAT_TIME') }}</th>
+			<th></th>
+		</tr>
+		<tr>
+			<td>g</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_G') }}</td>
+			<td>1&ndash;12</td>
+		</tr>
+		<tr>
+			<td>G</td>
+			<td>{{ lang('CTWC_DATEFORMAT_G') }}</td>
+			<td>0&ndash;23</td>
+		</tr>
+		<tr>
+			<td>h</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_H') }}</td>
+			<td>01&ndash;12</td>
+		</tr>
+		<tr>
+			<td>H</td>
+			<td>{{ lang('CTWC_DATEFORMAT_H') }}</td>
+			<td>00&ndash;23</td>
+		</tr>
+		<tr>
+			<td>i</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_I') }}</td>
+			<td>00&ndash;59</td>
+		</tr>
+		<tr>
+			<td>s</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_S') }}</td>
+			<td>00&ndash;59</td>
+		</tr>
+		<tr>
+			<td>a</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_A') }}</td>
+			<td>am / pm</td>
+		</tr>
+		<tr>
+			<td>A</td>
+			<td>{{ lang('CTWC_DATEFORMAT_A') }}</td>
+			<td>AM / PM</td>
+		</tr>
+		<tr>
+			<th></th>
+			<th>{{ lang('CTWC_DATEFORMAT_DATE') }}</th>
+			<th></th>
+		</tr>
+		<tr>
+			<td>y</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_Y') }}</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>Y</td>
+			<td>{{ lang('CTWC_DATEFORMAT_Y') }}</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td>n</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_N') }}</td>
+			<td>1&ndash;12</td>
+		</tr>
+		<tr>
+			<td>m</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_M') }}</td>
+			<td>01&ndash;12</td>
+		</tr>
+		<tr>
+			<td>M</td>
+			<td>{{ lang('CTWC_DATEFORMAT_M') }}</td>
+			<td>{{ lang(['datetime', 'Jan']) }}&ndash;{{ lang(['datetime', 'Dec']) }}</td>
+		</tr>
+		<tr>
+			<td>F</td>
+			<td>{{ lang('CTWC_DATEFORMAT_F') }}</td>
+			<td>{{ lang(['datetime', 'Januar']) }}&ndash;<br>{{ lang(['datetime', 'December']) }}</td>
+		</tr>
+		<tr>
+			<td>j</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_J') }}</td>
+			<td>1&ndash;31</td>
+		</tr>
+		<tr>
+			<td>jS</td>
+			<td>{{ lang('CTWC_DATEFORMAT_JS') }}</td>
+			<td>1st&ndash;31st</td>
+		</tr>
+		<tr>
+			<td>d</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_D') }}</td>
+			<td>01&ndash;31</td>
+		</tr>
+		<tr>
+			<td>D</td>
+			<td>{{ lang('CTWC_DATEFORMAT_D') }}</td>
+			<td>{{ lang(['datetime', 'Mon']) }}&ndash;{{ lang(['datetime', 'Sun']) }}</td>
+		</tr>
+		<tr>
+			<td>l</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_L') }}</td>
+			<td>{{ lang(['datetime', 'Monday']) }}&ndash;<br>{{ lang(['datetime', 'Sunday']) }}</td>
+		</tr>
+		<tr>
+			<td>z1</td>
+			<td>{{ lang('CTWC_DATEFORMAT_Z1') }}</td>
+			<td>1&ndash;366</td>
+		</tr>
+		<tr>
+			<td>z</td>
+			<td>{{ lang('CTWC_DATEFORMAT_LOW_Z') }}</td>
+			<td>0&ndash;365</td>
+		</tr>
+		<tr>
+			<th></th>
+			<th>{{ lang('CTWC_DATEFORMAT_WEEK') }}</th>
+			<th></th>
+		</tr>
+		<tr>
+			<td>W</td>
+			<td>{{ lang('CTWC_DATEFORMAT_W') }}</td>
+			<td>1&ndash;53</td>
+		</tr>
+		<tr>
+			<td>WS</td>
+			<td>{{ lang('CTWC_DATEFORMAT_WS') }}</td>
+			<td>1st&ndash;53rd</td>
+		</tr>
+		<tr>
+			<td>W0</td>
+			<td>{{ lang('CTWC_DATEFORMAT_W0') }}</td>
+			<td>1&ndash;53</td>
+		</tr>
+		<tr>
+			<td>W0S</td>
+			<td>{{ lang('CTWC_DATEFORMAT_W0S') }}</td>
+			<td>1st&ndash;53rd</td>
+		</tr>
+		<tr>
+			<td>W7</td>
+			<td>{{ lang('CTWC_DATEFORMAT_W7') }}</td>
+			<td>1&ndash;54</td>
+		</tr>
+		<tr>
+			<td>W7S</td>
+			<td>{{ lang('CTWC_DATEFORMAT_W7S') }}</td>
+			<td>1st&ndash;54rd</td>
+		</tr>
+		<tr>
+			<th></th>
+			<th>{{ lang('CTWC_DATEFORMAT_TZ') }}</th>
+			<th></th>
+		</tr>
+		<tr>
+			<td>O</td>
+			<td>{{ lang('CTWC_DATEFORMAT_O') }}</td>
+			<td>+0200</td>
+		</tr>
+		<tr>
+			<td>P</td>
+			<td>{{ lang('CTWC_DATEFORMAT_P') }}</td>
+			<td>+02:00</td>
+		</tr>
+		</tbody>
+	</table>
+	<div id="ctwc-dateformat-decr-backlink">{{ lang('CTWC_DATEFORMAT_BACKLINK') }}</div>
+</div>
+
+<script>
+	document.getElementById('ctwc-dateformat-decr-backlink').addEventListener("click", function() {
+		document.getElementById('ctwc-dateformat-decr').style.display = 'none';
+		document.getElementById('ctwc_ucp_prefs').style.display = 'initial';
+	});
+
+	document.getElementById('ctwc-dateformat-explain').addEventListener("click", function() {
+		document.getElementById('ctwc-dateformat-decr').style.display = 'initial';
+		document.getElementById('ctwc_ucp_prefs').style.display = 'none';
+	});
+</script>

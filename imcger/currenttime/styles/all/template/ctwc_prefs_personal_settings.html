@@ -11,7 +11,8 @@
 {% import '@imcger_currenttime/twig_macros.html' as common %}
 	<dl>
 		<dt>
-			<label for="ctwc_currtime_format">{{ lang('CTWC_CURRTIME_FORMAT') ~ lang('COLON') }}</label><br><span>{{ lang('BOARD_DATE_FORMAT_EXPLAIN') }} {{ lang('CTWC_CURRTIME_FORMAT_EXPLAIN') }}</span>
+			<label for="ctwc_currtime_format">{{ lang('CTWC_CURRTIME_FORMAT') ~ lang('COLON') }}</label><br>
+			<span>{{ lang('BOARD_DATE_FORMAT_EXPLAIN') }} <div id='ctwc-dateformat-explain'>{{ lang('CTWC_CURRTIME_FORMAT_EXPLAIN') }}</div></span>
 		</dt>
 		<dd>
 			{{ common.select('ctwc_currtime_dateformats', CTWC_CURRTIME_DATEFORMATS) }}

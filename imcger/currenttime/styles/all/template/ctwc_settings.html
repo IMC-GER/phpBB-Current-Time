@@ -12,6 +12,7 @@
 {% import '@imcger_currenttime/twig_macros.html' as common %}
 {% set switch_type = TOGGLECTRL_CT ?? TOGGLECTRL_TYPE ?? 'toggle' %}
 
+		<div id="ctwc_ucp_prefs">
 		{% if S_CTWC_ACP_USER_PREFS is defined %}<a id="ctwc_prefs" class="anchor"></a>{% endif %}
 		<fieldset>
 			{% if S_CTWC_ACP_USER_PREFS is defined %}<legend>{{ lang( 'UCP_CT_MODULE_WORLDCLOCK' ) }}</legend>{% endif %}
@@ -264,8 +265,7 @@
 			<dl>
 				<dt>
 					<label for="ctwc_wclock_format">{{ lang('CTWC_WCLOCK_FORMAT') ~ lang('COLON') }}</label><br>
-					<span>{{ lang('BOARD_DATE_FORMAT_EXPLAIN') }}</span>
-					<span>{{ lang('CTWC_WCLOCK_FORMAT_EXP') }}</span>
+					<span>{{ lang('BOARD_DATE_FORMAT_EXPLAIN') }} <div id='ctwc-dateformat-explain'>{{ lang('CTWC_CURRTIME_FORMAT_EXPLAIN') }}</div></span>
 				</dt>
 				<dd>
 					{{ common.select('ctwc_wclock_dateformats', CTWC_WCLOCK_DATEFORMATS) }}
@@ -284,3 +284,4 @@
 			</dl>
 		</fieldset>
 		<div id="ctwc_timezone"></div>
+		</div>

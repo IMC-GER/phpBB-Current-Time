@@ -16,3 +16,31 @@
 .ctwc-tz-select {
 	min-width: 225px;
 }
+
+/* Buttons to toogle explanation of the formatting options */
+#ctwc-dateformat-decr-backlink,
+#ctwc-dateformat-explain {
+	color: #45649f;
+	cursor: pointer;
+	font-size: 1em;
+}
+
+#ctwc-dateformat-decr-backlink:hover,
+#ctwc-dateformat-explain:hover {
+	color: #D31141;
+	text-decoration: underline;
+}
+
+#ctwc-dateformat-decr-backlink {
+	margin: 1em;
+	text-align: center;
+}
+
+/* Explanation of the formatting options */
+#ctwc-dateformat-decr {
+	display: none;
+}
+
+code {
+  white-space: nowrap;
+}

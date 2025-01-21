@@ -17,6 +17,10 @@ class IMCGerDate extends Date {
 	}
 
 	getWeekNo(startDay = 1) {
+		if (startDay == 7) {
+			return this.#getWeekUSA();
+		}
+
 		const curDate = new Date(this.getTime());
 		curDate.setHours(0, 0, 0, 0);
 		// startDay of the week must be converted to zero
@@ -26,6 +30,16 @@ class IMCGerDate extends Date {
 		firstWeekDay.setDate(firstWeekDay.getDate() + 3 - (firstWeekDay.getDay() + 7 - startDay) % 7);
 
 		return (1 + Math.round((curDate.getTime() - firstWeekDay.getTime()) / 86400000  / 7));
+	}
+
+	#getWeekUSA() {
+		const janFirst = new Date(this.getFullYear(), 0, 1);
+
+		const firstSunday = new Date(this.getFullYear(), 0, 7);
+		firstSunday.setHours(0, 0, 0, 0);
+		firstSunday.setDate(firstSunday.getDate() - firstSunday.getDay());
+
+		return (1 + Math.floor((this.getTime() - firstSunday.getTime()) / 86400000  / 7) + !!janFirst.getDay());
 	}
 }
 
@@ -106,10 +120,10 @@ class IMCGerClock {
 											.replaceAll("{z1}", d.getDayOfYear() + 1)
 											.replaceAll("{z}", d.getDayOfYear())
 											.replaceAll("{W0S}", this.#getOrdinalSuffix(d.getWeekNo(0)))
-											.replaceAll("{W1S}", this.#getOrdinalSuffix(d.getWeekNo(1)))
+											.replaceAll("{W7S}", this.#getOrdinalSuffix(d.getWeekNo(7)))
 											.replaceAll("{WS}",	this.#getOrdinalSuffix(d.getWeekNo()))
 											.replaceAll("{W0}", d.getWeekNo(0))
-											.replaceAll("{W1}", d.getWeekNo(1))
+											.replaceAll("{W7}", d.getWeekNo(7))
 											.replaceAll("{W}", d.getWeekNo())
 											.replaceAll("{O}", this.#tzOffsetHour(false))
 											.replaceAll("{P}", this.#tzOffsetHour())

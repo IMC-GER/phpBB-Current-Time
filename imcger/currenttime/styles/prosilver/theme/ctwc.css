@@ -41,3 +41,65 @@ p.time {
 		margin: 0 -5px;
 	}
 }
+
+/* Buttons to toogle explanation of the formatting options */
+#ctwc-dateformat-decr-backlink,
+#ctwc-dateformat-explain {
+	color: #45649f;
+	cursor: pointer;
+	font-size: 1em;
+}
+
+#ctwc-dateformat-decr-backlink:hover,
+#ctwc-dateformat-explain:hover {
+	color: #D31141;
+	text-decoration: underline;
+}
+
+#ctwc-dateformat-decr-backlink {
+	margin: 1em;
+	text-align: center;
+}
+
+/* Explanation of the formatting options */
+#ctwc-dateformat-decr {
+	display: none;
+}
+
+code {
+  white-space: nowrap;
+}
+
+#ctwc-dateformat-decr table {
+	margin-left: 5%;
+	line-height: 1.4em;
+}
+
+#ctwc-dateformat-decr table thead {
+	font-size: 1.1em;
+}
+
+#ctwc-dateformat-decr table td,
+#ctwc-dateformat-decr table th {
+	padding: 0 3px;
+}
+
+#ctwc-dateformat-decr table thead th {
+	text-align: left;
+}
+
+#ctwc-dateformat-decr table tbody tr:hover td {
+	background-color: #90d2ec;
+}
+
+#ctwc-dateformat-decr table td:first-child,
+#ctwc-dateformat-decr table td:last-child {
+	text-align: center;
+}
+
+@media (max-width: 900px) {
+	#ctwc-dateformat-decr table {
+		margin: auto;
+	}
+}
+

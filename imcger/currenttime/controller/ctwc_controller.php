@@ -156,8 +156,10 @@ class ctwc_controller
 
 				$this->db->sql_query($sql);
 
-				// Important hack to display the changes of the world clocks
-				redirect(append_sid($this->u_action));
+				// redirect(append_sid($this->u_action));
+				meta_refresh(3, $this->u_action);
+				$message = $this->language->lang('PREFERENCES_UPDATED') . '<br><br>' . $this->language->lang('RETURN_UCP', '<a href="' . $this->u_action . '">', '</a>');
+				trigger_error($message);
 			}
 		}
 
