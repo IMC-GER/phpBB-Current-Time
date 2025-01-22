@@ -169,7 +169,7 @@
 		<tr>
 			<td>W7S</td>
 			<td>{{ lang('CTWC_DATEFORMAT_W7S') }}</td>
-			<td>1st&ndash;54rd</td>
+			<td>1st&ndash;54th</td>
 		</tr>
 		<tr>
 			<th></th>
@@ -195,10 +195,12 @@
 	document.getElementById('ctwc-dateformat-decr-backlink').addEventListener("click", function() {
 		document.getElementById('ctwc-dateformat-decr').style.display = 'none';
 		document.getElementById('ctwc_ucp_prefs').style.display = 'initial';
+		document.location.hash = 'page-body';
 	});
 
 	document.getElementById('ctwc-dateformat-explain').addEventListener("click", function() {
 		document.getElementById('ctwc-dateformat-decr').style.display = 'initial';
 		document.getElementById('ctwc_ucp_prefs').style.display = 'none';
+		document.location.hash = 'page-body';
 	});
 </script>

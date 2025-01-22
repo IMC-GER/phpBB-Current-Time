@@ -19,21 +19,27 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
+	// User preferences
 	'CTWC_CURRTIME_FORMAT'			=> 'Date format for the “Current time”',
 	'CTWC_CURRTIME_FORMAT_EXPLAIN'	=> 'Click here for an explanation of the formatting options.',
 	'UCP_CT_MODULE_WORLDCLOCK'		=> 'Edit World Clock',
 
+	// Radio button label
 	'ON'	=> 'On',
 	'OFF'	=> 'Off',
 
+	// Description of the format string
 	'CTWC_DATEFORMAT_TITLE'	=> 'Date format for Current Time and World Clock',
-	'CTWC_DATEFORMAT_DECR1'	=> 'The format of the date/time string output can be freely defined using the formatting options described in the table. To prevent a known character from being interpreted in the format string, it can be escaped with a preceding backslash.',
-	'CTWC_DATEFORMAT_DECR2'	=> 'Die Formatzeichenkette <code>\'D, d M Y H:i:s \G\M\TP\'</code> entspicht dieser Ausgabe <code>\'Mon, 20 Jan 2025 23:18:29 GMT+02:00\'</code>',
+	'CTWC_DATEFORMAT_DECR1'	=> 'The format of the date/time string output can be freely defined using the formatting options described in the table. To prevent a known character from being interpreted in the format string, it can be escaped with a preceding backslash. If the character with a backslash is already a special sequence, you may need to also escape the backslash.',
+	'CTWC_DATEFORMAT_DECR2'	=> 'The format string <code>\'D, d M Y H:i:s \G\M\TP\'</code> corresponds to this output <code>\'Mon, 20 Jan 2025 23:18:29 GMT+01:00\'</code>',
+	'CTWC_DATEFORMAT_BACKLINK'	=> 'Back to the settings',
 
+	// Table head
 	'CTWC_DATEFORMAT_OPTION'	=> 'Opt.',
 	'CTWC_DATEFORMAT_DECR'		=> 'Description',
 	'CTWC_DATEFORMAT_DISPLAY'	=> 'Displays',
 
+	// Table body
 	'CTWC_DATEFORMAT_TIME'	=> 'Time',
 	'CTWC_DATEFORMAT_LOW_G'	=> '12-hour format of an hour without leading zeros',
 	'CTWC_DATEFORMAT_G'		=> '24-hour format of an hour without leading zeros',
@@ -70,6 +76,4 @@ $lang = array_merge($lang, [
 	'CTWC_DATEFORMAT_TZ'	=> 'Timezone',
 	'CTWC_DATEFORMAT_O'		=> 'Difference–Greenwich time (GMT) without colon between hours and minutes',
 	'CTWC_DATEFORMAT_P'		=> 'Difference–Greenwich time (GMT) with colon between hours and minutes',
-
-	'CTWC_DATEFORMAT_BACKLINK'	=> 'Back to the settings',
 ]);

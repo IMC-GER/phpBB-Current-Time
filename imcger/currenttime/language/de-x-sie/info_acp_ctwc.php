@@ -21,7 +21,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// Language pack author
 	'CTWC_LANG_DESC'				=> 'Deutsch',
-	'CTWC_LANG_EXT_VER' 			=> '0.8.0',
+	'CTWC_LANG_EXT_VER' 			=> '0.9.0',
 	'CTWC_LANG_AUTHOR' 				=> 'IMC-GER',
 
 	'ACP_CT_MODULE_WORLDCLOCK'		 => 'Current Time / World Clock',
@@ -32,7 +32,7 @@ $lang = array_merge($lang, [
 	// Permission
 	'ACL_U_CTWC_ACCESS'		=> 'Kann die Weltzeituhr anzeigen',
 
-	// Settings
+	// Settings world clock
 	'CTWC_SETTINGS'			=> 'Einstellungen',
 	'CTWC_WORLDCLOCK_1'		=> 'Weltzeituhr 1',
 	'CTWC_WORLDCLOCK_2'		=> 'Weltzeituhr 2',
@@ -55,7 +55,6 @@ $lang = array_merge($lang, [
 	'CTWC_RESET_DEFAULT_EXP'	=> 'Wenn diese Option aktiviert ist, werden die Einstellungen aller Benutzer überschrieben. Ohne die Aktivierung werden nur die Standardwerte für neue Benutzer gesetzt.',
 	'CTWC_RESET_ASK_BEFORE_EXP'	=> 'Diese Einstellung überschreibt die Einstellungen alle Benutzer mit den Standardwerten.<br><strong>Dieser Prozess kann nicht rückgängig gemacht werden!</strong>',
 
-	'CUSTOM_DATEFORMAT'			=> 'Eigenes …',
 	'ctwc_dateformats'	=> [
 		'D j. M Y, H:i:s'		=> 'So 1. Jan 2025, 18:33:28',
 		'j. M Y, H:i'			=> '1. Jan 2025, 13:57',

@@ -21,7 +21,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// Language pack author
 	'CTWC_LANG_DESC'				=> 'English',
-	'CTWC_LANG_EXT_VER' 			=> '0.8.0',
+	'CTWC_LANG_EXT_VER' 			=> '0.9.0',
 	'CTWC_LANG_AUTHOR' 				=> 'IMC-GER',
 
 	'ACP_CT_MODULE_WORLDCLOCK'		 => 'Current Time / World Clock',
@@ -32,7 +32,7 @@ $lang = array_merge($lang, [
 	// Permission
 	'ACL_U_CTWC_ACCESS'		=> 'Can view world clock',
 
-	// Settings
+	// Settings world clock
 	'CTWC_SETTINGS'			=> 'Settings',
 	'CTWC_WORLDCLOCK_1'		=> 'World Clock 1',
 	'CTWC_WORLDCLOCK_2'		=> 'World Clock 2',
@@ -55,14 +55,13 @@ $lang = array_merge($lang, [
 	'CTWC_RESET_DEFAULT_EXP'	=> 'If this option is activated, the settings of all users are overwritten. If it is not activated, only the default values for new users are set.',
 	'CTWC_RESET_ASK_BEFORE_EXP'	=> 'This setting overwrites the settings of all users with the default values.<br><strong>This process cannot be reversed!</strong>',
 
-	'CUSTOM_DATEFORMAT'			  => 'Custom…',
 	'ctwc_dateformats'	=> [
-		'D j. M Y, H:i:s'		  => 'Sun 01. Jan 2025, 18:33:28',
-		'jS M Y, g:i a'			  => '1st Jan 2025, 1:57 am',
-		'D j. M Y, g:i:s a'		  => 'Mon 1. Jan 2025, 1:57:28 am',
-		'jS. F Y, g:i a'		  => '1st Januar 2025, 1:57 am',
-		'l j F Y, g:i a'		  => 'Monday 1. Januar 2025, 1:57 an',
-		'd.m.Y, g:i:s a'		  => '01.01.2025, 1:57:28 am',
-		'D jS M, g:i:s a \G\M\TP' => 'Mon 1st Jan, 1:08:35 am GMT+11:00',
+		'D j. M Y, H:i:s'		=> 'Sun 1. Jan 2025, 18:33:28',
+		'j. M Y, H:i'			=> '1. Jan 2025, 13:57',
+		'D j. M Y, H:i:s'		=> 'Mon 1. Jan 2025, 13:57:28',
+		'j. F Y, H:i'			=> '1. Januar 2025, 13:57',
+		'l j. F Y, H:i'			=> 'Monday 1. Januar 2025, 13:57',
+		'd.m.Y, H:i:s'			=> '01.01.2025, 13:57:28',
+		'D j. M, H:i:s \G\M\TP'	=> 'Mon 1. Jan, 01:08:35 GMT+11:00',
 	],
 ]);

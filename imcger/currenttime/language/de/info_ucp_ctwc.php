@@ -19,21 +19,27 @@ if (empty($lang) || !is_array($lang))
 }
 
 $lang = array_merge($lang, [
+	// User preferences
 	'CTWC_CURRTIME_FORMAT'			=> 'Datums-Format für die „Aktuelle Zeit“',
 	'CTWC_CURRTIME_FORMAT_EXPLAIN'	=> 'Klicke hier um eine Erklärung der Formatierungsoptionen zu erhalten.',
 	'UCP_CT_MODULE_WORLDCLOCK'		=> 'Weltzeituhr konfiguieren',
 
+	// Radio button label
 	'ON'	=> 'An',
 	'OFF'	=> 'Aus',
 
+	// Description of the format string
 	'CTWC_DATEFORMAT_TITLE'	=> 'Datumsformat für aktuelle Zeit und Weltzeituhr',
-	'CTWC_DATEFORMAT_DECR1'	=> 'Das Format der ausgegebenen Datum/Zeit Zeichenkette kann mit den in der Tabelle beschriebenen Formatierungsoptionen frei definiert werden. Um zu verhindern, dass ein bekanntes Zeichen in der Formatzeichenkette interpretiert wird, kann es mit einem vorangestellten Backslash maskiert werden.',
-	'CTWC_DATEFORMAT_DECR2'	=> 'Die Formatzeichenkette <code>\'D, d M Y H:i:s \G\M\TP\'</code> entspicht dieser Ausgabe <code>\'Mo, 20 Jan 2025 23:18:29 GMT+02:00\'</code>',
+	'CTWC_DATEFORMAT_DECR1'	=> 'Das Format der ausgegebenen Datum/Zeit Zeichenkette kann mit den in der Tabelle beschriebenen Formatierungsoptionen frei definiert werden. Um zu verhindern, dass ein bekanntes Zeichen in der Formatzeichenkette interpretiert wird, kann es mit einem vorangestellten Backslash maskiert werden. Wenn das Zeichen mit dem Backslash bereits eine spezielle Zeichenfolge ist, muss auch der Backslash maskiert werden.',
+	'CTWC_DATEFORMAT_DECR2'	=> 'Die Formatzeichenkette <code>\'D, d M Y H:i:s \G\M\TP\'</code> entspicht dieser Ausgabe <code>\'Mo, 20 Jan 2025 23:18:29 GMT+01:00\'</code>',
+	'CTWC_DATEFORMAT_BACKLINK'	=> 'Zurück zu den Einstellungen',
 
+	// Table head
 	'CTWC_DATEFORMAT_OPTION'	=> 'Opt.',
 	'CTWC_DATEFORMAT_DECR'		=> 'Beschreibung',
 	'CTWC_DATEFORMAT_DISPLAY'	=> 'Anzeige',
 
+	// Table body
 	'CTWC_DATEFORMAT_TIME'	=> 'Zeit',
 	'CTWC_DATEFORMAT_LOW_G'	=> 'Stunde im 12-Stunden-Format; ohne vorangestellte Null',
 	'CTWC_DATEFORMAT_G'		=> 'Stunde im 24-Stunden-Format; ohne vorangestellte Null',
@@ -70,6 +76,4 @@ $lang = array_merge($lang, [
 	'CTWC_DATEFORMAT_TZ'	=> 'Zeitzone',
 	'CTWC_DATEFORMAT_O'		=> 'Differenz zur Greenwich-Zeit (GMT); ohne Doppelpunkt zwischen Stunden und Minuten',
 	'CTWC_DATEFORMAT_P'		=> 'Differenz zur Greenwich-Zeit (GMT); mit Doppelpunkt zwischen Stunden und Minuten',
-
-	'CTWC_DATEFORMAT_BACKLINK'	=> 'Zurück zu den Einstellungen',
 ]);

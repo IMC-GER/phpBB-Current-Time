@@ -44,3 +44,13 @@
 code {
   white-space: nowrap;
 }
+
+/* Table in ACP */
+#ctwc-dateformat-decr table tbody tr:hover td {
+	background-color: #90d2ec;
+}
+
+#ctwc-dateformat-decr table td:first-child,
+#ctwc-dateformat-decr table td:last-child {
+	text-align: center;
+}

@@ -79,6 +79,7 @@ class main_listener implements EventSubscriberInterface
 
 		$i = 0;
 		$js_weekday_month = [];
+
 		foreach ($weekday_month as $weekday_month_ary)
 		{
 			$js_weekday_month[$i] = '';
@@ -159,7 +160,7 @@ class main_listener implements EventSubscriberInterface
 
 			$format = isset($wc_date_ary[6]) ? $wc_date_ary[6] : $this->user->date_format;
 			$date_str = preg_replace($pattern, $wc_replacement, $format);
-			$date_str = str_replace('\\', '', $date_str);
+			$date_str = preg_replace('/(?<!\\\\)\\\\/', '', $date_str);
 
 			$this->template->assign_vars([
 				'CTWC_DATESTRING'	=> $date_str,

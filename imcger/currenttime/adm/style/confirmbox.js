@@ -1,16 +1,20 @@
 /**
+ * Current Time
+ * An extension for the phpBB Forum Software package.
  *
- * Recent Topics. An extension for the phpBB Forum Software package.
+ * @copyright (c) 2024, Thorsten Ahlers
+ * @license GNU General Public License, version 2 (GPL-2.0)
  *
- * @copyright (c) 2022, IMC, https://github.com/IMC-GER / LukeWCS, https://github.com/LukeWCS
- * @copyright (c) 2017, Sajaki, https://www.avathar.be
- * @copyright (c) 2015, PayBas
- * @license GNU General Public License, version 2 (GPL-2.0-only)
- *
- * Based on the original NV Recent Topics by Joas Schilling (nickvergessen)
  */
 
-var RecentTopicsNG = {};
+if (typeof imcger !== 'object') {
+	var imcger = {};
+}
+
+if (typeof imcger.currentTime !== 'object') {
+	imcger.currentTime = {};
+}
+
 
 (function ($) {	// IIFE start
 
@@ -80,7 +84,7 @@ class LukeWCSphpBBConfirmBox {
 // Register events
 
 $(window).ready(function() {
-	RecentTopicsNG.ConfirmBox = new LukeWCSphpBBConfirmBox('input[name="submit"]', 300);
+	imcger.currentTime.ConfirmBox = new LukeWCSphpBBConfirmBox('input[name="submit"]', 300);
 });
 
 })(jQuery);	// IIFE end
