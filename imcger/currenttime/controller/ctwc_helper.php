@@ -133,7 +133,7 @@ class ctwc_helper
 
 	public function set_select_template_vars($date_format, $template_var)
 	{
-		$this->language->add_lang(['info_acp_ctwc', 'info_ucp_ctwc', ], 'imcger/currenttime');
+		$this->language->add_lang(['info_acp_ctwc', ], 'imcger/currenttime');
 
 		$dateformat = preg_replace('/[0-9]/', '', $date_format);
 		$dateformat_options = [$this->user->format_date(time(), $dateformat, false) => $date_format];

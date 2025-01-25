@@ -60,7 +60,7 @@ class main_listener implements EventSubscriberInterface
 
 	public function add_languages()
 	{
-		$this->language->add_lang(['info_ucp_ctwc', ], 'imcger/currenttime');
+		$this->language->add_lang(['ctwc_common', ], 'imcger/currenttime');
 	}
 
 	public function add_permissions($event)
@@ -111,10 +111,10 @@ class main_listener implements EventSubscriberInterface
 			'/(?<!\\\\)D/',   // A textual representation of a day, three letters			Mon through Sun
 			'/(?<!\\\\)z1/',  // The day of the year (starting from 1) 						1 through 366
 			'/(?<!\\\\)z/',   // The day of the year (starting from 0) 						0 through 365
-			'/(?<!\\\\)W0S/', // Week number of year, weeks starting on Sunday				1 to 53
-			'/(?<!\\\\)W7S/', // Weeks starting on Sunday, weeks count from 1st Januar		1 to 54
+			'/(?<!\\\\)W0S/', // Week number of year, weeks starting on Sunday				1st to 53rd
+			'/(?<!\\\\)W7S/', // Weeks starting on Sunday, weeks count from 1st Januar		1st to 54rd
 							  // with suffix
-			'/(?<!\\\\)WS/',  // ISO 8601 week number of year, weeks starting on Monday		1 to 53
+			'/(?<!\\\\)WS/',  // ISO 8601 week number of year, weeks starting on Monday		1st to 53rd
 			'/(?<!\\\\)W0/',  // Week number of year, weeks starting on Sunday				1 to 53
 			'/(?<!\\\\)W7/',  // Weeks starting on Sunday, weeks count from 1st Januar		1 to 54
 			'/(?<!\\\\)W/',   // ISO 8601 week number of year, weeks starting on Monday		1 to 53

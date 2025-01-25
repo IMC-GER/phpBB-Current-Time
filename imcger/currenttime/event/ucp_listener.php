@@ -97,7 +97,7 @@ class ucp_listener implements EventSubscriberInterface
 	public function ucp_display_module_before()
 	{
 		// Add language file in UCP);
-		$this->language->add_lang(['info_acp_ctwc', 'info_ucp_ctwc', ], 'imcger/currenttime');
+		$this->language->add_lang(['info_acp_ctwc', ], 'imcger/currenttime');
 	}
 
 	/**

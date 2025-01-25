@@ -28,9 +28,9 @@ In a string passed to the class, the following placeholders are replaced by the 
 | \{D\}	| A textual representation of a day, three letters							| Mon – Sun |
 | \{z1\}| The day of the year (starting from 1)										| 1 – 366	|
 | \{z\}	| The day of the year (starting from 0)										| 0 – 365	|
-|\{W0S\}| Start of the week on Sunday counting similar to ISO with suffix			| 1 – 53	|
-|\{W7S\}| Weeks starting on Sunday, first week starts on 1st Januar with suffix		| 1 – 54	|
-| \{WS\}| Week number of year, weeks starting on Monday with suffix					| 1 – 53	|
+|\{W0S\}| Start of the week on Sunday counting similar to ISO with suffix			| 1st – 53rd|
+|\{W7S\}| Weeks starting on Sunday, first week starts on 1st Januar with suffix		| 1st – 54th|
+| \{WS\}| Week number of year, weeks starting on Monday with suffix					| 1st – 53rd|
 | \{W0\}| Start of the week on Sunday counting similar to ISO						| 1 – 53	|
 | \{W7\}| Weeks starting on Sunday, first week starts on 1st Januar					| 1 – 54	|
 | \{W\}	| ISO 8601 week number of year, weeks starting on Monday					| 1 – 53	|

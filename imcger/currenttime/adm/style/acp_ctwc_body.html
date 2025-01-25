@@ -16,7 +16,7 @@
 
 <h1>{{ lang('ACP_CTWC_TITLE') }}</h1>
 
-<p>{{ ACP_CTWC_DESC }}</p>
+<p>{{ lang('ACP_CTWC_DESC') }} {{ ACP_CTWC_ANONYMOUS_DESC }}</p>
 
 <form id="acp_board" method="post" action="{{ U_ACTION }}">
 
@@ -28,7 +28,7 @@
 		<dl>
 			<dt>
 				<label>{{ lang('CTWC_RESET_DEFAULT') ~ lang('COLON') }}</label><br>
-				<span>{{ lang('CTWC_RESET_DEFAULT_EXP') }}</span>
+				<span>{{ lang('CTWC_RESET_DEFAULT_EXP') }} {{ ACP_CTWC_ANONYMOUS_DESC }}</span>
 			</dt>
 			<dd>
 				{{ _self.switch('ctwc_reset_default', false, switch_type) }}
