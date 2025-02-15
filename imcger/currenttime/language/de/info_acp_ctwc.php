@@ -31,7 +31,7 @@ $lang = array_merge($lang, [
 	'ACP_CTWC_ANONYMOUS_DESC'	=> 'Die Einstellungen für Gäste müssen <a href="%1s#ctwc_prefs">auf dieser Seite</a> vorgenommen werden.',
 
 	// Permission
-	'ACL_U_CTWC_ACCESS'		=> 'Kann die Weltzeituhr anzeigen',
+	'ACL_U_CTWC_ACCESS'			=> 'Kann die Weltzeituhr sehen',
 
 	// Settings world clock
 	'CTWC_SETTINGS'			=> 'Einstellungen',

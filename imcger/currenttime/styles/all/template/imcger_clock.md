@@ -22,10 +22,12 @@ In a string passed to the class, the following placeholders are replaced by the 
 | \{n\}	| Numeric representation of a month, without leading zeros					| 1 – 12	|
 | \{m\}	| Numeric representation of a month, with leading zeros						| 01 – 12	|
 | \{M\}	| A short textual representation of a month, three letters					| Jan – Dec	|
+| \{F\} | A full textual representation of a month									| January – December |
 | \{jS\}| Day of the month with suffix and without leading zeros					| 1st – 31st|
 | \{j\}	| Day of the month without leading zeros									| 1 – 31	|
 | \{d\}	| Day of the month, 2 digits with leading zeros								| 01 – 31	|
 | \{D\}	| A textual representation of a day, three letters							| Mon – Sun |
+| \{l\} | A full textual representation of the day of the week 						| Sunday – Saturday |
 | \{z1\}| The day of the year (starting from 1)										| 1 – 366	|
 | \{z\}	| The day of the year (starting from 0)										| 0 – 365	|
 |\{W0S\}| Start of the week on Sunday counting similar to ISO with suffix			| 1st – 53rd|

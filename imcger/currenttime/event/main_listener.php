@@ -150,7 +150,6 @@ class main_listener implements EventSubscriberInterface
 					$timeOffset = $dateTimeZone->getOffset($dateTime);
 					$city		= !!$clock_data[2] ? $clock_data[2] : end(explode('/', $this->language->lang(['timezones', $clock_data[1]])));
 
-					// Generate tz_select for backwards compatibility
 					$this->template->assign_block_vars('ctwc_clock', [
 						'CITY'		 => $city,
 						'TIMEOFFSET' => $timeOffset,

@@ -28,18 +28,15 @@
 }
 
 p.ctwc-currenttime {
-	margin-top: 4px;
+	margin-top: -1em;
+}}
+
+p.ctwc-currenttime-board-disabled {
+	margin-top: 0;
 }
 
 p.time {
 	visibility: hidden;
-}
-
-@media (max-width: 700px) {
-	.ctwc-container {
-		border-radius: 0;
-		margin: 0 -5px;
-	}
 }
 
 /* Buttons to toogle explanation of the formatting options */
@@ -102,3 +99,21 @@ code {
 		margin: auto;
 	}
 }
+
+@media (max-width: 700px) {
+	.ctwc-container {
+		border-radius: 0;
+		margin: 0 -5px;
+	}
+	
+	p.ctwc-currenttime {
+		margin-top: -0.5em;
+	}
+}
+
+@media (max-width: 500px) {	
+	p.ctwc-currenttime {
+		margin-top: 0;
+	}
+}
+

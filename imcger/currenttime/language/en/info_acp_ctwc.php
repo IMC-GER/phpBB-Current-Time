@@ -31,7 +31,7 @@ $lang = array_merge($lang, [
 	'ACP_CTWC_ANONYMOUS_DESC'	=> 'The settings for anonymous user must be made <a href="%1s#ctwc_prefs">on this page</a>.',
 
 	// Permission
-	'ACL_U_CTWC_ACCESS'		=> 'Can view world clock',
+	'ACL_U_CTWC_ACCESS'			=> 'Can view world clock',
 
 	// Settings world clock
 	'CTWC_SETTINGS'			=> 'Settings',

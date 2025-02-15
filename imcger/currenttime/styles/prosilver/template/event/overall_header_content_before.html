@@ -1,0 +1,15 @@
+{#
+ * Current Time
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2024, Thorsten Ahlers
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+{# Idea from Kirk (phpbb.de) #}
+{% if SCRIPT_NAME != 'index' && CURRENT_TIME && !MESSAGE_TITLE && !USERNAME_CREDENTIAL %}
+	<p class="responsive-center ctwc-currenttime {% if S_BOARD_DISABLED %}ctwc-currenttime-board-disabled{% endif %} time rightside">
+		{{ CURRENT_TIME }}
+	</p>
+{% endif %}
