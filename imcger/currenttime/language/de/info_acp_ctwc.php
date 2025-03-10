@@ -21,17 +21,26 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// Language pack author
 	'CTWC_LANG_DESC'			=> 'Deutsch',
-	'CTWC_LANG_EXT_VER' 		=> '0.9.0',
+	'CTWC_LANG_EXT_VER' 		=> '0.11.0',
 	'CTWC_LANG_AUTHOR' 			=> 'IMC-GER',
 
 	'ACP_CT_MODULE_WORLDCLOCK'	=> 'Current Time / World Clock',
-	'ACP_CT_SETTINGS'			=> 'Einstellungen',
+	'ACP_CTWC_WORLDCL_SETTINGS'	=> 'Worldclock Einstellungen',
+	'ACP_CT_SETTINGS'			=> 'Allg. Einstellungen',
+	'ACP_CTWC_GSET_EXP'			=> 'Hier kannst du die Module dieser Extension aktiveren oder deaktivieren. Sollen diese nur für einzelne Benutzer oder Benutzergruppen deaktiviert werden musst du diese mit dem Rechtesystem des Forums tun.',
 	'ACP_CTWC_TITLE'			=> 'World Clock',
 	'ACP_CTWC_DESC'				=> 'Um die „World Clock“ angezeigt zu bekommen, muss dem Benutzer in der Rechteverwaltung das Benutzerrecht zugewiesen werden. Auf dieser Seite werden die Grundeinstellungen für neue Benutzer vorgenommen. Diese Einstellungen können für alle Benutzer übernommen werden.',
 	'ACP_CTWC_ANONYMOUS_DESC'	=> 'Die Einstellungen für Gäste müssen <a href="%1s#ctwc_prefs">auf dieser Seite</a> vorgenommen werden.',
 
 	// Permission
-	'ACL_U_CTWC_ACCESS'			=> 'Kann die Weltzeituhr sehen',
+	'ACL_U_CTWC_ACCESS'			  => 'Kann die Weltzeituhr sehen',
+	'ACL_U_CTWC_CANSEE_LOCALTIME' => 'Kann die Ortszeit der Benutzer sehen',
+
+	// General settings
+	'CTWC_SHOW_CURRENTTIME'			=> 'Anzeige der aktuellen Uhrzeit auf allen Forumsseiten',
+	'CTWC_SHOW_WORLDCLOCK'			=> 'Benutzer kann die Weltzeituhr anzeigen',
+	'CTWC_SHOW_LOCALTIME_PROFIL'	=> 'Anzeige der Ortszeit des Benutzers in seinem Profil',
+	'CTWC_SHOW_LOCALTIME_POST'		=> 'Anzeige der Ortszeit des Beitragsautors im Beitragsprofil',
 
 	// Settings world clock
 	'CTWC_SETTINGS'			=> 'Einstellungen',
@@ -67,6 +76,7 @@ $lang = array_merge($lang, [
 	],
 
 	// User preferences
+	'CTWC_CANSEE_LOCALTIME'			=> 'Benutzer können meine Ortszeit sehen',
 	'CTWC_CURRTIME_FORMAT'			=> 'Datums-Format für die „Aktuelle Zeit“',
 	'CTWC_CURRTIME_FORMAT_EXPLAIN'	=> 'Klicke hier um eine Erklärung der unterstüzten Formatierungsoptionen zu erhalten.',
 

@@ -7,6 +7,7 @@
  *
  #}
 
-{% if CTWC_WCLOCK_DISP_0 is defined %}
-	{% include '@imcger_currenttime/ctwc_settings.html' %}
+{%- if CTWC_USER_LOCAL_TIME is defined %}
+	<dt>{{ lang('CTWC_LOCAL_TIME') ~ lang('COLON') }} </dt>
+	<dd><span class="time" style="visibility: hidden;">{{ CTWC_USER_LOCAL_TIME }}</span></dd>
 {% endif %}

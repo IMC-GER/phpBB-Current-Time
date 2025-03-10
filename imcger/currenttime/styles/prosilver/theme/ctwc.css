@@ -105,15 +105,14 @@ code {
 		border-radius: 0;
 		margin: 0 -5px;
 	}
-	
+
 	p.ctwc-currenttime {
 		margin-top: -0.5em;
 	}
 }
 
-@media (max-width: 500px) {	
+@media (max-width: 500px) {
 	p.ctwc-currenttime {
 		margin-top: 0;
 	}
 }
-

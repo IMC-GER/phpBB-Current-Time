@@ -23,6 +23,11 @@ class acp_info {
 					'auth'	=> 'ext_imcger/currenttime && acl_a_board',
 					'cat'	=> ['ACP_CT_MODULE_WORLDCLOCK',],
 				],
+				'worldclock_settings' => [
+					'title'	=> 'ACP_CTWC_WORLDCL_SETTINGS',
+					'auth'	=> 'ext_imcger/currenttime && acl_a_board',
+					'cat'	=> ['ACP_CT_MODULE_WORLDCLOCK',],
+				],
 			],
 		];
 	}

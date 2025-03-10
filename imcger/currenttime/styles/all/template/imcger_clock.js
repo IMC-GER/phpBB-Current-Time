@@ -57,17 +57,23 @@ class IMCGerClock {
 		this.#tzOffset	 = tzOffset ?? this.#jsTzOffset;
 		this.#timeString = '';
 
+		if (timeStringObject != null && typeof timeStringObject === 'object') {
+			this.#timeStringObject	= timeStringObject;
+			this.#timeString		= timeStringObject.innerHTML;
+
+			let strTimeOffsetAry = this.#timeString.match(/\{\{[-+]?\d+\}\}/);
+			if (strTimeOffsetAry) {
+				this.#timeString = this.#timeString.replace(strTimeOffsetAry[0], '');
+				this.#tzOffset	 = parseInt(strTimeOffsetAry[0].substr(2, strTimeOffsetAry[0].length - 4));
+			}
+		} else if (timeStringObject != null) {
+			throw new TypeError("timeStringObject must be a object");
+		}
+
 		if (!Number.isInteger(this.#tzOffset)) {
 			throw new TypeError("tzOffset must be an integer");
 		} else if ( this.#tzOffset < -43200 || this.#tzOffset > 50400) {
 			throw new RangeError("The timezone offset must be between -43200 and 50400.");
-		}
-
-		if (timeStringObject != null && typeof timeStringObject === 'object') {
-			this.#timeStringObject	= timeStringObject;
-			this.#timeString		= timeStringObject.innerHTML;
-		} else if (timeStringObject != null) {
-			throw new TypeError("timeStringObject must be a object");
 		}
 
 		if (this.#timeString.search(/\{[gGhHisaAyYnmMjdDzW]\}/) >= 0) {

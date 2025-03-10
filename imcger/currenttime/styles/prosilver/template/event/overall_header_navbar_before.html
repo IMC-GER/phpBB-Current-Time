@@ -12,7 +12,13 @@
 {% if ctwc_clock|length %}
 <div class="navbar ctwc-container">
 	<div class="inner">
-		<div  id="ctwc-clock"></div>
+		<div  id="ctwc-clock">
+		{% if CTWC_LINES %}
+			<div id="ctwc_temp"><span>&nbsp;</span><br><span>&nbsp;</span></div>
+		{% else %}
+			<div id="ctwc_temp"><span>&nbsp;</span><span>&nbsp;</span></div>
+		{% endif %}
+		</div>
 	</div>
 </div>
 {% endif %}

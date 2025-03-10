@@ -7,6 +7,7 @@
  *
  #}
 
+{% if USER_CTWC_CURRTIME_FORMAT is defined %}
 {% INCLUDEJS '@imcger_currenttime/ctwc_prefs_personal_settings.js' %}
 {% import '@imcger_currenttime/twig_macros.html' as common %}
 	<dl>
@@ -21,3 +22,4 @@
 			{{ common.text('user_ctwc_currtime_format', USER_CTWC_CURRTIME_FORMAT, 20) }}
 		</dd>
 	</dl>
+{% endif %}

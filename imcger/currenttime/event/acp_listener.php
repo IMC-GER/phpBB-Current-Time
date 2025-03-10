@@ -13,12 +13,15 @@ namespace imcger\currenttime\event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Event listener
+ * ACP listener
  */
 class acp_listener implements EventSubscriberInterface
 {
 	/** @var \phpbb\user */
 	protected $user;
+
+	/** @var config */
+	protected $config;
 
 	/** @var \phpbb\template\template */
 	protected $template;
@@ -36,12 +39,14 @@ class acp_listener implements EventSubscriberInterface
 	public function __construct
 	(
 		\phpbb\user $user,
+		\phpbb\config\config $config,
 		\phpbb\template\template $template,
 		\phpbb\request\request $request,
 		\imcger\currenttime\controller\ctwc_helper $ctwc_helper
 	)
 	{
 		$this->user			= $user;
+		$this->config		= $config;
 		$this->template 	= $template;
 		$this->request		= $request;
 		$this->ctwc_helper	= $ctwc_helper;
@@ -79,6 +84,7 @@ class acp_listener implements EventSubscriberInterface
 		$user_row += ['ctwc_wclock_format' => trim($this->request->variable('ctwc_wclock_format', $user_setting[6] ?? $this->user->date_format))];
 		$user_row += ['ctwc_wclock_lines' => $this->request->variable('ctwc_wclock_lines', $user_setting[7] ?? 0)];
 		$user_row += ['user_ctwc_currtime_format' => $this->request->variable('user_ctwc_currtime_format',  $currtime_format)];
+		$user_row += ['user_ctwc_disp_localtime' => $this->request->variable('user_ctwc_disp_localtime',  $event['user_row']['user_ctwc_disp_localtime'])];
 
 		$event['user_row'] = array_merge($event['user_row'], $user_row);
 	}
@@ -106,6 +112,7 @@ class acp_listener implements EventSubscriberInterface
 		$event['sql_ary'] = array_merge($event['sql_ary'], [
 			'user_imcger_ct_data'		=> $user_data_str,
 			'user_ctwc_currtime_format' => $event['user_row']['user_ctwc_currtime_format'],
+			'user_ctwc_disp_localtime'  => $event['user_row']['user_ctwc_disp_localtime'],
 		]);
 	}
 
@@ -129,27 +136,45 @@ class acp_listener implements EventSubscriberInterface
 		$this->ctwc_helper->timezone_select('ctwc5', $event['user_row']['ctwc_tz_5']);
 
 		$this->template->assign_vars([
-			'CTWC_WCLOCK_DISP_0'	=> $event['user_row']['ctwc_wclock_disp_0'],
-			'CTWC_WCLOCK_DISP_1'	=> $event['user_row']['ctwc_wclock_disp_1'],
-			'CTWC_WCLOCK_DISP_2'	=> $event['user_row']['ctwc_wclock_disp_2'],
-			'CTWC_WCLOCK_DISP_3'	=> $event['user_row']['ctwc_wclock_disp_3'],
-			'CTWC_WCLOCK_DISP_4'	=> $event['user_row']['ctwc_wclock_disp_4'],
-			'CTWC_WCLOCK_DISP_5'	=> $event['user_row']['ctwc_wclock_disp_5'],
-			'CTWC_TZ_CITY_0'	 	=> $event['user_row']['ctwc_tz_city_0'],
-			'CTWC_TZ_CITY_1'	 	=> $event['user_row']['ctwc_tz_city_1'],
-			'CTWC_TZ_CITY_2'	 	=> $event['user_row']['ctwc_tz_city_2'],
-			'CTWC_TZ_CITY_3'	 	=> $event['user_row']['ctwc_tz_city_3'],
-			'CTWC_TZ_CITY_4'	 	=> $event['user_row']['ctwc_tz_city_4'],
-			'CTWC_TZ_CITY_5'	 	=> $event['user_row']['ctwc_tz_city_5'],
-			'CTWC_WCLOCK_FORMAT'	=> $event['user_row']['ctwc_wclock_format'],
-			'CTWC_WCLOCK_LINES'		=> $this->ctwc_helper->select_struct((int) $event['user_row']['ctwc_wclock_lines'], [
-				'CTWC_SINGLELINE'	=> 0,
-				'CTWC_TWOLINES'		=> 1,
-			]),
 			'TOGGLECTRL_CT'				=> 'radio',
 			'S_CTWC_ACP_USER_PREFS'		=> true,
-			'S_CTWC_ACCESS'				=> $user_auth->acl_get('u_ctwc_access'),
-			'USER_CTWC_CURRTIME_FORMAT'	=> $event['user_row']['user_ctwc_currtime_format'],
 		]);
+
+		if ($this->config['ctwc_show_currenttime'])
+		{
+			$this->template->assign_vars([
+				'USER_CTWC_CURRTIME_FORMAT'	=> $event['user_row']['user_ctwc_currtime_format'],
+			]);
+		}
+
+		if ($user_auth->acl_get('u_ctwc_access') && $this->config['ctwc_show_worldclock'])
+		{
+			$this->template->assign_vars([
+				'CTWC_WCLOCK_DISP_0'	=> $event['user_row']['ctwc_wclock_disp_0'],
+				'CTWC_WCLOCK_DISP_1'	=> $event['user_row']['ctwc_wclock_disp_1'],
+				'CTWC_WCLOCK_DISP_2'	=> $event['user_row']['ctwc_wclock_disp_2'],
+				'CTWC_WCLOCK_DISP_3'	=> $event['user_row']['ctwc_wclock_disp_3'],
+				'CTWC_WCLOCK_DISP_4'	=> $event['user_row']['ctwc_wclock_disp_4'],
+				'CTWC_WCLOCK_DISP_5'	=> $event['user_row']['ctwc_wclock_disp_5'],
+				'CTWC_TZ_CITY_0'	 	=> $event['user_row']['ctwc_tz_city_0'],
+				'CTWC_TZ_CITY_1'	 	=> $event['user_row']['ctwc_tz_city_1'],
+				'CTWC_TZ_CITY_2'	 	=> $event['user_row']['ctwc_tz_city_2'],
+				'CTWC_TZ_CITY_3'	 	=> $event['user_row']['ctwc_tz_city_3'],
+				'CTWC_TZ_CITY_4'	 	=> $event['user_row']['ctwc_tz_city_4'],
+				'CTWC_TZ_CITY_5'	 	=> $event['user_row']['ctwc_tz_city_5'],
+				'CTWC_WCLOCK_FORMAT'	=> $event['user_row']['ctwc_wclock_format'],
+				'CTWC_WCLOCK_LINES'		=> $this->ctwc_helper->select_struct((int) $event['user_row']['ctwc_wclock_lines'], [
+					'CTWC_SINGLELINE'	=> 0,
+					'CTWC_TWOLINES'		=> 1,
+				]),
+			]);
+		}
+
+		if ($this->config['ctwc_show_localtime_profil'] || $this->config['ctwc_show_localtime_post'])
+		{
+			$this->template->assign_vars([
+				'USER_CTWC_DISP_LOCALTIME'	=> $event['user_row']['user_ctwc_disp_localtime'],
+			]);
+		}
 	}
 }

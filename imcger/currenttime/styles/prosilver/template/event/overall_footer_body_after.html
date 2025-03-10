@@ -8,7 +8,6 @@
  #}
 
 {% INCLUDEJS '@imcger_currenttime/imcger_clock.js' %}
-
 <script>
 	/**
 	 * @var	imcger	object for pphpBB.
@@ -56,6 +55,8 @@
 	{% for data in ctwc_clock -%}
 		createClock('{{ data.CITY|e('js') }}', '{{ CTWC_DATESTRING|e('js') }}', {{ data.TIMEOFFSET }}, {{ CTWC_LINES }});
 	{% endfor %}
+	
+	document.getElementById('ctwc_temp').remove();
 {% endif %}
 
 </script>

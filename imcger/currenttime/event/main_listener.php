@@ -13,7 +13,7 @@ namespace imcger\currenttime\event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Style listener
+ * Main listener
  */
 class main_listener implements EventSubscriberInterface
 {
@@ -22,6 +22,9 @@ class main_listener implements EventSubscriberInterface
 
 	/** @var \phpbb\user */
 	protected $user;
+
+	/** @var config */
+	protected $config;
 
 	/** @var \phpbb\template\template */
 	protected $template;
@@ -33,10 +36,14 @@ class main_listener implements EventSubscriberInterface
 	protected $ctwc_data_table;
 
 
+	/**
+	 * Constructor
+	 */
 	public function __construct
 	(
 		\phpbb\auth\auth $auth,
 		\phpbb\user $user,
+		\phpbb\config\config $config,
 		\phpbb\template\template $template,
 		\phpbb\language\language $language,
 		$ctwc_data_table
@@ -44,28 +51,42 @@ class main_listener implements EventSubscriberInterface
 	{
 		$this->auth		= $auth;
 		$this->user		= $user;
+		$this->config	= $config;
 		$this->template	= $template;
 		$this->language = $language;
 		$this->ctwc_data_table = $ctwc_data_table;
 	}
 
+	/**
+	 * Assign functions defined in this class to event listeners in the core
+	 */
 	public static function getSubscribedEvents()
 	{
 		return [
-			'core.user_setup_after'				=> 'add_languages',
-			'core.permissions'					=> 'add_permissions',
-			'core.page_header_after'			=> 'page_header_after',
+			'core.user_setup_after'					=> 'add_languages',
+			'core.permissions'						=> 'add_permissions',
+			'core.page_header_after'				=> 'page_header_after',
+			'core.memberlist_prepare_profile_data'	=> 'memberlist_prepare_profile_data',
+			'core.viewtopic_cache_user_data'		=> 'viewtopic_cache_user_data',
+			'core.viewtopic_modify_post_row'		=> 'viewtopic_modify_post_row',
 		];
 	}
 
+	/**
+	 * Add language file
+	 */
 	public function add_languages()
 	{
 		$this->language->add_lang(['ctwc_common', ], 'imcger/currenttime');
 	}
 
+	/**
+	 * Execute code and/or overwrite _common_ template variables after they have been assigned.
+	 */
 	public function add_permissions($event)
 	{
 		$event->update_subarray( 'permissions', 'u_ctwc_access', [ 'lang' => 'ACL_U_CTWC_ACCESS', 'cat' => 'misc' ] );
+		$event->update_subarray( 'permissions', 'u_ctwc_cansee_localtime', [ 'lang' => 'ACL_U_CTWC_CANSEE_LOCALTIME', 'cat' => 'misc' ] );
 	}
 
 	public function page_header_after()
@@ -91,6 +112,127 @@ class main_listener implements EventSubscriberInterface
 			$i++;
 		}
 
+		$wc_date_ary = json_decode($this->user->data['user_imcger_ct_data'],  true);
+
+		if (is_array($wc_date_ary) && $this->auth->acl_get('u_ctwc_access') && $this->config['ctwc_show_worldclock'])
+		{
+			foreach ($wc_date_ary as $clock_data)
+			{
+				if (isset($clock_data[0]) && $clock_data[0] == 1 && !!$clock_data[1])
+				{
+					$dateTimeZone = new \DateTimeZone($clock_data[1]);
+					$dateTime	  = new \DateTime('now', $dateTimeZone);
+
+					$timeOffset = $dateTimeZone->getOffset($dateTime);
+					$city		= !!$clock_data[2] ? $clock_data[2] : end(explode('/', $this->language->lang(['timezones', $clock_data[1]])));
+
+					$this->template->assign_block_vars('ctwc_clock', [
+						'CITY'		 => $city,
+						'TIMEOFFSET' => $timeOffset,
+					]);
+				}
+			}
+
+			$format = isset($wc_date_ary[6]) ? $wc_date_ary[6] : $this->user->date_format;
+			$date_str = $this->generate_datetime_str('wc', $format);
+			$date_str = preg_replace('/(?<!\\\\)\\\\/', '', $date_str);
+
+			$this->template->assign_vars([
+				'CTWC_DATESTRING'	=> $date_str,
+				'CTWC_LINES'		=> $wc_date_ary[7] ?? 0,
+			]);
+		}
+
+		$datetime  = $this->user->create_datetime();
+		$tz_offset = $datetime->getOffset();
+
+		$dateformat = !!$this->user->data['user_ctwc_currtime_format'] ? $this->user->data['user_ctwc_currtime_format'] : $this->user->data['user_dateformat'];
+		$dateformat = $this->generate_datetime_str('ct', $dateformat);
+
+		$currenttime = $this->config['ctwc_show_currenttime'] ? $this->language->lang('CURRENT_TIME', $this->user->format_date(time(), $dateformat, false)) : '&nbsp;';
+
+		$this->template->assign_vars([
+			'CURRENT_TIME'				=> $currenttime,
+			'CTWC_TZOFFSET'				=> $tz_offset,
+			'CTWC_WEEKDAY_SHORT_ARY'	=> $js_weekday_month[0],
+			'CTWC_WEEKDAY_ARY'			=> $js_weekday_month[1],
+			'CTWC_MONTHS_SHORT_ARY'		=> $js_weekday_month[2],
+			'CTWC_MONTHS_ARY'			=> $js_weekday_month[3],
+		]);
+	}
+	/*
+	 * Preparing a user's data before displaying it in profile and memberlist
+	 */
+	public function memberlist_prepare_profile_data($event)
+	{
+		if ($event['data']['user_ctwc_disp_localtime'] && $this->config['ctwc_show_localtime_profil'] &&  $this->auth->acl_get('u_ctwc_cansee_localtime'))
+		{
+			$dateTimeZone = new \DateTimeZone($event['data']['user_timezone']);
+			$dateTime	  = new \DateTime('now', $dateTimeZone);
+
+			$dateformat = $this->user->data['user_dateformat'];
+			$dateformat = $this->generate_datetime_str('ct', $dateformat);
+
+			$user_local_time = $this->user->format_date(time(), $dateformat, true) . '{{' .$dateTimeZone->getOffset($dateTime) . '}}';
+
+			$template_data = $event['template_data'];
+			$template_data = array_merge($template_data, [
+						'CTWC_USER_LOCAL_TIME' => $user_local_time,
+					]);
+
+			$event['template_data'] = $template_data;
+		}
+	}
+
+	/**
+	 * Modify the users' data displayed with their posts
+	 */
+	public function viewtopic_cache_user_data($event)
+	{
+		if ($event['row']['user_ctwc_disp_localtime'] && $this->config['ctwc_show_localtime_post'] && $this->auth->acl_get('u_ctwc_cansee_localtime'))
+		{
+			// Store user timezone in cache data
+			$user_cache_data = $event['user_cache_data'];
+
+			$dateTimeZone = new \DateTimeZone($event['row']['user_timezone']);
+			$dateTime	  = new \DateTime('now', $dateTimeZone);
+
+			$dateformat = $this->user->data['user_dateformat'];
+			$dateformat = $this->generate_datetime_str('ct', $dateformat);
+
+			$user_local_time = $this->user->format_date(time(), $dateformat, true) . '{{' . $dateTimeZone->getOffset($dateTime) . '}}';
+
+			$user_cache_data = array_merge($user_cache_data, [
+						'user_ctwc_local_time' => $user_local_time,
+					]);
+
+			$event['user_cache_data'] = $user_cache_data;
+		}
+	}
+
+	/**
+	 * Modify the posts template block
+	 */
+	public function viewtopic_modify_post_row($event)
+	{
+		$post_row	= $event['post_row'];
+		$poster_id	= $post_row['POSTER_ID'];
+
+		if (isset($event['user_cache'][$poster_id]['user_ctwc_local_time']))
+		{
+			$post_row = array_merge($post_row, [
+						'CTWC_USER_LOCAL_TIME' => $event['user_cache'][$poster_id]['user_ctwc_local_time'],
+					]);
+
+			$event['post_row'] = $post_row;
+		}
+	}
+
+	/*
+	 * Changes the placeholder in the date/time string for the JavaScript clock class
+	 */
+	private function generate_datetime_str($replacement, $format)
+	{
 		$pattern = [
 			'/(?<!\\\\)g/',   // hour in 12-hour format; without leading zero				 1 to 12
 			'/(?<!\\\\)G/',   // hour in 24-hour format; without leading zero				 0 to 23
@@ -136,50 +278,8 @@ class main_listener implements EventSubscriberInterface
 			'{W0}', '{W7}', '{W}', '{l}', '{F}', '{O}', '{P}',
 		];
 
-		$wc_date_ary = json_decode($this->user->data['user_imcger_ct_data'],  true);
+		$replacement = $replacement == 'ct' ? $ct_replacement : $wc_replacement;
 
-		if (is_array($wc_date_ary) && $this->auth->acl_get('u_ctwc_access'))
-		{
-			foreach ($wc_date_ary as $clock_data)
-			{
-				if (isset($clock_data[0]) && $clock_data[0] == 1 && !!$clock_data[1])
-				{
-					$dateTimeZone = new \DateTimeZone($clock_data[1]);
-					$dateTime	  = new \DateTime("now", $dateTimeZone);
-
-					$timeOffset = $dateTimeZone->getOffset($dateTime);
-					$city		= !!$clock_data[2] ? $clock_data[2] : end(explode('/', $this->language->lang(['timezones', $clock_data[1]])));
-
-					$this->template->assign_block_vars('ctwc_clock', [
-						'CITY'		 => $city,
-						'TIMEOFFSET' => $timeOffset,
-					]);
-				}
-			}
-
-			$format = isset($wc_date_ary[6]) ? $wc_date_ary[6] : $this->user->date_format;
-			$date_str = preg_replace($pattern, $wc_replacement, $format);
-			$date_str = preg_replace('/(?<!\\\\)\\\\/', '', $date_str);
-
-			$this->template->assign_vars([
-				'CTWC_DATESTRING'	=> $date_str,
-				'CTWC_LINES'		=> $wc_date_ary[7] ?? 0,
-			]);
-		}
-
-		$datetime  = $this->user->create_datetime();
-		$tz_offset = $datetime->getOffset();
-
-		$dateformat = !!$this->user->data['user_ctwc_currtime_format'] ? $this->user->data['user_ctwc_currtime_format'] : $this->user->data['user_dateformat'];
-		$dateformat = preg_replace($pattern, $ct_replacement, $dateformat);
-
-		$this->template->assign_vars([
-			'CURRENT_TIME'				=> $this->language->lang('CURRENT_TIME', $this->user->format_date(time(), $dateformat, false)),
-			'CTWC_TZOFFSET'				=> $tz_offset,
-			'CTWC_WEEKDAY_SHORT_ARY'	=> $js_weekday_month[0],
-			'CTWC_WEEKDAY_ARY'			=> $js_weekday_month[1],
-			'CTWC_MONTHS_SHORT_ARY'		=> $js_weekday_month[2],
-			'CTWC_MONTHS_ARY'			=> $js_weekday_month[3],
-		]);
+		return preg_replace($pattern, $replacement, $format);
 	}
 }

@@ -21,7 +21,9 @@ class ctwc_helper
 	/** @var \phpbb\language\language */
 	protected $language;
 
-
+	/**
+	 * Constructor
+	 */
 	public function __construct
 	(
 		\phpbb\user $user,
@@ -36,10 +38,6 @@ class ctwc_helper
 
 	/**
 	 * Options to pick a timezone and date/time
-	 *
-	 * @param	string			$prefix				Prefix for template loop
-	 * @param	string			$default			A timezone to select
-	 *
 	 */
 	public function timezone_select($prefix = '', $default = '')
 	{
@@ -110,6 +108,9 @@ class ctwc_helper
 		}
 	}
 
+	/*
+	 * Creates an array of variables for the SelectBox macro
+	 */
 	public function select_struct($cfg_value, array $options): array
 	{
 		$options_tpl = [];
@@ -131,6 +132,9 @@ class ctwc_helper
 		return $options_tpl;
 	}
 
+	/*
+	 * Creates an array of dateformat options for the SelectBox macro
+	 */
 	public function set_select_template_vars($date_format, $template_var)
 	{
 		$this->language->add_lang(['info_acp_ctwc', ], 'imcger/currenttime');

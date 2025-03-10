@@ -13,7 +13,7 @@ namespace imcger\currenttime\event;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
- * Collapse Quote listener
+ * UCP L<istener
  */
 class ucp_listener implements EventSubscriberInterface
 {
@@ -40,15 +40,6 @@ class ucp_listener implements EventSubscriberInterface
 
 	/**
 	 * Constructor
-	 *
-	 * @param \phpbb\config\config				$config
-	 * @param \phpbb\template\template			$template		Template object
-	 * @param \phpbb\user						$user			User object
-	 * @param \phpbb\language\language			$language		language object
-	 * @param \phpbb\request\request			$request		Request objectt
-	 * @param \phpbb\db\driver\driver_interface $db
-	 *
-	 * @return null
 	 */
 	public function __construct
 	(
@@ -72,10 +63,6 @@ class ucp_listener implements EventSubscriberInterface
 
 	/**
 	 * Assign functions defined in this class to event listeners in the core
-	 *
-	 * @return array
-	 * @static
-	 * @access public
 	 */
 	public static function getSubscribedEvents()
 	{
@@ -84,15 +71,12 @@ class ucp_listener implements EventSubscriberInterface
 			'core.ucp_prefs_personal_data'			=> 'ucp_prefs_personal_data',
 			'core.ucp_prefs_personal_update_data'	=> 'ucp_prefs_personal_update_data',
 			'core.ucp_register_register_after'		=> 'ucp_register_set_data',
+			'core.modify_module_row'				=> 'modify_module_row',
 		];
 	}
 
 	/**
-	 * Add collapsequote language file
-	 *
-	 * @param	object		$event	The event object
-	 * @return	null
-	 * @access	public
+	 * Add language file
 	 */
 	public function ucp_display_module_before()
 	{
@@ -102,21 +86,25 @@ class ucp_listener implements EventSubscriberInterface
 
 	/**
 	 * Add UCP edit display options data before they are assigned to the template or submitted
-	 *
-	 * @param	object		$event	The event object
-	 * @return	null
-	 * @access	public
 	 */
 	public function ucp_prefs_personal_data($event)
 	{
 		$format = !!$this->user->data['user_ctwc_currtime_format'] ? $this->user->data['user_ctwc_currtime_format'] : $this->user->date_format;
 
 		$event['data'] = array_merge($event['data'], [
-			'user_ctwc_currtime_format' => $this->request->variable('user_ctwc_currtime_format', $format),
+			'user_ctwc_currtime_format'	=> $this->request->variable('user_ctwc_currtime_format', $format),
+			'user_ctwc_disp_localtime'	=> $this->request->variable('user_ctwc_disp_localtime', $this->user->data['user_ctwc_disp_localtime']),
 		]);
 
 		if (!$event['submit'])
 		{
+			if ($this->config['ctwc_show_localtime_profil'] || $this->config['ctwc_show_localtime_post'])
+			{
+				$this->template->assign_vars([
+					'USER_CTWC_DISP_LOCALTIME' => $event['data']['user_ctwc_disp_localtime'],
+				]);
+			}
+
 			$this->ctwc_helper->set_select_template_vars($event['data']['user_ctwc_currtime_format'], 'CTWC_CURRTIME_DATEFORMATS');
 
 			$this->template->assign_vars([
@@ -128,24 +116,17 @@ class ucp_listener implements EventSubscriberInterface
 
 	/**
 	 * Update UCP edit display options data on form submit
-	 *
-	 * @param	object		$event	The event object
-	 * @return	null
-	 * @access	public
 	 */
 	public function ucp_prefs_personal_update_data($event)
 	{
 		$event['sql_ary'] = array_merge($event['sql_ary'], [
 			'user_ctwc_currtime_format' => $event['data']['user_ctwc_currtime_format'],
+			'user_ctwc_disp_localtime'	=> $event['data']['user_ctwc_disp_localtime'],
 		]);
 	}
 
 	/**
-	 * After new user registration, set user parameters to default;
-	 *
-	 * @param	$event
-	 * @return	null
-	 * @access	public
+	 * This event allows to modify parameters for building modules list
 	 */
 	public function ucp_register_set_data($event)
 	{
@@ -160,5 +141,18 @@ class ucp_listener implements EventSubscriberInterface
 				WHERE user_id = ' . (int) $event['user_id'];
 
 		$this->db->sql_query($sql);
+	}
+
+	/**
+	 * After new user registration, set user parameters to default;
+	 */
+	public function modify_module_row($event)
+	{
+		if (!$this->config['ctwc_show_worldclock'] && $event['module_row']['langname'] == 'UCP_CT_MODULE_WORLDCLOCK')
+		{
+			$display = $event['module_row'];
+			$display['display'] = (int) 0;
+			$event['module_row'] = $display;
+		}
 	}
 }

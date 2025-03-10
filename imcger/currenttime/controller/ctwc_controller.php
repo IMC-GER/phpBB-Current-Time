@@ -80,9 +80,6 @@ class ctwc_controller
 
 	/**
 	 * Display the options a user can configure for this extension
-	 *
-	 * @return null
-	 * @access public
 	 */
 	public function display_options($modul)
 	{
@@ -99,7 +96,7 @@ class ctwc_controller
 		{
 			if (!check_form_key('imcger\currenttime'))
 			{
-				trigger_error($this->language->lang('FORM_INVALID') . '<br><br><a href="' . $this->u_action . '">&laquo; ' . $this->user->lang['BACK_TO_PREV'] . '</a>', E_USER_WARNING);
+				trigger_error($this->language->lang('FORM_INVALID') . '<br><br><a href="' . $this->u_action . '">&laquo; ' . $this->language->lang('BACK_TO_PREV') . '</a>', E_USER_WARNING);
 			}
 
 			$user_setting = [];
@@ -147,6 +144,9 @@ class ctwc_controller
 
 					$this->db->sql_query($sql);
 				}
+
+				trigger_error($this->language->lang('CONFIG_UPDATED') . adm_back_link($this->u_action));
+
 			}
 			else if ($this->modul == 'ucp')
 			{
@@ -223,8 +223,7 @@ class ctwc_controller
 	}
 
 	/**
-	 * @param  string $action The selected action (ACP & UCP section).
-	 * @return mixed
+	 * The selected action (ACP & UCP section).
 	 */
 	public function set_page_url($action)
 	{

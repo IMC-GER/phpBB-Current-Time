@@ -7,10 +7,12 @@
  *
  #}
 
-<style>
-	#ctwc-dateformat-explain {
-	  display: none;
-	}
-</style>
+{% if CTWC_CURRTIME_DATEFORMATS is defined %}
+	<style>
+		#ctwc-dateformat-explain {
+		  display: none;
+		}
+	</style>
 
 {% include '@imcger_currenttime/ctwc_prefs_personal_settings.html' %}
+{% endif %}

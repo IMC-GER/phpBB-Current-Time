@@ -1,0 +1,15 @@
+{#
+ * Current Time
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2024, Thorsten Ahlers
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+{%- if postrow.CTWC_USER_LOCAL_TIME is defined %}
+	<dd class="profile-joined">
+		<strong>{{ lang('CTWC_LOCAL_TIME') ~ lang('COLON') }} </strong>
+		<span class="time" style="visibility: hidden;">{{ postrow.CTWC_USER_LOCAL_TIME }}</span>
+	</dd>
+{% endif %}

@@ -12,6 +12,15 @@
 {% import '@imcger_currenttime/twig_macros.html' as common %}
 {% set switch_type = TOGGLECTRL_CT ?? TOGGLECTRL_TYPE ?? 'toggle' %}
 
+{% macro switch(name, checked = false, type = 'toggle') -%}
+	{% if type == 'toggle' || type == 'checkbox' -%}
+		<input type="checkbox"{{ type == 'toggle' ? ' class="toggle"' }} name="{{ name }}" value="1"{{ checked ? ' checked' }}>
+	{%- elseif type == 'radio' -%}
+		<label><input type="radio" class="radio" name="{{ name }}" value="1"{{ checked ? ' checked' }}> {{ lang('ON') }}</label>
+		<label><input type="radio" class="radio" name="{{ name }}" value="0"{{ !checked ? ' checked' }}> {{ lang('OFF') }}</label>
+	{%- endif %}
+{%- endmacro %}
+
 		<div id="ctwc_ucp_prefs">
 		{% if S_CTWC_ACP_USER_PREFS is defined %}<a id="ctwc_prefs" class="anchor"></a>{% endif %}
 		<fieldset>
@@ -22,7 +31,7 @@
 					<span>{{ lang('CTWC_WORLDCLOCK_EXP') }}</span>
 				</dt>
 				<dd>
-					{{ common.switch('ctwc_wclock_disp_0', CTWC_WCLOCK_DISP_0, switch_type) }}
+					{{ _self.switch('ctwc_wclock_disp_0', CTWC_WCLOCK_DISP_0, switch_type) }}
 				</dd>
 				{% if ctwc0_timezone_date %}
 				<dd>
@@ -63,7 +72,7 @@
 					<span>{{ lang('CTWC_WORLDCLOCK_EXP') }}</span>
 				</dt>
 				<dd>
-					{{ common.switch('ctwc_wclock_disp_1', CTWC_WCLOCK_DISP_1, switch_type) }}
+					{{ _self.switch('ctwc_wclock_disp_1', CTWC_WCLOCK_DISP_1, switch_type) }}
 				</dd>
 				{% if ctwc1_timezone_date %}
 				<dd>
@@ -104,7 +113,7 @@
 					<span>{{ lang('CTWC_WORLDCLOCK_EXP') }}</span>
 				</dt>
 				<dd>
-					{{ common.switch('ctwc_wclock_disp_2', CTWC_WCLOCK_DISP_2, switch_type) }}
+					{{ _self.switch('ctwc_wclock_disp_2', CTWC_WCLOCK_DISP_2, switch_type) }}
 				</dd>
 				{% if ctwc2_timezone_date %}
 				<dd>
@@ -145,7 +154,7 @@
 					<span>{{ lang('CTWC_WORLDCLOCK_EXP') }}</span>
 				</dt>
 				<dd>
-					{{ common.switch('ctwc_wclock_disp_3', CTWC_WCLOCK_DISP_3, switch_type) }}
+					{{ _self.switch('ctwc_wclock_disp_3', CTWC_WCLOCK_DISP_3, switch_type) }}
 				</dd>
 				{% if ctwc3_timezone_date %}
 				<dd>
@@ -186,7 +195,7 @@
 					<span>{{ lang('CTWC_WORLDCLOCK_EXP') }}</span>
 				</dt>
 				<dd>
-					{{ common.switch('ctwc_wclock_disp_4', CTWC_WCLOCK_DISP_4, switch_type) }}
+					{{ _self.switch('ctwc_wclock_disp_4', CTWC_WCLOCK_DISP_4, switch_type) }}
 				</dd>
 				{% if ctwc4_timezone_date %}
 				<dd>
@@ -227,7 +236,7 @@
 					<span>{{ lang('CTWC_WORLDCLOCK_EXP') }}</span>
 				</dt>
 				<dd>
-					{{ common.switch('ctwc_wclock_disp_5', CTWC_WCLOCK_DISP_5, switch_type) }}
+					{{ _self.switch('ctwc_wclock_disp_5', CTWC_WCLOCK_DISP_5, switch_type) }}
 				</dd>
 				{% if ctwc4_timezone_date %}
 				<dd>

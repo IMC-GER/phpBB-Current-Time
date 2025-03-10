@@ -21,17 +21,26 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// Language pack author
 	'CTWC_LANG_DESC'			=> 'English',
-	'CTWC_LANG_EXT_VER' 		=> '0.9.0',
+	'CTWC_LANG_EXT_VER' 		=> '0.11.0',
 	'CTWC_LANG_AUTHOR' 			=> 'IMC-GER',
 
 	'ACP_CT_MODULE_WORLDCLOCK'	=> 'Current Time / World Clock',
-	'ACP_CT_SETTINGS'			=> 'Settings',
+	'ACP_CTWC_WORLDCL_SETTINGS'	=> 'Worldclock Settings',
+	'ACP_CT_SETTINGS'			=> 'General Settings',
+	'ACP_CTWC_GSET_EXP'			=> 'Here you can activate or deactivate the modules of this extension. If you only want to deactivate them for individual users or user groups, you must do this using the forum\'s permissions system.',
 	'ACP_CTWC_TITLE'			=> 'World Clock',
 	'ACP_CTWC_DESC'				=> 'To display the “World Clock”, the user must be assigned user permissions in the permission management. The basic settings for new users are made on this page. These settings can be applied to all users.',
 	'ACP_CTWC_ANONYMOUS_DESC'	=> 'The settings for anonymous user must be made <a href="%1s#ctwc_prefs">on this page</a>.',
 
 	// Permission
-	'ACL_U_CTWC_ACCESS'			=> 'Can view world clock',
+	'ACL_U_CTWC_ACCESS'			  => 'Can view world clock',
+	'ACL_U_CTWC_CANSEE_LOCALTIME' => 'Can see the user\'s local time',
+
+	// General settings
+	'CTWC_SHOW_CURRENTTIME'			=> 'Display the current time on all forum pages',
+	'CTWC_SHOW_WORLDCLOCK'			=> 'User can display the World Clock',
+	'CTWC_SHOW_LOCALTIME_PROFIL'	=> 'Display of the user\'s local time in their profile',
+	'CTWC_SHOW_LOCALTIME_POST'		=> 'Display the local time of the post author in the post profile',
 
 	// Settings world clock
 	'CTWC_SETTINGS'			=> 'Settings',
@@ -67,6 +76,7 @@ $lang = array_merge($lang, [
 	],
 
 	// User preferences
+	'CTWC_CANSEE_LOCALTIME'			=> 'Users can see my local time',
 	'CTWC_CURRTIME_FORMAT'			=> 'Date format for the “Current time”',
 	'CTWC_CURRTIME_FORMAT_EXPLAIN'	=> 'Click here for an explanation of the supported formatting options.',
 

@@ -9,6 +9,16 @@ services:
             - '@template'
             - '@language'
 
+    imcger.currenttime.general_settings.controller:
+        class: imcger\currenttime\controller\ctwc_general_settings
+        arguments:
+            - '@config'
+            - '@request'
+            - '@user'
+            - '@template'
+            - '@language'
+            - '@ext.manager'
+
     imcger.currenttime.acp_ucp.controller:
         class: imcger\currenttime\controller\ctwc_controller
         arguments:
@@ -28,6 +38,7 @@ services:
         arguments:
             - '@auth'
             - '@user'
+            - '@config'
             - '@template'
             - '@language'
             - '%imcger.currenttime.table.ctwc_data%'
@@ -38,6 +49,7 @@ services:
         class: imcger\currenttime\event\acp_listener
         arguments:
             - '@user'
+            - '@config'
             - '@template'
             - '@request'
             - '@imcger.currenttime.ctwc_helper'

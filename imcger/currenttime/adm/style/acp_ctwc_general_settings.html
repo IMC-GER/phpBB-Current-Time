@@ -1,0 +1,74 @@
+{#
+ * Current Time
+ * An extension for the phpBB Forum Software package.
+ *
+ * @copyright (c) 2024, Thorsten Ahlers
+ * @license GNU General Public License, version 2 (GPL-2.0)
+ *
+ #}
+
+{% INCLUDECSS '@imcger_currenttime/ctwc_all.css' %}
+{% INCLUDECSS '@imcger_currenttime/acp_toggle.css' %}
+{% import '@imcger_currenttime/twig_macros.html' as common %}
+{% set switch_type = TOGGLECTRL_CT ?? TOGGLECTRL_TYPE ?? 'toggle' %}
+
+{% INCLUDE 'overall_header.html' %}
+
+<h1>{{ lang('ACP_CT_MODULE_WORLDCLOCK') }}</h1>
+
+<p>{{ lang('ACP_CTWC_GSET_EXP') }}</p>
+
+<form id="acp_board" method="post" action="{{ U_ACTION }}">
+	<fieldset>
+		<legend>{{ lang('ACP_CT_SETTINGS') }}</legend>
+		<dl>
+			<dt>
+				<label>{{ lang('CTWC_SHOW_CURRENTTIME') ~ lang('COLON') }}</label>
+			</dt>
+			<dd>
+				{{ common.switch('ctwc_show_currenttime', CTWC_SHOW_CURRENTTIME, switch_type) }}
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<label>{{ lang('CTWC_SHOW_WORLDCLOCK') ~ lang('COLON') }}</label>
+			</dt>
+			<dd>
+				{{ common.switch('ctwc_show_worldclock', CTWC_SHOW_WORLDCLOCK, switch_type) }}
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<label>{{ lang('CTWC_SHOW_LOCALTIME_PROFIL') ~ lang('COLON') }}</label>
+			</dt>
+			<dd>
+				{{ common.switch('ctwc_show_localtime_profil', CTWC_SHOW_LOCALTIME_PROFIL, switch_type) }}
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<label>{{ lang('CTWC_SHOW_LOCALTIME_POST') ~ lang('COLON') }}</label>
+			</dt>
+			<dd>
+				{{ common.switch('ctwc_show_localtime_post', CTWC_SHOW_LOCALTIME_POST, switch_type) }}
+			</dd>
+		</dl>
+	</fieldset>
+	<fieldset>
+		<legend>{{ lang('ACP_SUBMIT_CHANGES') }}</legend>
+		<p class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{{ lang('SUBMIT') }}">&nbsp;
+			<input class="button2" type="reset"  id="reset" name="reset" value="{{ lang('RESET') }}">
+		</p>
+	</fieldset>
+
+	{{ S_FORM_TOKEN }}
+</form>
+
+<p class="imcger-copyright">
+	{{ CTWC_NAME }} v{{ CTWC_EXT_VER }} &copy; IMC-Ger<br>
+	{{ lang('CTWC_LANG_DESC') }} v{{ lang('CTWC_LANG_EXT_VER') }} &bull; {{ lang('CTWC_LANG_AUTHOR') }}
+</p>
+
+{% INCLUDE 'overall_footer.html' %}
+

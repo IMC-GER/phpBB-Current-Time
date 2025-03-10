@@ -32,6 +32,22 @@ class acp_module
 		{
 			case 'settings':
 				// Load a template from adm/style for our ACP page
+				$this->tpl_name = 'acp_ctwc_general_settings';
+
+				// Set the page title for our ACP page
+				$this->page_title = $language->lang('ACP_CT_MODULE_WORLDCLOCK');
+
+				$controller = $phpbb_container->get('imcger.currenttime.general_settings.controller');
+
+				// Make the $u_action url available in the admin controller
+				$controller->set_page_url($this->u_action);
+
+				// Load the display options handle in the ucp controller
+				$controller->general_settings();
+			break;
+
+			case 'worldclock_settings':
+				// Load a template from adm/style for our ACP page
 				$this->tpl_name = 'acp_ctwc_body';
 
 				// Set the page title for our ACP page
