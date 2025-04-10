@@ -8,7 +8,7 @@
  #}
 
 {# Idea from Kirk (phpbb.de) #}
-{% if SCRIPT_NAME != 'index' && CURRENT_TIME != '&nbsp;' && !MESSAGE_TITLE && !USERNAME_CREDENTIAL %}
+{% if SCRIPT_NAME != 'index' && CTWC_SHOW_CURRENTTIME && !MESSAGE_TITLE && !USERNAME_CREDENTIAL %}
 	<p class="responsive-center ctwc-currenttime {% if S_BOARD_DISABLED %}ctwc-currenttime-board-disabled{% endif %} time rightside">
 		{{ CURRENT_TIME }}
 	</p>

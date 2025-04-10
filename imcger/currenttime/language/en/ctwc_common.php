@@ -20,7 +20,6 @@ if (empty($lang) || !is_array($lang))
 
 $lang = array_merge($lang, [
 	// User preferences
-	'UCP_CT_MODULE_WORLDCLOCK'	=> 'Edit World Clock',
-
+	'UCP_CT_MODULE_WORLDCLOCK'	=> 'Edit world clock',
 	'CTWC_LOCAL_TIME'			=> 'Local time',
 ]);

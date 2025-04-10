@@ -1,12 +1,13 @@
 {
 	"name": "imcger/currenttime",
 	"type": "phpbb-extension",
-	"description": "Refreshes the display of the current time on the index page.",
+	"description": "Refreshes the display of the current time on the index page. Show users local time and world clock.",
 	"homepage": "",
-	"version": "0.11.0",
-	"time": "2025-03-10",
+	"version": "0.12.0",
+	"time": "2025-04-10",
 	"license": "GPL-2.0-only",
-	"authors": [{
+	"authors": [
+        {
 			"name": "Thorsten Ahlers",
 			"homepage": "https://github.com/IMC-GER",
 			"role": "Developer"

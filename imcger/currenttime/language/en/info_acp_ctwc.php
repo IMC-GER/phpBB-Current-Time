@@ -24,12 +24,12 @@ $lang = array_merge($lang, [
 	'CTWC_LANG_EXT_VER' 		=> '0.11.0',
 	'CTWC_LANG_AUTHOR' 			=> 'IMC-GER',
 
-	'ACP_CT_MODULE_WORLDCLOCK'	=> 'Current Time / World Clock',
-	'ACP_CTWC_WORLDCL_SETTINGS'	=> 'Worldclock Settings',
+	'ACP_CT_MODULE_WORLDCLOCK'	=> 'Current time / World clock',
+	'ACP_CTWC_WORLDCL_SETTINGS'	=> 'World clock Settings',
 	'ACP_CT_SETTINGS'			=> 'General Settings',
 	'ACP_CTWC_GSET_EXP'			=> 'Here you can activate or deactivate the modules of this extension. If you only want to deactivate them for individual users or user groups, you must do this using the forum\'s permissions system.',
-	'ACP_CTWC_TITLE'			=> 'World Clock',
-	'ACP_CTWC_DESC'				=> 'To display the “World Clock”, the user must be assigned user permissions in the permission management. The basic settings for new users are made on this page. These settings can be applied to all users.',
+	'ACP_CTWC_TITLE'			=> 'World clock',
+	'ACP_CTWC_DESC'				=> 'To display the World clock, the user must be assigned user permissions in the permission management. The basic settings for new users are made on this page. These settings can be applied to all users.',
 	'ACP_CTWC_ANONYMOUS_DESC'	=> 'The settings for anonymous user must be made <a href="%1s#ctwc_prefs">on this page</a>.',
 
 	// Permission
@@ -38,24 +38,24 @@ $lang = array_merge($lang, [
 
 	// General settings
 	'CTWC_SHOW_CURRENTTIME'			=> 'Display the current time on all forum pages',
-	'CTWC_SHOW_WORLDCLOCK'			=> 'User can display the World Clock',
+	'CTWC_SHOW_WORLDCLOCK'			=> 'User can display the World clock',
 	'CTWC_SHOW_LOCALTIME_PROFIL'	=> 'Display of the user\'s local time in their profile',
 	'CTWC_SHOW_LOCALTIME_POST'		=> 'Display the local time of the post author in the post profile',
 
 	// Settings world clock
 	'CTWC_SETTINGS'			=> 'Settings',
-	'CTWC_WORLDCLOCK_1'		=> 'World Clock 1',
-	'CTWC_WORLDCLOCK_2'		=> 'World Clock 2',
-	'CTWC_WORLDCLOCK_3'		=> 'World Clock 3',
-	'CTWC_WORLDCLOCK_4'		=> 'World Clock 4',
-	'CTWC_WORLDCLOCK_5'		=> 'World Clock 5',
-	'CTWC_WORLDCLOCK_6'		=> 'World Clock 6',
+	'CTWC_WORLDCLOCK_1'		=> 'World clock 1',
+	'CTWC_WORLDCLOCK_2'		=> 'World clock 2',
+	'CTWC_WORLDCLOCK_3'		=> 'World clock 3',
+	'CTWC_WORLDCLOCK_4'		=> 'World clock 4',
+	'CTWC_WORLDCLOCK_5'		=> 'World clock 5',
+	'CTWC_WORLDCLOCK_6'		=> 'World clock 6',
 	'CTWC_WORLDCLOCK_EXP'	=> 'You can activate the world clock and set the time zone and city of the time zone. The name of the city is displayed before the time string.',
 	'CTWC_SELECT_TZ_TIME'	=> 'Select timezone time',
 
-	'CTWC_TZ_CITY'			 => 'Alternative designation of the time zone',
-	'CTWC_TZ_CITY_EXP'		 => 'If you leave this field blank, the city name of the time zone will be displayed.',
-	'CTWC_WCLOCK_FORMAT'	 => 'World clock time format',
+	'CTWC_TZ_CITY'			=> 'Alternative designation of the time zone',
+	'CTWC_TZ_CITY_EXP'		=> 'If you leave this field blank, the city name of the time zone will be displayed.',
+	'CTWC_WCLOCK_FORMAT'	=> 'World clock time format',
 
 	'CTWC_WCLOCK_LINES'		=> 'Display world clocks in',
 	'CTWC_SINGLELINE'		=> 'single-line',
@@ -85,9 +85,9 @@ $lang = array_merge($lang, [
 	'OFF'	=> 'Off',
 
 	// Description of the format string
-	'CTWC_DATEFORMAT_TITLE'	=> 'Date format for Current Time and World Clock',
-	'CTWC_DATEFORMAT_DECR1'	=> 'The format of the date/time string output can be freely defined using the formatting options described in the table. To prevent a known character from being interpreted in the format string, it can be escaped with a preceding backslash.',
-	'CTWC_DATEFORMAT_DECR2'	=> 'The format string <code>\'D, d M Y H:i:s \G\M\TP\'</code> corresponds to this output <code>\'Mon, 20 Jan 2025 23:18:29 GMT+01:00\'</code>',
+	'CTWC_DATEFORMAT_TITLE'		=> 'Date format for Current Time and World clock',
+	'CTWC_DATEFORMAT_DECR1'		=> 'The format of the date/time string output can be freely defined using the formatting options described in the table. To prevent a known character from being interpreted in the format string, it can be escaped with a preceding backslash.',
+	'CTWC_DATEFORMAT_DECR2'		=> 'The format string <code>\'D, d M Y H:i:s \G\M\TP\'</code> corresponds to this output <code>\'Mon, 20 Jan 2025 23:18:29 GMT+01:00\'</code>',
 	'CTWC_DATEFORMAT_BACKLINK'	=> 'Back to the settings',
 
 	// Table head

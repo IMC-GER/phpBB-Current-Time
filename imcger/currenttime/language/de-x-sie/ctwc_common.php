@@ -21,6 +21,5 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// User preferences
 	'UCP_CT_MODULE_WORLDCLOCK'	=> 'Weltzeituhr konfiguieren',
-
 	'CTWC_LOCAL_TIME'			=> 'Ortszeit',
 ]);

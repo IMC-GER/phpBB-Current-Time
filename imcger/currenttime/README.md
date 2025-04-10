@@ -1,5 +1,5 @@
 # phpBB-Current-Time
-This extension updates the “Current time” display every second or minute, depending on the setting. The current time is displayed on all pages and can be configured independently of the user date format in the personal settings.
+This extension updates the “Current Time / World Clock” display every second or minute, depending on the setting. The current time is displayed on all pages and can be configured independently of the user date format in the personal settings.
 The forum time is displayed. This may differ from the browser time due to different time zone settings.
 
 You can also display the users local time in the user profile and the post authors local time in the post profile.

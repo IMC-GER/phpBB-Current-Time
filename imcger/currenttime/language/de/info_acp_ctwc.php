@@ -24,12 +24,12 @@ $lang = array_merge($lang, [
 	'CTWC_LANG_EXT_VER' 		=> '0.11.0',
 	'CTWC_LANG_AUTHOR' 			=> 'IMC-GER',
 
-	'ACP_CT_MODULE_WORLDCLOCK'	=> 'Current Time / World Clock',
-	'ACP_CTWC_WORLDCL_SETTINGS'	=> 'Worldclock Einstellungen',
+	'ACP_CT_MODULE_WORLDCLOCK'	=> 'Current time / World clock',
+	'ACP_CTWC_WORLDCL_SETTINGS'	=> 'Weltzeituhr Einstellungen',
 	'ACP_CT_SETTINGS'			=> 'Allg. Einstellungen',
 	'ACP_CTWC_GSET_EXP'			=> 'Hier kannst du die Module dieser Extension aktiveren oder deaktivieren. Sollen diese nur für einzelne Benutzer oder Benutzergruppen deaktiviert werden musst du diese mit dem Rechtesystem des Forums tun.',
-	'ACP_CTWC_TITLE'			=> 'World Clock',
-	'ACP_CTWC_DESC'				=> 'Um die „World Clock“ angezeigt zu bekommen, muss dem Benutzer in der Rechteverwaltung das Benutzerrecht zugewiesen werden. Auf dieser Seite werden die Grundeinstellungen für neue Benutzer vorgenommen. Diese Einstellungen können für alle Benutzer übernommen werden.',
+	'ACP_CTWC_TITLE'			=> 'Weltzeituhr',
+	'ACP_CTWC_DESC'				=> 'Um die Weltzeituhr angezeigt zu bekommen, muss dem Benutzer in der Rechteverwaltung das Benutzerrecht zugewiesen werden. Auf dieser Seite werden die Grundeinstellungen für neue Benutzer vorgenommen. Diese Einstellungen können für alle Benutzer übernommen werden.',
 	'ACP_CTWC_ANONYMOUS_DESC'	=> 'Die Einstellungen für Gäste müssen <a href="%1s#ctwc_prefs">auf dieser Seite</a> vorgenommen werden.',
 
 	// Permission
@@ -53,9 +53,9 @@ $lang = array_merge($lang, [
 	'CTWC_WORLDCLOCK_EXP'	=> 'Du kannst die Weltzeituhr aktivieren und die Zeitzone und die Stadt innerhalb der Zeitzone einstellen. Der Name der Stadt wird vor der Zeitangabe angezeigt.',
 	'CTWC_SELECT_TZ_TIME'	=> 'Auswahl der Zeit in der Zeitzone',
 
-	'CTWC_TZ_CITY'			 => 'Alternative Bezeichnung der Zeitzone',
-	'CTWC_TZ_CITY_EXP'		 => 'Wenn dieses Feld leer bleibt, wird der Stadtname der Zeitzone angezeigt.',
-	'CTWC_WCLOCK_FORMAT'	 => 'Format der Weltzeituhr',
+	'CTWC_TZ_CITY'			=> 'Alternative Bezeichnung der Zeitzone',
+	'CTWC_TZ_CITY_EXP'		=> 'Wenn dieses Feld leer bleibt, wird der Stadtname der Zeitzone angezeigt.',
+	'CTWC_WCLOCK_FORMAT'	=> 'Format der Weltzeituhr',
 
 	'CTWC_WCLOCK_LINES'		=> 'Anzeige der Weltzeituhren in',
 	'CTWC_SINGLELINE'		=> 'einer Zeile',
@@ -85,9 +85,9 @@ $lang = array_merge($lang, [
 	'OFF'	=> 'Aus',
 
 	// Description of the format string
-	'CTWC_DATEFORMAT_TITLE'	=> 'Datumsformat für aktuelle Zeit und Weltzeituhr',
-	'CTWC_DATEFORMAT_DECR1'	=> 'Das Format der ausgegebenen Datum/Zeit Zeichenkette kann mit den in der Tabelle beschriebenen Formatierungsoptionen frei definiert werden. Um zu verhindern, dass ein bekanntes Zeichen in der Formatzeichenkette interpretiert wird, kann es mit einem vorangestellten Backslash maskiert werden.',
-	'CTWC_DATEFORMAT_DECR2'	=> 'Die Formatzeichenkette <code>\'D, d M Y H:i:s \G\M\TP\'</code> entspicht dieser Ausgabe <code>\'Mo, 20 Jan 2025 23:18:29 GMT+01:00\'</code>',
+	'CTWC_DATEFORMAT_TITLE'		=> 'Datumsformat für aktuelle Zeit und Weltzeituhr',
+	'CTWC_DATEFORMAT_DECR1'		=> 'Das Format der ausgegebenen Datum/Zeit Zeichenkette kann mit den in der Tabelle beschriebenen Formatierungsoptionen frei definiert werden. Um zu verhindern, dass ein bekanntes Zeichen in der Formatzeichenkette interpretiert wird, kann es mit einem vorangestellten Backslash maskiert werden.',
+	'CTWC_DATEFORMAT_DECR2'		=> 'Die Formatzeichenkette <code>\'D, d M Y H:i:s \G\M\TP\'</code> entspicht dieser Ausgabe <code>\'Mo, 20 Jan 2025 23:18:29 GMT+01:00\'</code>',
 	'CTWC_DATEFORMAT_BACKLINK'	=> 'Zurück zu den Einstellungen',
 
 	// Table head
