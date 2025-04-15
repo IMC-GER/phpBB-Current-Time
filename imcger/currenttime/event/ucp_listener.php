@@ -38,6 +38,9 @@ class ucp_listener implements EventSubscriberInterface
 	/** @var \imcger\currenttime\controller\ctwc_helper */
 	protected $ctwc_helper;
 
+	/** @var string Table name */
+	protected $ctwc_data_table;
+
 	/**
 	 * Constructor
 	 */
@@ -49,16 +52,18 @@ class ucp_listener implements EventSubscriberInterface
 		\phpbb\language\language $language,
 		\phpbb\request\request $request,
 		\phpbb\db\driver\driver_interface $db,
-		\imcger\currenttime\controller\ctwc_helper $ctwc_helper
+		\imcger\currenttime\controller\ctwc_helper $ctwc_helper,
+		$ctwc_data_table
 	)
 	{
-		$this->config		= $config;
-		$this->template 	= $template;
-		$this->user 		= $user;
-		$this->language 	= $language;
-		$this->request		= $request;
-		$this->db			= $db;
-		$this->ctwc_helper	= $ctwc_helper;
+		$this->config			= $config;
+		$this->template 		= $template;
+		$this->user 			= $user;
+		$this->language 		= $language;
+		$this->request			= $request;
+		$this->db				= $db;
+		$this->ctwc_helper		= $ctwc_helper;
+		$this->ctwc_data_table	= $ctwc_data_table;
 	}
 
 	/**

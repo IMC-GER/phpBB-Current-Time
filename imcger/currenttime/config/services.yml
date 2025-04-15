@@ -66,6 +66,7 @@ services:
             - '@request'
             - '@dbal.conn'
             - '@imcger.currenttime.ctwc_helper'
+            - '%imcger.currenttime.table.ctwc_data%'
         tags:
             - { name: event.listener }
 
