@@ -68,7 +68,6 @@ $lang = array_merge($lang, [
 	'ctwc_dateformats'	=> [
 		'D j. M Y, H:i:s'		=> 'So 1. Jan 2025, 18:33:28',
 		'j. M Y, H:i'			=> '1. Jan 2025, 13:57',
-		'D j. M Y, H:i:s'		=> 'Mo 1. Jan 2025, 13:57:28',
 		'j. F Y, H:i'			=> '1. Januar 2025, 13:57',
 		'l j. F Y, H:i'			=> 'Montag 1. Januar 2025, 13:57',
 		'd.m.Y, H:i:s'			=> '01.01.2025, 13:57:28',
@@ -76,7 +75,7 @@ $lang = array_merge($lang, [
 	],
 
 	// User preferences
-	'CTWC_CANSEE_LOCALTIME'			=> 'Benutzer können meine Ortszeit sehen',
+	'CTWC_CANSEE_LOCALTIME'			=> 'Benutzer dürfen meine Ortszeit sehen',
 	'CTWC_CURRTIME_FORMAT'			=> 'Datums-Format für die „Aktuelle Zeit“',
 	'CTWC_CURRTIME_FORMAT_EXPLAIN'	=> 'Klicke hier um eine Erklärung der unterstüzten Formatierungsoptionen zu erhalten.',
 

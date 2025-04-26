@@ -25,7 +25,7 @@
 	imcger.currentTime.monthShort	= [{{ CTWC_MONTHS_SHORT_ARY }}];
 	imcger.currentTime.month		= [{{ CTWC_MONTHS_ARY }}];
 
-	// Initialize current time clock
+	// Initialize current time and local time clocks
 	imcger.currentTime.Clocks = document.getElementsByClassName('time');
 
 	for (i = 0; i < imcger.currentTime.Clocks.length; i++) {
@@ -35,6 +35,7 @@
 	}
 
 {% if ctwc_clock|length %}
+	// Create world clocks
 	function createClock(city, timeStr, timeZone, lines) {
 		let elem = document.createElement('div'),
 			cont = document.getElementById('ctwc-clock'),
@@ -55,8 +56,7 @@
 	{% for data in ctwc_clock -%}
 		createClock('{{ data.CITY|e('js') }}', '{{ CTWC_DATESTRING|e('js') }}', {{ data.TIMEOFFSET }}, {{ CTWC_LINES }});
 	{% endfor %}
-	
+
 	document.getElementById('ctwc_temp').remove();
 {% endif %}
-
 </script>

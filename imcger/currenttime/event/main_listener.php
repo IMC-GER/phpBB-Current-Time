@@ -149,7 +149,6 @@ class main_listener implements EventSubscriberInterface
 		$dateformat = !!$this->user->data['user_ctwc_currtime_format'] ? $this->user->data['user_ctwc_currtime_format'] : $this->user->data['user_dateformat'];
 		$dateformat = $this->generate_datetime_str('ct', $dateformat);
 
-
 		if ($this->config['ctwc_show_currenttime'])
 		{
 			$currenttime = $this->language->lang('CURRENT_TIME', $this->user->format_date(time(), $dateformat, false));

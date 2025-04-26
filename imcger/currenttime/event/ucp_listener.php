@@ -106,16 +106,19 @@ class ucp_listener implements EventSubscriberInterface
 			if ($this->config['ctwc_show_localtime_profil'] || $this->config['ctwc_show_localtime_post'])
 			{
 				$this->template->assign_vars([
+					'TOGGLECTRL_CT'			   => 'radio',
 					'USER_CTWC_DISP_LOCALTIME' => $event['data']['user_ctwc_disp_localtime'],
 				]);
 			}
 
 			$this->ctwc_helper->set_select_template_vars($event['data']['user_ctwc_currtime_format'], 'CTWC_CURRTIME_DATEFORMATS');
 
-			$this->template->assign_vars([
-				'TOGGLECTRL_CT'				=> 'radio',
-				'USER_CTWC_CURRTIME_FORMAT'	=> $event['data']['user_ctwc_currtime_format'],
-			]);
+			if ($this->config['ctwc_show_currenttime'])
+			{
+				$this->template->assign_vars([
+					'USER_CTWC_CURRTIME_FORMAT'	=> $event['data']['user_ctwc_currtime_format'],
+				]);
+			}
 		}
 	}
 

@@ -68,7 +68,6 @@ $lang = array_merge($lang, [
 	'ctwc_dateformats'	=> [
 		'D j. M Y, H:i:s'		=> 'Sun 1. Jan 2025, 18:33:28',
 		'j. M Y, H:i'			=> '1. Jan 2025, 13:57',
-		'D j. M Y, H:i:s'		=> 'Mon 1. Jan 2025, 13:57:28',
 		'j. F Y, H:i'			=> '1. Januar 2025, 13:57',
 		'l j. F Y, H:i'			=> 'Monday 1. Januar 2025, 13:57',
 		'd.m.Y, H:i:s'			=> '01.01.2025, 13:57:28',
