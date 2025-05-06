@@ -44,12 +44,7 @@ $lang = array_merge($lang, [
 
 	// Settings world clock
 	'CTWC_SETTINGS'			=> 'Einstellungen',
-	'CTWC_WORLDCLOCK_1'		=> 'Weltzeituhr 1',
-	'CTWC_WORLDCLOCK_2'		=> 'Weltzeituhr 2',
-	'CTWC_WORLDCLOCK_3'		=> 'Weltzeituhr 3',
-	'CTWC_WORLDCLOCK_4'		=> 'Weltzeituhr 4',
-	'CTWC_WORLDCLOCK_5'		=> 'Weltzeituhr 5',
-	'CTWC_WORLDCLOCK_6'		=> 'Weltzeituhr 6',
+	'CTWC_WORLDCLOCK'		=> 'Weltzeituhr',
 	'CTWC_WORLDCLOCK_EXP'	=> 'Du kannst die Weltzeituhr aktivieren und die Zeitzone und die Stadt innerhalb der Zeitzone einstellen. Der Name der Stadt wird vor der Zeitangabe angezeigt.',
 	'CTWC_SELECT_TZ_TIME'	=> 'Auswahl der Zeit in der Zeitzone',
 

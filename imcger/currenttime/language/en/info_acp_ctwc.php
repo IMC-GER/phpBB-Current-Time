@@ -44,12 +44,7 @@ $lang = array_merge($lang, [
 
 	// Settings world clock
 	'CTWC_SETTINGS'			=> 'Settings',
-	'CTWC_WORLDCLOCK_1'		=> 'World clock 1',
-	'CTWC_WORLDCLOCK_2'		=> 'World clock 2',
-	'CTWC_WORLDCLOCK_3'		=> 'World clock 3',
-	'CTWC_WORLDCLOCK_4'		=> 'World clock 4',
-	'CTWC_WORLDCLOCK_5'		=> 'World clock 5',
-	'CTWC_WORLDCLOCK_6'		=> 'World clock 6',
+	'CTWC_WORLDCLOCK'		=> 'World clock',
 	'CTWC_WORLDCLOCK_EXP'	=> 'You can activate the world clock and set the time zone and city of the time zone. The name of the city is displayed before the time string.',
 	'CTWC_SELECT_TZ_TIME'	=> 'Select timezone time',
 

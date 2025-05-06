@@ -193,6 +193,14 @@ class ctwc_controller
 		$this->ctwc_helper->timezone_select('ctwc4', $user_setting[4][1] ?? '');
 		$this->ctwc_helper->timezone_select('ctwc5', $user_setting[5][1] ?? '');
 
+		for ($i = 0; $i < 6; $i++)
+		{
+			$this->template->assign_block_vars('ctwc_data', [
+				'WCLOCK_DISP'	=> $user_setting[$i][0] ?? 0,
+				'TZ_CITY'		=> $user_setting[$i][2] ?? '',
+			]);
+		}
+
 		$metadata_manager = $this->ext_manager->create_extension_metadata_manager('imcger/currenttime');
 		$u_ctwc_user_set  = append_sid($this->phpbb_root_path . 'adm/index.' . $this->phpEx, 'i=users&amp;u=1&amp;mode=prefs');
 
@@ -202,18 +210,6 @@ class ctwc_controller
 			'ACP_CTWC_ANONYMOUS_DESC' => $this->language->lang('ACP_CTWC_ANONYMOUS_DESC', $u_ctwc_user_set),
 			'CTWC_NAME'				=> $metadata_manager->get_metadata('display-name'),
 			'CTWC_EXT_VER'			=> $metadata_manager->get_metadata('version'),
-			'CTWC_WCLOCK_DISP_0'	=> $user_setting[0][0] ?? 0,
-			'CTWC_WCLOCK_DISP_1'	=> $user_setting[1][0] ?? 0,
-			'CTWC_WCLOCK_DISP_2'	=> $user_setting[2][0] ?? 0,
-			'CTWC_WCLOCK_DISP_3'	=> $user_setting[3][0] ?? 0,
-			'CTWC_WCLOCK_DISP_4'	=> $user_setting[4][0] ?? 0,
-			'CTWC_WCLOCK_DISP_5'	=> $user_setting[5][0] ?? 0,
-			'CTWC_TZ_CITY_0'		=> $user_setting[0][2] ?? '',
-			'CTWC_TZ_CITY_1'		=> $user_setting[1][2] ?? '',
-			'CTWC_TZ_CITY_2'		=> $user_setting[2][2] ?? '',
-			'CTWC_TZ_CITY_3'		=> $user_setting[3][2] ?? '',
-			'CTWC_TZ_CITY_4'		=> $user_setting[4][2] ?? '',
-			'CTWC_TZ_CITY_5'		=> $user_setting[5][2] ?? '',
 			'CTWC_WCLOCK_FORMAT'	=> $user_setting[6] ?? $this->user->date_format,
 			'CTWC_WCLOCK_LINES'		=> $this->ctwc_helper->select_struct($user_setting[7] ?? 0, [
 				'CTWC_SINGLELINE'	=> 0,

@@ -47,10 +47,10 @@ class currenttime003 extends \phpbb\db\migration\migration
 	public function update_data()
 	{
 		return [
-			['config.add', ['ctwc_show_currenttime'			, 1]],
-			['config.add', ['ctwc_show_worldclock'			, 1]],
-			['config.add', ['ctwc_show_localtime_profil'	, 1]],
-			['config.add', ['ctwc_show_localtime_post'		, 0]],
+			['config.add', ['ctwc_show_currenttime'		 , 1]],
+			['config.add', ['ctwc_show_worldclock'		 , 1]],
+			['config.add', ['ctwc_show_localtime_profil' , 1]],
+			['config.add', ['ctwc_show_localtime_post'	 , 0]],
 
 			['module.add', [
 					'acp',

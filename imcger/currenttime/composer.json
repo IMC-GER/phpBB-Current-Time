@@ -3,8 +3,8 @@
 	"type": "phpbb-extension",
 	"description": "Refreshes the display of the current time on the index page. Show users local time and world clock.",
 	"homepage": "",
-	"version": "0.12.2",
-	"time": "2025-04-26",
+	"version": "0.13.0",
+	"time": "2025-05-06",
 	"license": "GPL-2.0-only",
 	"authors": [
         {

@@ -149,19 +149,15 @@ class acp_listener implements EventSubscriberInterface
 
 		if ($user_auth->acl_get('u_ctwc_access') && $this->config['ctwc_show_worldclock'])
 		{
+			for ($i = 0; $i < 6; $i++)
+			{
+				$this->template->assign_block_vars('ctwc_data', [
+					'WCLOCK_DISP'	=> $event['user_row']['ctwc_wclock_disp_' . $i],
+					'TZ_CITY'		=> $event['user_row']['ctwc_tz_city_' . $i],
+				]);
+			}
+
 			$this->template->assign_vars([
-				'CTWC_WCLOCK_DISP_0'	=> $event['user_row']['ctwc_wclock_disp_0'],
-				'CTWC_WCLOCK_DISP_1'	=> $event['user_row']['ctwc_wclock_disp_1'],
-				'CTWC_WCLOCK_DISP_2'	=> $event['user_row']['ctwc_wclock_disp_2'],
-				'CTWC_WCLOCK_DISP_3'	=> $event['user_row']['ctwc_wclock_disp_3'],
-				'CTWC_WCLOCK_DISP_4'	=> $event['user_row']['ctwc_wclock_disp_4'],
-				'CTWC_WCLOCK_DISP_5'	=> $event['user_row']['ctwc_wclock_disp_5'],
-				'CTWC_TZ_CITY_0'	 	=> $event['user_row']['ctwc_tz_city_0'],
-				'CTWC_TZ_CITY_1'	 	=> $event['user_row']['ctwc_tz_city_1'],
-				'CTWC_TZ_CITY_2'	 	=> $event['user_row']['ctwc_tz_city_2'],
-				'CTWC_TZ_CITY_3'	 	=> $event['user_row']['ctwc_tz_city_3'],
-				'CTWC_TZ_CITY_4'	 	=> $event['user_row']['ctwc_tz_city_4'],
-				'CTWC_TZ_CITY_5'	 	=> $event['user_row']['ctwc_tz_city_5'],
 				'CTWC_WCLOCK_FORMAT'	=> $event['user_row']['ctwc_wclock_format'],
 				'CTWC_WCLOCK_LINES'		=> $this->ctwc_helper->select_struct((int) $event['user_row']['ctwc_wclock_lines'], [
 					'CTWC_SINGLELINE'	=> 0,

@@ -154,7 +154,7 @@ class main_listener implements EventSubscriberInterface
 			$currenttime = $this->language->lang('CURRENT_TIME', $this->user->format_date(time(), $dateformat, false));
 
 			$this->template->assign_vars([
-				'CURRENT_TIME'			=> $currenttime,
+				'CURRENT_TIME' => $currenttime,
 			]);
 		}
 
@@ -167,6 +167,7 @@ class main_listener implements EventSubscriberInterface
 			'CTWC_MONTHS_ARY'			=> $js_weekday_month[3],
 		]);
 	}
+
 	/*
 	 * Preparing a user's data before displaying it in profile and memberlist
 	 */
