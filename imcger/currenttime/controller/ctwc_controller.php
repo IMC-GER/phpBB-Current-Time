@@ -12,41 +12,18 @@ namespace imcger\currenttime\controller;
 
 class ctwc_controller
 {
-	/** @var \phpbb\db\driver\driver_interface */
-	protected $db;
-
-	/** @var \phpbb\request\request */
-	protected $request;
-
-	/** @var \phpbb\user */
-	protected $user;
-
-	/** @var \phpbb\template\template */
-	protected $template;
-
-	/** @var \phpbb\language\language */
-	protected $language;
-
-	/** @var \imcger\currenttime\controller\ctwc_helper */
-	protected $ctwc_helper;
-
-	/** @var \phpbb\extension\manager */
-	protected $ext_manager;
-
-	/** @var string Table name */
-	protected $ctwc_data_table;
-
-	/** @var string phpBB root path	*/
-	protected $phpbb_root_path;
-
-	/** @var string PHP extension */
-	protected $phpEx;
-
-	/** @var string Custom form action */
-	protected $u_action;
-
-	/** @var string source modul */
-	protected $modul;
+	protected object $db;
+	protected object $request;
+	protected object $user;
+	protected object $template;
+	protected object $language;
+	protected object $ctwc_helper;
+	protected object $ext_manager;
+	protected string $ctwc_data_table;
+	protected string $phpbb_root_path;
+	protected string $phpEx;
+	protected string $u_action;
+	protected string $modul;
 
 	/**
 	 * Constructor
@@ -81,7 +58,7 @@ class ctwc_controller
 	/**
 	 * Display the options a user can configure for this extension
 	 */
-	public function display_options($modul)
+	public function display_options(string $modul): void
 	{
 		$this->modul = $modul;
 
@@ -169,7 +146,7 @@ class ctwc_controller
 	/**
 	 * Set template variables
 	 */
-	protected function set_template_vars(?array $user_setting = null)
+	protected function set_template_vars(?array $user_setting = null): void
 	{
 		if (!isset($user_setting) && $this->modul == 'acp')
 		{
@@ -221,7 +198,7 @@ class ctwc_controller
 	/**
 	 * The selected action (ACP & UCP section).
 	 */
-	public function set_page_url($action)
+	public function set_page_url(string $action): void
 	{
 		$this->u_action = $action;
 	}

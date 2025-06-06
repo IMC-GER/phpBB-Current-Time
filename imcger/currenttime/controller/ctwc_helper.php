@@ -12,14 +12,9 @@ namespace imcger\currenttime\controller;
 
 class ctwc_helper
 {
-	/** @var \phpbb\user */
-	protected $user;
-
-	/** @var \phpbb\template\template */
-	protected $template;
-
-	/** @var \phpbb\language\language */
-	protected $language;
+	protected object $user;
+	protected object $template;
+	protected object $language;
 
 	/**
 	 * Constructor
@@ -39,7 +34,7 @@ class ctwc_helper
 	/**
 	 * Options to pick a timezone and date/time
 	 */
-	public function timezone_select($prefix = '', $default = '')
+	public function timezone_select(string $prefix = '', string $default = ''): void
 	{
 		$default_offset = '';
 
@@ -110,6 +105,9 @@ class ctwc_helper
 
 	/*
 	 * Creates an array of variables for the SelectBox macro
+	 *
+	 * The variable $cfg_value is a union type array|string
+	 * Not specified for reasons of compatibility with php 7
 	 */
 	public function select_struct($cfg_value, array $options): array
 	{
@@ -135,7 +133,7 @@ class ctwc_helper
 	/*
 	 * Creates an array of dateformat options for the SelectBox macro
 	 */
-	public function set_select_template_vars($date_format, $template_var)
+	public function set_select_template_vars(string $date_format, string $template_var): void
 	{
 		$this->language->add_lang(['info_acp_ctwc', ], 'imcger/currenttime');
 
@@ -153,5 +151,60 @@ class ctwc_helper
 		$this->template->assign_vars([
 			$template_var => $this->select_struct($date_format, $dateformat_options),
 		]);
+	}
+
+	/*
+	 * Changes the placeholder in the date/time string for the JavaScript clock class
+	 */
+	public function generate_datetime_str(string $replacement, string $format): string
+	{
+		$pattern = [
+			'/(?<!\\\\)g/',   // hour in 12-hour format; without leading zero				 1 to 12
+			'/(?<!\\\\)G/',   // hour in 24-hour format; without leading zero				 0 to 23
+			'/(?<!\\\\)h/',   // hour in 12-hour format; with leading zero					01 to 12
+			'/(?<!\\\\)H/',   // hour in 24-hour format; with leading zero					00 to 23
+			'/(?<!\\\\)i/',   // minutes; with leading zero									00 to 59
+			'/(?<!\\\\)s/',   // seconds; with leading zero									00 to 59
+			'/(?<!\\\\)a/',   // Lowercase Ante meridiem and Post meridiem					am or pm
+			'/(?<!\\\\)A/',   // Uppercase Ante meridiem and Post meridiem					AM or PM
+			'/(?<!\\\\)y/',   // A two digit representation of a year
+			'/(?<!\\\\)Y/',   // A full numeric representation of a year
+			'/(?<!\\\\)n/',   // Numeric representation of a month, without leading zeros	 1 through 12
+			'/(?<!\\\\)m/',   // Numeric representation of a month, with leading zeros		01 through 12
+			'/(?<!\\\\)M/',   // A short textual representation of a month, three letters	Jan through Dec
+			'/(?<!\\\\)jS/',  // Day of the month with suffix and without leading zeros 	1st to 31st
+			'/(?<!\\\\)j/',   // Day of the month without leading zeros 					1 to 31
+			'/(?<!\\\\)d/',   // Day of the month, 2 digits with leading zeros 				01 to 31
+			'/(?<!\\\\)D/',   // A textual representation of a day, three letters			Mon through Sun
+			'/(?<!\\\\)z1/',  // The day of the year (starting from 1) 						1 through 366
+			'/(?<!\\\\)z/',   // The day of the year (starting from 0) 						0 through 365
+			'/(?<!\\\\)W0S/', // Week number of year, weeks starting on Sunday				1st to 53rd
+			'/(?<!\\\\)W7S/', // Weeks starting on Sunday, weeks count from 1st Januar		1st to 54rd
+							  // with suffix
+			'/(?<!\\\\)WS/',  // ISO 8601 week number of year, weeks starting on Monday		1st to 53rd
+			'/(?<!\\\\)W0/',  // Week number of year, weeks starting on Sunday				1 to 53
+			'/(?<!\\\\)W7/',  // Weeks starting on Sunday, weeks count from 1st Januar		1 to 54
+			'/(?<!\\\\)W/',   // ISO 8601 week number of year, weeks starting on Monday		1 to 53
+			'/(?<!\\\\)l/',   // A full textual representation of the day of the week 		Sunday through Saturday
+			'/(?<!\\\\)F/',   // A full textual representation of a month					January through December
+			'/(?<!\\\\)O/',   // Difference to Greenwich time (GMT) without colon 			Example: +0200
+			'/(?<!\\\\)P/',   // Difference to Greenwich time (GMT) with colon 				Example: +02:00
+		];
+
+		$ct_replacement = [
+			'{\g}', '{\G}', '{\h}', '{\H}', '{\i}', '{\s}', '{\a}', '{\A}', '{\y}', '{\Y}', '{\n}',
+			'{\m}', '{\M}', '{\j\S}', '{\j}', '{\d}', '{\D}', '{\z1}', '{\z}', '{\W0\S}', '{\W7\S}', '{\W\S}',
+			'{\W0}', '{\W7}', '{\W}', '{\l}', '{\F}', '{\O}', '{\P}',
+		];
+
+		$wc_replacement = [
+			'{g}', '{G}', '{h}', '{H}', '{i}', '{s}', '{a}', '{A}', '{y}', '{Y}', '{n}',
+			'{m}', '{M}', '{jS}', '{j}', '{d}', '{D}', '{z1}', '{z}', '{W0S}', '{W7S}', '{WS}',
+			'{W0}', '{W7}', '{W}', '{l}', '{F}', '{O}', '{P}',
+		];
+
+		$replacement = $replacement == 'ct' ? $ct_replacement : $wc_replacement;
+
+		return preg_replace($pattern, $replacement, $format);
 	}
 }

@@ -41,7 +41,7 @@ services:
             - '@config'
             - '@template'
             - '@language'
-            - '%imcger.currenttime.table.ctwc_data%'
+            - '@imcger.currenttime.ctwc_helper'
         tags:
             - { name: event.listener }
 
@@ -59,6 +59,7 @@ services:
     imcger.currenttime.ucp.listener:
         class: 'imcger\currenttime\event\ucp_listener'
         arguments:
+            - '@auth'
             - '@config'
             - '@template'
             - '@user'

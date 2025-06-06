@@ -12,7 +12,7 @@ namespace imcger\currenttime\ucp;
 
 class ucp_info {
 
-	public function module()
+	public function module(): array
 	{
 		return [
 			'filename'	=> '\imcger\currenttime\ucp\ucp_module',

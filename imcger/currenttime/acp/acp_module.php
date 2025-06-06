@@ -22,7 +22,7 @@ class acp_module
 	public $page_title;
 
 	/** UCP module */
-	public function main($id, $mode)
+	public function main(string $id, string $mode): void
 	{
 		global $phpbb_container;
 

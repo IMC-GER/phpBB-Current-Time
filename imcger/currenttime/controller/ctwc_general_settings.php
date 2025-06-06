@@ -12,26 +12,13 @@ namespace imcger\currenttime\controller;
 
 class ctwc_general_settings
 {
-	/** @var \phpbb\config\config */
-	protected $config;
-
-	/** @var \phpbb\request\request */
-	protected $request;
-
-	/** @var \phpbb\user */
-	protected $user;
-
-	/** @var \phpbb\template\template */
-	protected $template;
-
-	/** @var \phpbb\language\language */
-	protected $language;
-
-	/** @var \phpbb\extension\manager */
-	protected $ext_manager;
-
-	/** @var string Custom form action */
-	protected $u_action;
+	protected object $config;
+	protected object $request;
+	protected object $user;
+	protected object $template;
+	protected object $language;
+	protected object $ext_manager;
+	protected string $u_action;
 
 	/**
 	 * Constructor
@@ -57,7 +44,7 @@ class ctwc_general_settings
 	/**
 	 * Display the options a user can configure for this extension
 	 */
-	public function general_settings()
+	public function general_settings(): void
 	{
 		$this->language->add_lang(['ucp', ]);
 
@@ -85,7 +72,7 @@ class ctwc_general_settings
 	/**
 	 * Set template variables
 	 */
-	protected function set_template_vars()
+	protected function set_template_vars(): void
 	{
 		$metadata_manager = $this->ext_manager->create_extension_metadata_manager('imcger/currenttime');
 
@@ -103,7 +90,7 @@ class ctwc_general_settings
 	/**
 	 * The selected action (ACP & UCP section).
 	 */
-	public function set_page_url($action)
+	public function set_page_url(string $action): void
 	{
 		$this->u_action = $action;
 	}

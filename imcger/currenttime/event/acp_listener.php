@@ -17,21 +17,11 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class acp_listener implements EventSubscriberInterface
 {
-	/** @var \phpbb\user */
-	protected $user;
-
-	/** @var config */
-	protected $config;
-
-	/** @var \phpbb\template\template */
-	protected $template;
-
-	/** @var \phpbb\request\request */
-	protected $request;
-
-	/** @var \imcger\currenttime\controller\ctwc_helper */
-	protected $ctwc_helper;
-
+	protected object $user;
+	protected object $config;
+	protected object $template;
+	protected object $request;
+	protected object $ctwc_helper;
 
 	/**
 	 * Constructor
@@ -55,7 +45,7 @@ class acp_listener implements EventSubscriberInterface
 	/**
 	 * Get subscribed events
 	 */
-	public static function getSubscribedEvents()
+	public static function getSubscribedEvents(): array
 	{
 		return [
 			'core.acp_users_prefs_modify_data'			=> 'acp_users_prefs_modify_data',
@@ -67,7 +57,7 @@ class acp_listener implements EventSubscriberInterface
 	/**
 	 * Modify users preferences data
 	 */
-	public function acp_users_prefs_modify_data($event)
+	public function acp_users_prefs_modify_data(object $event): void
 	{
 		$user_setting = json_decode($event['user_row']['user_imcger_ct_data'], true);
 		$currtime_format = !!$event['user_row']['user_ctwc_currtime_format'] ? $event['user_row']['user_ctwc_currtime_format'] : $this->user->date_format;
@@ -92,7 +82,7 @@ class acp_listener implements EventSubscriberInterface
 	/**
 	 * Modify SQL query before users preferences are updated
 	 */
-	public function acp_users_prefs_modify_sql($event)
+	public function acp_users_prefs_modify_sql(object $event): void
 	{
 		$user_setting = [];
 
@@ -119,7 +109,7 @@ class acp_listener implements EventSubscriberInterface
 	/**
 	 * Modify users preferences data before assigning it to the template
 	 */
-	public function acp_users_prefs_modify_template_data($event)
+	public function acp_users_prefs_modify_template_data(object $event): void
 	{
 		$user_auth	= new \phpbb\auth\auth();
 		$userdata	= $user_auth->obtain_user_data($event['user_row']['user_id']);

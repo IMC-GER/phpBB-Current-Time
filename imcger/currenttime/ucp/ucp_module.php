@@ -23,7 +23,7 @@ class ucp_module
 
 
 	/** UCP module */
-	public function main($id, $mode)
+	public function main(string $id, string $mode): void
 	{
 		global $phpbb_container;
 

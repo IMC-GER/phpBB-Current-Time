@@ -12,7 +12,7 @@ namespace imcger\currenttime\acp;
 
 class acp_info {
 
-	public function module()
+	public function module(): array
 	{
 		return [
 			'filename'	=> '\imcger\currenttime\acp\acp_module',
@@ -21,12 +21,12 @@ class acp_info {
 				'settings' => [
 					'title'	=> 'ACP_CT_SETTINGS',
 					'auth'	=> 'ext_imcger/currenttime && acl_a_board',
-					'cat'	=> ['ACP_CT_MODULE_WORLDCLOCK',],
+					'cat'	=> ['ACP_CT_MODULE_WORLDCLOCK', ],
 				],
 				'worldclock_settings' => [
 					'title'	=> 'ACP_CTWC_WORLDCL_SETTINGS',
 					'auth'	=> 'ext_imcger/currenttime && acl_a_board',
-					'cat'	=> ['ACP_CT_MODULE_WORLDCLOCK',],
+					'cat'	=> ['ACP_CT_MODULE_WORLDCLOCK', ],
 				],
 			],
 		];

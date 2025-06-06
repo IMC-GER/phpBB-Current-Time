@@ -21,8 +21,8 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// Language pack author
 	'CTWC_LANG_DESC'			=> 'Deutsch',
-	'CTWC_LANG_EXT_VER' 		=> '0.11.0',
-	'CTWC_LANG_AUTHOR' 			=> 'IMC-GER',
+	'CTWC_LANG_EXT_VER' 		=> '0.14.0',
+	'CTWC_LANG_AUTHOR' 			=> 'IMC-Ger',
 
 	'ACP_CT_MODULE_WORLDCLOCK'	=> 'Current time / World clock',
 	'ACP_CTWC_WORLDCL_SETTINGS'	=> 'Weltzeituhr Einstellungen',
@@ -40,7 +40,7 @@ $lang = array_merge($lang, [
 	'CTWC_SHOW_CURRENTTIME'			=> 'Anzeige der aktuellen Uhrzeit auf allen Forumsseiten',
 	'CTWC_SHOW_WORLDCLOCK'			=> 'Benutzer kann die Weltzeituhr anzeigen',
 	'CTWC_SHOW_LOCALTIME_PROFIL'	=> 'Anzeige der Ortszeit des Benutzers in seinem Profil',
-	'CTWC_SHOW_LOCALTIME_POST'		=> 'Anzeige der Ortszeit des Beitragsautors im Beitragsprofil',
+	'CTWC_SHOW_LOCALTIME_POST'		=> 'Anzeige der Ortszeit des Autors im Beitrags- und Privatnachrichtenprofil',
 
 	// Settings world clock
 	'CTWC_SETTINGS'			=> 'Einstellungen',
