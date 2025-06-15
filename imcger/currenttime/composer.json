@@ -1,10 +1,10 @@
 {
 	"name": "imcger/currenttime",
 	"type": "phpbb-extension",
-	"description": "Refreshes the display of the current time on the index page. Show users local time and world clock.",
+	"description": "Displays the current time on all pages, the user's local time and a world clock. The times are updated continuously.",
 	"homepage": "https://github.com/IMC-GER/phpBB-Current-Time",
-	"version": "0.14.0",
-	"time": "2025-06-05",
+	"version": "1.0.0",
+	"time": "2025-06-15",
 	"license": "GPL-2.0-only",
 	"authors": [
         {
@@ -13,9 +13,11 @@
 			"role": "Developer"
 		}
 	],
-	"require": {
-		"php": ">=7.4"
-	},
+    "require": {
+        "php": ">=7.4,<8.5.0@dev",
+        "composer/installers": "~1.0",
+        "phpbb/phpbb": ">=3.3.0,<4.0.0@dev"
+    },
 	"extra": {
 		"display-name": "Current Time / World Clock",
 		"soft-require": {

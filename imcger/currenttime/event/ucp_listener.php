@@ -163,7 +163,17 @@ class ucp_listener implements EventSubscriberInterface
 			// Store user timezone in cache data
 			$msg_data = $event['msg_data'];
 
-			$dateTimeZone = new \DateTimeZone($event['user_info']['user_timezone']);
+			try
+			{
+				$dateTimeZone = new \DateTimeZone($event['user_info']['user_timezone']);
+			}
+			catch (\Exception $e)
+			{
+				// If the timezone the user has selected is invalid,
+				// do not display the incorrect time in the autor profile.
+				return;
+			}
+
 			$dateTime	  = new \DateTime('now', $dateTimeZone);
 
 			$dateformat = $this->user->data['user_dateformat'];

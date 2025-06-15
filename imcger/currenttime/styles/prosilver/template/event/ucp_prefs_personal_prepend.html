@@ -9,7 +9,7 @@
 
 {% if USER_CTWC_DISP_LOCALTIME is defined %}
 {% import '@imcger_currenttime/twig_macros.html' as common %}
-	<div id="ctwc_ucp_prefs">
+	<div id="ctwc_ucp_prefs"> {# closing tag is in ucp_prefs_personal_append.html #}
 	<dl>
 		<dt><label for="user_ctwc_disp_localtime">{{ lang('CTWC_CANSEE_LOCALTIME') ~ lang('COLON') }}</label></dt>
 		<dd>

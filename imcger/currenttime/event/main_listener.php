@@ -112,14 +112,26 @@ class main_listener implements EventSubscriberInterface
 			{
 				if (isset($clock_data[0]) && $clock_data[0] == 1 && !!$clock_data[1])
 				{
-					$dateTimeZone = new \DateTimeZone($clock_data[1]);
+					try
+					{
+						$dateTimeZone = new \DateTimeZone($clock_data[1]);
+						$fall_back_tz = null;
+					}
+					catch (\Exception $e)
+					{
+						// If the timezone is invalid, fall back to UTC.
+						$dateTimeZone = new \DateTimeZone('UTC');
+						$fall_back_tz = 'UTC';
+					}
+
 					$dateTime	  = new \DateTime('now', $dateTimeZone);
 
 					$timeOffset = $dateTimeZone->getOffset($dateTime);
-					$city		= !!$clock_data[2] ? $clock_data[2] : end(explode('/', $this->language->lang(['timezones', $clock_data[1]])));
+					$tz_local_ary = explode('/', $this->language->lang(['timezones', $clock_data[1]]));
+					$city		= !!$clock_data[2] ? $clock_data[2] : end($tz_local_ary);
 
 					$this->template->assign_block_vars('ctwc_clock', [
-						'CITY'		 => $city,
+						'CITY'		 => $fall_back_tz ?? $city,
 						'TIMEOFFSET' => $timeOffset,
 					]);
 				}
@@ -167,7 +179,17 @@ class main_listener implements EventSubscriberInterface
 	{
 		if ($event['data']['user_ctwc_disp_localtime'] && $this->config['ctwc_show_localtime_profil'] &&  $this->auth->acl_get('u_ctwc_cansee_localtime'))
 		{
-			$dateTimeZone = new \DateTimeZone($event['data']['user_timezone']);
+			try
+			{
+				$dateTimeZone = new \DateTimeZone($event['data']['user_timezone']);
+			}
+			catch (\Exception $e)
+			{
+				// If the timezone the user has selected is invalid,
+				// do not display the incorrect time in the user profile.
+				return;
+			}
+
 			$dateTime	  = new \DateTime('now', $dateTimeZone);
 
 			$dateformat = $this->user->data['user_dateformat'];
@@ -194,7 +216,17 @@ class main_listener implements EventSubscriberInterface
 			// Store user timezone in cache data
 			$user_cache_data = $event['user_cache_data'];
 
-			$dateTimeZone = new \DateTimeZone($event['row']['user_timezone']);
+			try
+			{
+				$dateTimeZone = new \DateTimeZone($event['row']['user_timezone']);
+			}
+			catch (\Exception $e)
+			{
+				// If the timezone the user has selected is invalid,
+				// do not display the incorrect time in the post profile.
+				return;
+			}
+
 			$dateTime	  = new \DateTime('now', $dateTimeZone);
 
 			$dateformat = $this->user->data['user_dateformat'];

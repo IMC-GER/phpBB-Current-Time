@@ -21,7 +21,7 @@ if (empty($lang) || !is_array($lang))
 $lang = array_merge($lang, [
 	// Language pack author
 	'CTWC_LANG_DESC'			=> 'Deutsch',
-	'CTWC_LANG_EXT_VER' 		=> '0.14.0',
+	'CTWC_LANG_EXT_VER' 		=> '1.0.0',
 	'CTWC_LANG_AUTHOR' 			=> 'IMC-Ger',
 
 	'ACP_CT_MODULE_WORLDCLOCK'	=> 'Current time / World clock',

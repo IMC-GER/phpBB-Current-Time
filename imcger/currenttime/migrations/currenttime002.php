@@ -12,17 +12,17 @@ namespace imcger\currenttime\migrations;
 
 class currenttime002 extends \phpbb\db\migration\migration
 {
-	public function effectively_installed()
+	public function effectively_installed(): bool
 	{
 		return $this->db_tools->sql_column_exists(USERS_TABLE, 'user_ctwc_currtime_format');
 	}
 
-	public static function depends_on()
+	public static function depends_on(): array
 	{
 		return ['\imcger\currenttime\migrations\currenttime001',];
 	}
 
-	public function update_schema()
+	public function update_schema(): array
 	{
 		return [
 			'add_columns' => [
@@ -33,7 +33,7 @@ class currenttime002 extends \phpbb\db\migration\migration
 		];
 	}
 
-	public function revert_schema()
+	public function revert_schema(): array
 	{
 		return [
 			'drop_columns' => [
