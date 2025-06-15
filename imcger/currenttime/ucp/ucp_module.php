@@ -12,17 +12,10 @@ namespace imcger\currenttime\ucp;
 
 class ucp_module
 {
-	/** @var $action */
-	public $u_action;
+	public string $u_action;
+	public string $tpl_name;
+	public string $page_title;
 
-	/** @var $tpl_name */
-	public $tpl_name;
-
-	/** @var $page_title */
-	public $page_title;
-
-
-	/** UCP module */
 	public function main(string $id, string $mode): void
 	{
 		global $phpbb_container;

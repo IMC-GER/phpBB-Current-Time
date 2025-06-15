@@ -5,9 +5,11 @@ It's updates the current time, user local time and world clock display every sec
 The current time is displayed on all pages and can be configured independently of the user date format in the UCP personal settings.
 The forum time is displayed. This may differ from the browser time due to different time zone settings.
 
-You can also display the users local time in the user profile and the post authors local time in the post profile.
+You can also display the users local time in the user profile and the authors local time in the post and pm profile.
 
 A world clock can be displayed above the navigation bar. This is freely configurable. Up to 6 time zones can be displayed. The settings can be made in the UCP, in the ACP and in the ACP user administration.
+
+[![Tests](https://github.com/IMC-GER/phpBB-Current-Time/actions/workflows/tests.yml/badge.svg)](https://github.com/IMC-GER/RecentTopicsNG/actions/workflows/tests.yml)
 
 ## Screenshots
 ![Displayed Time](https://raw.githubusercontent.com/IMC-GER/images/refs/heads/main/screenshots/currenttime/CurrentTime.gif)
@@ -19,7 +21,7 @@ A world clock can be displayed above the navigation bar. This is freely configur
 - [ACP User permissions](https://raw.githubusercontent.com/IMC-GER/images/refs/heads/main/screenshots/currenttime/CTWC_ACP_permissions.jpg)
 
 ## Requirements
-- php >= 7.1.3
+- php >= 7.4
 - phpBB >= 3.3.0, < 4.0.0@dev
 
 ## Supported Style

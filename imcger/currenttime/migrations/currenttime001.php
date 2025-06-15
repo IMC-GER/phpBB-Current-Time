@@ -12,17 +12,17 @@ namespace imcger\currenttime\migrations;
 
 class currenttime001 extends \phpbb\db\migration\migration
 {
-	public function effectively_installed()
+	public function effectively_installed(): bool
 	{
 		return $this->db_tools->sql_column_exists(USERS_TABLE, 'user_imcger_ct_data');
 	}
 
-	public static function depends_on()
+	public static function depends_on(): array
 	{
 		return ['\phpbb\db\migration\data\v330\v330',];
 	}
 
-	public function update_schema()
+	public function update_schema(): array
 	{
 		return [
 			'add_columns' => [
@@ -42,7 +42,7 @@ class currenttime001 extends \phpbb\db\migration\migration
 		];
 	}
 
-	public function revert_schema()
+	public function revert_schema(): array
 	{
 		return [
 			'drop_tables'	=> [
@@ -56,7 +56,7 @@ class currenttime001 extends \phpbb\db\migration\migration
 		];
 	}
 
-	public function update_data()
+	public function update_data(): array
 	{
 
 		return [
