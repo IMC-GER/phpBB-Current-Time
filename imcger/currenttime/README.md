@@ -9,7 +9,7 @@ You can also display the users local time in the user profile and the authors lo
 
 A world clock can be displayed above the navigation bar. This is freely configurable. Up to 6 time zones can be displayed. The settings can be made in the UCP, in the ACP and in the ACP user administration.
 
-[![Tests](https://github.com/IMC-GER/phpBB-Current-Time/actions/workflows/tests.yml/badge.svg)](https://github.com/IMC-GER/RecentTopicsNG/actions/workflows/tests.yml)
+[![Tests](https://github.com/IMC-GER/phpBB-Current-Time/actions/workflows/tests.yml/badge.svg)](https://github.com/IMC-GER/phpBB-Current-Time/actions/workflows/tests.yml)
 
 ## Screenshots
 ![Displayed Time](https://raw.githubusercontent.com/IMC-GER/images/refs/heads/main/screenshots/currenttime/CurrentTime.gif)
